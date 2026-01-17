@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import * as projectController from '../controllers/project.controller';
 
 const router = Router();
 
@@ -10,6 +11,9 @@ router.get('/', (req, res) => {
     version: '1.0.0',
   });
 });
+
+// Project routes
+router.post('/projects', projectController.createProject);
 
 export default router;
 

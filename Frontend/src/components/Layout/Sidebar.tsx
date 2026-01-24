@@ -2,14 +2,13 @@ import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard,
   FolderKanban,
-  Database,
   Shield,
-  HardDrive,
   Code,
   Settings,
   ChevronRight,
 } from 'lucide-react';
 import './Sidebar.css';
+import { useNavigate } from 'react-router-dom';
 
 interface NavItem {
   icon: React.ElementType;
@@ -19,22 +18,21 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { icon: LayoutDashboard, label: 'Overview', path: '/dashboard' },
+  { icon: LayoutDashboard, label: 'Overview', path: '/dashboard/overview' },
   { icon: FolderKanban, label: 'Projects', path: '/dashboard/projects' },
-  { icon: Database, label: 'Database', path: '/dashboard/database' },
   { icon: Shield, label: 'Authentication', path: '/dashboard/auth' },
-  { icon: HardDrive, label: 'Storage', path: '/dashboard/storage' },
   { icon: Code, label: 'Edge Functions', path: '/dashboard/functions' },
   { icon: Settings, label: 'Settings', path: '/dashboard/settings' },
 ];
 
 export default function Sidebar() {
+  const navigate = useNavigate();
   return (
     <aside className="sidebar">
       <div className="sidebar-header">
         <div className="logo">
-          <Shield size={24} />
-          <span className="logo-text">Shield</span>
+          <Shield size={24} onClick={() => navigate('/')} style={{ cursor: 'pointer' }} />
+          <span className="logo-text cursor-pointer" onClick={() => navigate('/')}>Shield</span>
         </div>
       </div>
       <nav className="sidebar-nav">

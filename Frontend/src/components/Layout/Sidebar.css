@@ -107,3 +107,7 @@
 .nav-item:hover .nav-chevron {
   opacity: 1;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}

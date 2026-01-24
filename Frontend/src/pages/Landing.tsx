@@ -1,10 +1,12 @@
 import { ArrowRight, Shield, Database, Lock, HardDrive, Code, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Landing.css';
 
 export default function Landing() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -71,9 +73,9 @@ export default function Landing() {
         <div className="nav-container">
           <div className="nav-logo">
             <div className="logo-icon">
-              <Shield size={24} />
+              <Shield size={24} onClick={() => navigate('/')} style={{ cursor: 'pointer' }} />
             </div>
-            <span className="logo-text">Shield</span>
+            <span className="logo-text cursor-pointer" onClick={() => navigate('/')}>Shield</span>
           </div>
           <div className="nav-links">
             <a href="#features" className="nav-link">Features</a>

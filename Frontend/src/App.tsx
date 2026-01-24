@@ -16,11 +16,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/dashboard" element={<Layout />}>
-          <Route index element={<Overview />} />
+          {/* <Route index element={<Overview />} /> */}
+          <Route index element={<Navigate to="overview" replace />} />
+          <Route path="overview" element={<Overview />} />
           <Route path="projects" element={<Projects />} />
-          <Route path="database" element={<Database />} />
           <Route path="auth" element={<Auth />} />
-          <Route path="storage" element={<Storage />} />
           <Route path="functions" element={<Functions />} />
           <Route path="settings" element={<Settings />} />
         </Route>

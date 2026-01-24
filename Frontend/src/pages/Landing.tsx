@@ -2,7 +2,28 @@ import { ArrowRight, Shield, Database, Lock, HardDrive, Code, Globe } from 'luci
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { CodeBlock, IconButton, createShikiAdapter } from "@chakra-ui/react"
+import type { HighlighterGeneric } from "shiki"
 import './Landing.css';
+
+const shikiAdapter = createShikiAdapter<HighlighterGeneric<any, any>>({
+  async load() {
+    const { createHighlighter } = await import("shiki")
+    return createHighlighter({
+      langs: ["tsx", "scss", "html", "bash", "json"],
+      themes: ["github-dark"],
+    })
+  },
+  theme: "github-dark",
+})
+
+const file = {
+  code: `<div class="container">
+  <h1>Hello, world!</h1>
+</div>`,
+  language: "tsx",
+  title: "example.ts",
+}
 
 export default function Landing() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -120,42 +141,23 @@ export default function Landing() {
       {/* Code Preview Section */}
       <section id="code" className="code-section">
         <div className="code-container">
-          <div className="code-window">
-            <div className="code-header">
-              <div className="code-dots">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-              <span className="code-title">example.ts</span>
-            </div>
-            <div className="code-content">
-              <pre>
-                <code>
-                  {`import { createClient } from '@shield/client'
-
-const shield = createClient(
-  'https://your-project.shield.io',
-  'your-anon-key'
-)
-
-// Query database
-const { data } = await shield
-  .from('users')
-  .select('*')
-  .eq('status', 'active')
-
-// Real-time subscription
-shield
-  .channel('messages')
-  .on('INSERT', (payload) => {
-    console.log('New message:', payload)
-  })
-  .subscribe()`}
-                </code>
-              </pre>
-            </div>
-          </div>
+          <CodeBlock.AdapterProvider value={shikiAdapter}>
+            <CodeBlock.Root code={file.code} language={file.language} variant="subtle">
+              <CodeBlock.Header>
+                <CodeBlock.Title>{file.title}</CodeBlock.Title>
+                <CodeBlock.CopyTrigger asChild>
+                  <IconButton variant="ghost" size="2xs">
+                    <CodeBlock.CopyIndicator />
+                  </IconButton>
+                </CodeBlock.CopyTrigger>
+              </CodeBlock.Header>
+              <CodeBlock.Content>
+                <CodeBlock.Code>
+                  <CodeBlock.CodeText />
+                </CodeBlock.Code>
+              </CodeBlock.Content>
+            </CodeBlock.Root>
+          </CodeBlock.AdapterProvider>
         </div>
       </section>
 

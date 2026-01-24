@@ -3,7 +3,8 @@
   top: 0;
   left: var(--sidebar-width);
   right: 0;
-  height: var(--header-height);
+  /* height: var(--header-height); */
+  height: 68.5px;
   background-color: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
   display: flex;
@@ -12,6 +13,7 @@
   padding: 0 32px;
   z-index: 90;
   backdrop-filter: blur(8px);
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header-left {

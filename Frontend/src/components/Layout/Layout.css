@@ -18,3 +18,7 @@
   margin-left: var(--sidebar-collapsed-width);
   width: calc(100% - var(--sidebar-collapsed-width));
 }
+
+.layout.collapsed .header {
+  left: var(--sidebar-collapsed-width);
+}

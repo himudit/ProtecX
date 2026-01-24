@@ -10,14 +10,63 @@
   flex-direction: column;
   z-index: 100;
   overflow-y: auto;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
 }
 
 .sidebar-header {
-  padding: 20px 24px;
+  padding: 16px 20px;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
+  justify-content: space-between;
   min-height: var(--header-height);
+}
+
+.sidebar.collapsed .sidebar-header {
+  padding: 16px 0;
+  justify-content: center;
+}
+
+.sidebar.collapsed .logo {
+  gap: 0;
+}
+
+.collapse-toggle {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.collapse-toggle:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.sidebar.collapsed .collapse-toggle {
+  display: flex;
+  margin: 0 auto;
+}
+
+/* Let's adjust where the toggle button is */
+.sidebar.collapsed .sidebar-header {
+  position: relative;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar.collapsed .logo {
+  margin-bottom: 0;
 }
 
 .logo {
@@ -51,7 +100,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 8px 12px;
+  padding: 10px 12px;
   color: var(--text-secondary);
   text-decoration: none;
   border-radius: 6px;
@@ -60,6 +109,12 @@
   font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.sidebar.collapsed .nav-item {
+  justify-content: center;
+  padding: 10px 0;
 }
 
 .nav-item:hover {

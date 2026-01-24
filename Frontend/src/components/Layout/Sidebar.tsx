@@ -4,8 +4,12 @@ import {
   FolderKanban,
   Shield,
   Code,
+  Package,
+  Webhook,
   Settings,
   ChevronRight,
+  ChevronLeft,
+  Menu
 } from 'lucide-react';
 import './Sidebar.css';
 import { useNavigate } from 'react-router-dom';
@@ -20,20 +24,29 @@ interface NavItem {
 const navItems: NavItem[] = [
   { icon: LayoutDashboard, label: 'Overview', path: '/dashboard/overview' },
   { icon: FolderKanban, label: 'Projects', path: '/dashboard/projects' },
-  { icon: Shield, label: 'Authentication', path: '/dashboard/auth' },
+  { icon: Package, label: 'SDK', path: '/dashboard/sdk' },
+  { icon: Webhook, label: 'API', path: '/dashboard/api' },
   { icon: Code, label: 'Edge Functions', path: '/dashboard/functions' },
   { icon: Settings, label: 'Settings', path: '/dashboard/settings' },
 ];
 
-export default function Sidebar() {
+interface SidebarProps {
+  isCollapsed: boolean;
+  onToggle: () => void;
+}
+
+export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
   const navigate = useNavigate();
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-header">
         <div className="logo">
           <Shield size={24} onClick={() => navigate('/')} style={{ cursor: 'pointer' }} />
-          <span className="logo-text cursor-pointer" onClick={() => navigate('/')}>Shield</span>
+          {!isCollapsed && <span className="logo-text cursor-pointer" onClick={() => navigate('/')}>Shield</span>}
         </div>
+        <button className="collapse-toggle" onClick={onToggle}>
+          {isCollapsed ? <Menu size={20} /> : <ChevronLeft size={20} />}
+        </button>
       </div>
       <nav className="sidebar-nav">
         {navItems.map((item) => {
@@ -45,11 +58,12 @@ export default function Sidebar() {
               className={({ isActive }) =>
                 `nav-item ${isActive ? 'active' : ''}`
               }
+              title={isCollapsed ? item.label : ''}
             >
               <Icon size={18} />
-              <span className="nav-label">{item.label}</span>
-              {item.badge && <span className="nav-badge">{item.badge}</span>}
-              <ChevronRight size={16} className="nav-chevron" />
+              {!isCollapsed && <span className="nav-label">{item.label}</span>}
+              {!isCollapsed && item.badge && <span className="nav-badge">{item.badge}</span>}
+              {!isCollapsed && <ChevronRight size={16} className="nav-chevron" />}
             </NavLink>
           );
         })}

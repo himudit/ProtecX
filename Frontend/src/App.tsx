@@ -3,9 +3,8 @@ import Layout from './components/Layout/Layout';
 import Landing from './pages/Landing';
 import Overview from './pages/Overview';
 import Projects from './pages/Projects';
-import Database from './pages/Database';
-import Auth from './pages/Auth';
-import Storage from './pages/Storage';
+import SDK from './pages/SDK';
+import API from './pages/API';
 import Functions from './pages/Functions';
 import Settings from './pages/Settings';
 import './App.css';
@@ -20,7 +19,9 @@ function App() {
           <Route index element={<Navigate to="overview" replace />} />
           <Route path="overview" element={<Overview />} />
           <Route path="projects" element={<Projects />} />
-          <Route path="auth" element={<Auth />} />
+          <Route path="sdk" element={<SDK />} />
+          <Route path="api" element={<API />} />
+          {/* <Route path="auth" element={<Auth />} /> */}
           <Route path="functions" element={<Functions />} />
           <Route path="settings" element={<Settings />} />
         </Route>

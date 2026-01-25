@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import * as userService from '../services/user.service';
+import { AuthRequest } from '../interfaces/auth-request.interface';
 
 /**
  * Sign up a new user
@@ -58,7 +59,7 @@ export const login = async (
  * Get current user profile
  */
 export const getProfile = async (
-  req: Request,
+  req: AuthRequest,
   res: Response,
   next: NextFunction
 ): Promise<void> => {

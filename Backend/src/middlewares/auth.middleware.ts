@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { verifyToken } from '../utils/jwt';
 import { AppError } from '../interfaces/error.interface';
+import { AuthRequest } from '../interfaces/auth-request.interface';
 
 /**
  * Authentication middleware to verify JWT token
@@ -8,7 +9,7 @@ import { AppError } from '../interfaces/error.interface';
  * Adds userId to request object for use in subsequent handlers
  */
 export const authMiddleware = async (
-  req: Request,
+  req: AuthRequest,
   res: Response,
   next: NextFunction
 ): Promise<void> => {

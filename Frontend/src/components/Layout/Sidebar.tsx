@@ -42,7 +42,7 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
     <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-header">
         <div className="logo">
-          <ShieldIcon size={24} onClick={() => navigate('/')} style={{ cursor: 'pointer' }} />
+          <ShieldIcon size={16} onClick={() => navigate('/')} style={{ cursor: 'pointer' }} />
           {!isCollapsed && <span className="logo-text cursor-pointer" onClick={() => navigate('/')}>Shield</span>}
         </div>
 

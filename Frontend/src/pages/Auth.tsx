@@ -1,10 +1,11 @@
-import { Users, Shield, Key, Mail, Lock } from 'lucide-react';
+import { Users, Key, Mail, Lock } from 'lucide-react';
+import ShieldIcon from '../components/Common/ShieldIcon';
 import './Auth.css';
 
 export default function Auth() {
   const providers = [
     { name: 'Email', icon: Mail, enabled: true, users: 3420 },
-    { name: 'Google', icon: Shield, enabled: true, users: 1250 },
+    { name: 'Google', icon: ShieldIcon, enabled: true, users: 1250 },
     { name: 'GitHub', icon: Key, enabled: false, users: 0 },
     { name: 'Magic Link', icon: Lock, enabled: true, users: 890 },
   ];
@@ -27,7 +28,7 @@ export default function Auth() {
           </div>
         </div>
         <div className="auth-stat-card">
-          <Shield size={24} />
+          <ShieldIcon size={24} />
           <div>
             <h3>3</h3>
             <p>Active Providers</p>

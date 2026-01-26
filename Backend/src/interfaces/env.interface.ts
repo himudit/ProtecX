@@ -10,5 +10,6 @@ export interface EnvConfig {
   JWT_SECRET?: string;
   JWT_TTL?: string;
   API_KEY?: string;
+  ENCRYPTION_KEY?: string;
 }
 

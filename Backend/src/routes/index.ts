@@ -20,7 +20,7 @@ router.post('/auth/login', userController.login);
 router.get('/auth/profile', authMiddleware, userController.getProfile);
 
 // Project routes
-router.post('/projects', projectController.createProject);
+router.post('/projects', authMiddleware, projectController.createProject);
 
 export default router;
 

@@ -50,7 +50,6 @@ const Login: React.FC = () => {
 
     return (
         <>
-            {/* Toast Notification */}
             {toast && (
                 <div style={{
                     position: 'fixed',
@@ -110,19 +109,6 @@ const Login: React.FC = () => {
                             <p style={{ fontSize: '0.8745em', color: 'var(--text-secondary)', marginTop: '0.5rem' }}>Please enter your details</p>
                         </div>
 
-                        {/* {apiError && (
-                            <div style={{
-                                backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                                border: '1px solid #ef4444',
-                                color: '#ef4444',
-                                padding: '0.75rem',
-                                borderRadius: '0.5rem',
-                                marginBottom: '1rem',
-                                fontSize: '0.875rem'
-                            }}>
-                                {apiError}
-                            </div>
-                        )} */}
 
                         <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>

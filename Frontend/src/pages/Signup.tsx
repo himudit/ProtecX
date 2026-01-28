@@ -7,7 +7,8 @@ import { useDispatch } from 'react-redux';
 import { setCredentials } from '../store/slices/authSlice';
 import ShieldIcon from '../components/Common/ShieldIcon';
 import { signupSchema, SignupInput } from '../schemas/auth.schema';
-import api from '../utils/api';
+import { authService } from '../services/auth.service';
+import type { AuthResponse } from '../types/auth';
 
 const Signup: React.FC = () => {
     const navigate = useNavigate();
@@ -30,14 +31,14 @@ const Signup: React.FC = () => {
         setApiError(null);
         setToast({ visible: true, message: 'Creating account...', type: 'loading' });
         try {
-            const response = await api.post('/auth/signup', data);
-            if (response.data.success) {
-                const { user, token } = response.data.data;
+            const response = await authService.signup(data);
+            if (response.success) {
+                const { user, token } = response.data;
                 dispatch(setCredentials({ user, token }));
                 setToast(null);
                 navigate('/dashboard/overview');
             }
-        } catch (error: any) {
+        } catch (error: unknown) {
             const message = error.response?.data?.message || 'Invalid Login credentials';
             setApiError(message);
             setToast({ visible: true, message: 'Invalid Login credentials', type: 'error' });

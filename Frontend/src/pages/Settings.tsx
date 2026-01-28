@@ -1,6 +1,6 @@
 import { User, Bell, CreditCard, Globe } from 'lucide-react';
 import ShieldIcon from '../components/Common/ShieldIcon';
-import './Settings.css';
+import styles from './Settings.module.css';
 
 export default function Settings() {
   const settingsSections = [
@@ -37,33 +37,33 @@ export default function Settings() {
   ];
 
   return (
-    <div className="settings-page">
-      <div className="page-header">
+    <div className={styles['settings-page']}>
+      <div className={styles['page-header']}>
         <div>
-          <h1 className="page-title">Settings</h1>
-          <p className="page-subtitle">Manage your account and preferences</p>
+          <h1 className={styles['page-title']}>Settings</h1>
+          <p className={styles['page-subtitle']}>Manage your account and preferences</p>
         </div>
       </div>
 
-      <div className="settings-grid">
+      <div className={styles['settings-grid']}>
         {settingsSections.map((section) => {
           const Icon = section.icon;
           return (
-            <div key={section.title} className="settings-card">
-              <div className="settings-card-header">
-                <div className="settings-icon">
+            <div key={section.title} className={styles['settings-card']}>
+              <div className={styles['settings-card-header']}>
+                <div className={styles['settings-icon']}>
                   <Icon size={20} />
                 </div>
                 <div>
-                  <h3 className="settings-title">{section.title}</h3>
-                  <p className="settings-description">{section.description}</p>
+                  <h3 className={styles['settings-title']}>{section.title}</h3>
+                  <p className={styles['settings-description']}>{section.description}</p>
                 </div>
               </div>
-              <div className="settings-items">
+              <div className={styles['settings-items']}>
                 {section.items.map((item) => (
-                  <div key={item} className="settings-item">
+                  <div key={item} className={styles['settings-item']}>
                     <span>{item}</span>
-                    <button className="text-link">Configure</button>
+                    <button className={styles['text-link']}>Configure</button>
                   </div>
                 ))}
               </div>

@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Database, Users, Activity, Clock } from 'lucide-react';
 import ShieldIcon from '../components/Common/ShieldIcon';
-import './ProjectOverview.css';
+import styles from './ProjectOverview.module.css';
 
 export default function ProjectOverview() {
     const { projectId } = useParams();
@@ -21,43 +21,43 @@ export default function ProjectOverview() {
     };
 
     return (
-        <div className="project-overview">
-            <div className="overview-header">
+        <div className={styles['project-overview']}>
+            <div className={styles['overview-header']}>
                 <div>
-                    <h1 className="project-title">{project.name}</h1>
-                    <p className="project-id">Project ID: {projectId}</p>
+                    <h1 className={styles['project-title']}>{project.name}</h1>
+                    <p className={styles['project-id']}>Project ID: {projectId}</p>
                 </div>
-                <div className={`status-badge ${project.status}`}>
+                <div className={`${styles['status-badge']} ${styles[project.status]}`}>
                     {project.status}
                 </div>
             </div>
 
-            <div className="stats-grid">
+            <div className={styles['stats-grid']}>
                 {project.stats.map((stat) => (
-                    <div key={stat.label} className="stat-card">
-                        <div className="stat-icon" style={{ backgroundColor: `${stat.color}15`, color: stat.color }}>
+                    <div key={stat.label} className={styles['stat-card']}>
+                        <div className={styles['stat-icon']} style={{ backgroundColor: `${stat.color}15`, color: stat.color }}>
                             <stat.icon size={24} />
                         </div>
-                        <div className="stat-info">
-                            <span className="stat-label">{stat.label}</span>
-                            <span className="stat-value">{stat.value}</span>
+                        <div className={styles['stat-info']}>
+                            <span className={styles['stat-label']}>{stat.label}</span>
+                            <span className={styles['stat-value']}>{stat.value}</span>
                         </div>
                     </div>
                 ))}
             </div>
 
-            <div className="recent-activity">
-                <div className="section-header">
+            <div className={styles['recent-activity']}>
+                <div className={styles['section-header']}>
                     <Clock size={18} />
                     <h2>Recent Activity</h2>
                 </div>
-                <div className="activity-list">
+                <div className={styles['activity-list']}>
                     {[1, 2, 3].map((i) => (
-                        <div key={i} className="activity-item">
-                            <div className="activity-dot" />
-                            <div className="activity-content">
-                                <p className="activity-text">Database backup completed successfully</p>
-                                <span className="activity-time">{i * 2} hours ago</span>
+                        <div key={i} className={styles['activity-item']}>
+                            <div className={styles['activity-dot']} />
+                            <div className={styles['activity-content']}>
+                                <p className={styles['activity-text']}>Database backup completed successfully</p>
+                                <span className={styles['activity-time']}>{i * 2} hours ago</span>
                             </div>
                         </div>
                     ))}

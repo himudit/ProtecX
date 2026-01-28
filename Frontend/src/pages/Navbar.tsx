@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import ShieldIcon from "../components/Common/ShieldIcon";
-import "./Navbar.css";
+import styles from "./Navbar.module.css";
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -18,26 +18,26 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
-            <div className="navbar-inner">
+        <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
+            <div className={styles['navbar-inner']}>
                 {/* Logo */}
-                <div className="navbar-logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-                    <div className={`logo-icon ${scrolled ? "scrolled" : ""}`}>
+                <div className={styles['navbar-logo']} onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+                    <div className={`${styles['logo-icon']} ${scrolled ? styles.scrolled : ""}`}>
                         <ShieldIcon size={20} />
                     </div>
-                    <span className="logo-text">Shield</span>
+                    <span className={styles['logo-text']}>Shield</span>
                 </div>
 
                 {/* Links */}
-                <div className="navbar-links-container">
-                    <a href="#features" className="nav-link">Features</a>
-                    <a href="#docs" className="nav-link">Docs</a>
+                <div className={styles['navbar-links-container']}>
+                    <a href="#features" className={styles['nav-link']}>Features</a>
+                    <a href="#docs" className={styles['nav-link']}>Docs</a>
                 </div>
 
                 {/* Actions */}
-                <div className="navbar-actions">
-                    <Link to="/login" className="nav-link-btn">Sign In</Link>
-                    <Link to="/signup" className={`nav-primary-btn ${scrolled ? "scrolled" : ""}`}>
+                <div className={styles['navbar-actions']}>
+                    <Link to="/login" className={styles['nav-link-btn']}>Sign In</Link>
+                    <Link to="/signup" className={`${styles['nav-primary-btn']} ${scrolled ? styles.scrolled : ""}`}>
                         Get Started
                         <ArrowRight size={16} />
                     </Link>

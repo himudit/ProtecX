@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { CodeBlock, IconButton, createShikiAdapter } from "@chakra-ui/react"
 import type { HighlighterGeneric } from "shiki"
 import Navbar from './Navbar';
-import './Landing.css';
+import styles from './Landing.module.css';
 
 const shikiAdapter = createShikiAdapter<HighlighterGeneric<any, any>>({
   async load() {
@@ -73,56 +73,56 @@ export default function Landing() {
   ];
 
   return (
-    <div className="landing-page">
+    <div className={styles['landing-page']}>
       {/* Background */}
-      <div className="landing-bg">
+      <div className={styles['landing-bg']}>
         <div
-          className="gradient-orb orb-1"
+          className={`${styles['gradient-orb']} ${styles['orb-1']}`}
           style={{
             transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
           }}
         />
         <div
-          className="gradient-orb orb-2"
+          className={`${styles['gradient-orb']} ${styles['orb-2']}`}
           style={{
             transform: `translate(${mousePosition.x * -0.03}px, ${mousePosition.y * -0.03}px)`,
           }}
         />
-        <div className="grid-pattern" />
+        <div className={styles['grid-pattern']} />
       </div>
 
       {/* Navigation */}
       <Navbar />
 
       {/* Hero Section */}
-      <section className="hero-section">
-        <div className="hero-container">
-          <h1 className="hero-title">
-            Build <span className="strikethrough">faster</span> <span className="fastest-text">fastest</span> backend with <span className="gradient-text">Shield</span>
+      <section className={styles['hero-section']}>
+        <div className={styles['hero-container']}>
+          <h1 className={styles['hero-title']}>
+            Build <span className={styles.strikethrough}>faster</span> <span className={styles['fastest-text']}>fastest</span> backend with <span className={styles['gradient-text']}>Shield</span>
           </h1>
-          <p className="hero-description">
+          <p className={styles['hero-description']}>
             Shield is a backend platform that gives you everything you need to build modern apps.
             <br />
             Database, authentication, storage, and edge functions, all in one place.
           </p>
-          <div className="hero-cta">
-            <Link to="/dashboard" className="cta-primary">
+          <div className={styles['hero-cta']}>
+            <Link to="/dashboard" className={styles['cta-primary']}>
               Start Building
               <ArrowRight size={20} />
             </Link>
-            <a href="#code" className="cta-secondary">
+            <a href="#code" className={styles['cta-secondary']}>
               View Code Example
             </a>
           </div>
-          <div className="hero-note">
+          <div className={styles['hero-note']}>
             Free tier available • No credit card required
           </div>
         </div>
       </section>
 
       {/* Code Preview Section */}
-      <section id="code" className="code-section">
-        <div className="code-container">
+      <section id="code" className={styles['code-section']}>
+        <div className={styles['code-container']}>
           <CodeBlock.AdapterProvider value={shikiAdapter}>
             <CodeBlock.Root code={file.code} language={file.language} variant="subtle">
               <CodeBlock.Header>
@@ -144,24 +144,24 @@ export default function Landing() {
       </section>
 
       {/* Features Grid */}
-      <section id="features" className="features-section">
-        <div className="features-container">
-          <div className="section-header">
-            <h2 className="section-title">What Shield provides</h2>
-            <p className="section-description">
+      <section id="features" className={styles['features-section']}>
+        <div className={styles['features-container']}>
+          <div className={styles['section-header']}>
+            <h2 className={styles['section-title']}>What Shield provides</h2>
+            <p className={styles['section-description']}>
               Everything you need to build your backend, without managing infrastructure.
             </p>
           </div>
-          <div className="features-grid">
+          <div className={styles['features-grid']}>
             {features.map((feature, idx) => {
               const Icon = feature.icon;
               return (
-                <div key={idx} className="feature-card">
-                  <div className="feature-icon">
+                <div key={idx} className={styles['feature-card']}>
+                  <div className={styles['feature-icon']}>
                     <Icon size={24} />
                   </div>
-                  <h3 className="feature-title">{feature.title}</h3>
-                  <p className="feature-description">{feature.description}</p>
+                  <h3 className={styles['feature-title']}>{feature.title}</h3>
+                  <p className={styles['feature-description']}>{feature.description}</p>
                 </div>
               );
             })}
@@ -170,13 +170,13 @@ export default function Landing() {
       </section>
 
       {/* CTA Section */}
-      <section className="cta-section">
-        <div className="cta-container">
-          <h2 className="cta-title">Ready to get started?</h2>
-          <p className="cta-description">
+      <section className={styles['cta-section']}>
+        <div className={styles['cta-container']}>
+          <h2 className={styles['cta-title']}>Ready to get started?</h2>
+          <p className={styles['cta-description']}>
             Create your project and start building in minutes.
           </p>
-          <Link to="/dashboard" className="cta-button">
+          <Link to="/dashboard" className={styles['cta-button']}>
             Create Project
             <ArrowRight size={20} />
           </Link>
@@ -184,29 +184,29 @@ export default function Landing() {
       </section>
 
       {/* Footer */}
-      <footer className="landing-footer">
-        <div className="footer-container">
-          <div className="footer-brand">
-            <div className="footer-logo">
+      <footer className={styles['landing-footer']}>
+        <div className={styles['footer-container']}>
+          <div className={styles['footer-brand']}>
+            <div className={styles['footer-logo']}>
               <ShieldIcon size={20} />
               <span>Shield</span>
             </div>
-            <p className="footer-tagline">Backend as a Service</p>
+            <p className={styles['footer-tagline']}>Backend as a Service</p>
           </div>
-          <div className="footer-links">
-            <div className="footer-column">
+          <div className={styles['footer-links']}>
+            <div className={styles['footer-column']}>
               <h4>Product</h4>
               <a href="#features">Features</a>
               <a href="#docs">Documentation</a>
             </div>
-            <div className="footer-column">
+            <div className={styles['footer-column']}>
               <h4>Company</h4>
               <a href="#">About</a>
               <a href="#">Blog</a>
             </div>
           </div>
         </div>
-        <div className="footer-bottom">
+        <div className={styles['footer-bottom']}>
           <p>© 2024 Shield</p>
         </div>
       </footer>

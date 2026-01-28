@@ -12,7 +12,7 @@ import {
     GripVertical,
     Boxes
 } from 'lucide-react';
-import './ProjectSidebar.css';
+import styles from './ProjectSidebar.module.css';
 
 interface ProjectSidebarProps {
     isCollapsed: boolean;
@@ -32,18 +32,18 @@ export default function ProjectSidebar({ isCollapsed, onToggle }: ProjectSidebar
     ];
 
     return (
-        <aside className={`project-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
-            <div className="project-sidebar-header">
+        <aside className={`${styles['project-sidebar']} ${isCollapsed ? styles.collapsed : ''}`}>
+            <div className={styles['project-sidebar-header']}>
                 {!isCollapsed ? <h3> <Boxes size={30} />  Project</h3> : <h3> <Boxes size={30} /> </h3>}
 
             </div>
-            <nav className="project-sidebar-nav">
+            <nav className={styles['project-sidebar-nav']}>
                 {navItems.map((item) => (
                     <NavLink
                         key={item.path}
                         to={item.path}
                         end={item.path === `/dashboard/projects/${projectId}`}
-                        className={({ isActive }) => `project-nav-item ${isActive ? 'active' : ''}`}
+                        className={({ isActive }) => `${styles['project-nav-item']} ${isActive ? styles.active : ''}`}
                         title={isCollapsed ? item.label : ''}
                     >
                         <item.icon size={18} />
@@ -52,7 +52,7 @@ export default function ProjectSidebar({ isCollapsed, onToggle }: ProjectSidebar
                 ))}
             </nav>
             <div
-                className="project-resizer-handle"
+                className={styles['project-resizer-handle']}
                 onMouseDown={(e) => {
                     const startX = e.clientX;
                     document.body.style.userSelect = 'none';

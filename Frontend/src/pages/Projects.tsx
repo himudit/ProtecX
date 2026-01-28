@@ -1,6 +1,6 @@
 import { Plus, MoreVertical, Database, Users, Globe } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import './Projects.css';
+import styles from './Projects.module.css';
 
 export default function Projects() {
   const navigate = useNavigate();
@@ -38,54 +38,54 @@ export default function Projects() {
   ];
 
   return (
-    <div className="projects-page">
-      <div className="page-header">
+    <div className={styles['projects-page']}>
+      <div className={styles['page-header']}>
         <div>
-          <h1 className="page-title">Projects</h1>
-          <p className="page-subtitle">Manage your projects and resources</p>
+          <h1 className={styles['page-title']}>Projects</h1>
+          <p className={styles['page-subtitle']}>Manage your projects and resources</p>
         </div>
-        <button className="primary-btn">
+        <button className={styles['primary-btn']}>
           <Plus size={18} />
           <span>New Project</span>
         </button>
       </div>
 
-      <div className="projects-grid">
+      <div className={styles['projects-grid']}>
         {projects.map((project) => (
           <div
             key={project.id}
-            className="project-card"
+            className={styles['project-card']}
             onClick={() => navigate(`/dashboard/projects/${project.id}`)}
             style={{ cursor: 'pointer' }}
           >
-            <div className="project-header">
-              <div className="project-info">
-                <h3 className="project-name">{project.name}</h3>
-                <p className="project-description">{project.description}</p>
+            <div className={styles['project-header']}>
+              <div className={styles['project-info']}>
+                <h3 className={styles['project-name']}>{project.name}</h3>
+                <p className={styles['project-description']}>{project.description}</p>
               </div>
-              <button className="icon-btn" onClick={(e) => e.stopPropagation()}>
+              <button className={styles['icon-btn']} onClick={(e) => e.stopPropagation()}>
                 <MoreVertical size={18} />
               </button>
             </div>
-            <div className="project-stats">
-              <div className="project-stat">
+            <div className={styles['project-stats']}>
+              <div className={styles['project-stat']}>
                 <Database size={16} />
                 <span>{project.databases} Databases</span>
               </div>
-              <div className="project-stat">
+              <div className={styles['project-stat']}>
                 <Users size={16} />
                 <span>{project.users.toLocaleString()} Users</span>
               </div>
-              <div className="project-stat">
+              <div className={styles['project-stat']}>
                 <Globe size={16} />
                 <span>{project.region}</span>
               </div>
             </div>
-            <div className="project-footer">
-              <span className={`status-badge ${project.status}`}>
+            <div className={styles['project-footer']}>
+              <span className={`${styles['status-badge']} ${styles[project.status]}`}>
                 {project.status}
               </span>
-              <span className="project-updated">Updated {project.updated}</span>
+              <span className={styles['project-updated']}>Updated {project.updated}</span>
             </div>
           </div>
         ))}

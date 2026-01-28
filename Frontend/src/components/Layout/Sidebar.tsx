@@ -11,7 +11,7 @@ import {
   Menu,
   GripVertical
 } from 'lucide-react';
-import './Sidebar.css';
+import styles from './Sidebar.module.css';
 import { useNavigate } from 'react-router-dom';
 import ShieldIcon from '../Common/ShieldIcon';
 
@@ -39,15 +39,15 @@ interface SidebarProps {
 export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
   const navigate = useNavigate();
   return (
-    <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
-      <div className="sidebar-header">
-        <div className="logo">
+    <aside className={`${styles.sidebar} ${isCollapsed ? styles.collapsed : ''}`}>
+      <div className={styles['sidebar-header']}>
+        <div className={styles.logo}>
           <ShieldIcon size={16} onClick={() => navigate('/')} style={{ cursor: 'pointer' }} />
-          {!isCollapsed && <span className="logo-text cursor-pointer" onClick={() => navigate('/')}>Shield</span>}
+          {!isCollapsed && <span className={`${styles['logo-text']} cursor-pointer`} onClick={() => navigate('/')}>Shield</span>}
         </div>
 
       </div>
-      <nav className="sidebar-nav">
+      <nav className={styles['sidebar-nav']}>
         {navItems.map((item) => {
           const Icon = item.icon;
           return (
@@ -55,20 +55,20 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
               key={item.path}
               to={item.path}
               className={({ isActive }) =>
-                `nav-item ${isActive ? 'active' : ''}`
+                `${styles['nav-item']} ${isActive ? styles.active : ''}`
               }
               title={isCollapsed ? item.label : ''}
             >
               <Icon size={18} />
-              {!isCollapsed && <span className="nav-label">{item.label}</span>}
-              {!isCollapsed && item.badge && <span className="nav-badge">{item.badge}</span>}
-              {!isCollapsed && <ChevronRight size={16} className="nav-chevron" />}
+              {!isCollapsed && <span className={styles['nav-label']}>{item.label}</span>}
+              {!isCollapsed && item.badge && <span className={styles['nav-badge']}>{item.badge}</span>}
+              {!isCollapsed && <ChevronRight size={16} className={styles['nav-chevron']} />}
             </NavLink>
           );
         })}
       </nav>
       <div
-        className="resizer-handle"
+        className={styles['resizer-handle']}
         onMouseDown={(e) => {
           const startX = e.clientX;
           document.body.style.userSelect = 'none';

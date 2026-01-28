@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
-import './Layout.css';
+import styles from './Layout.module.css';
 
 export default function Layout() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -19,10 +19,10 @@ export default function Layout() {
   }, [location.pathname]);
 
   return (
-    <div className={`layout ${isCollapsed ? 'collapsed' : ''}`}>
+    <div className={`${styles.layout} ${isCollapsed ? styles.collapsed : ''}`}>
       <Sidebar isCollapsed={isCollapsed} onToggle={() => setIsCollapsed(!isCollapsed)} />
       <Header />
-      <main className="main-content">
+      <main className={styles['main-content']}>
         <Outlet />
       </main>
     </div>

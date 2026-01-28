@@ -1,5 +1,5 @@
 import { Upload, Folder, File, HardDrive } from 'lucide-react';
-import './Storage.css';
+import styles from './Storage.module.css';
 
 export default function Storage() {
   const buckets = [
@@ -10,62 +10,62 @@ export default function Storage() {
   ];
 
   return (
-    <div className="storage-page">
-      <div className="page-header">
+    <div className={styles['storage-page']}>
+      <div className={styles['page-header']}>
         <div>
-          <h1 className="page-title">Storage</h1>
-          <p className="page-subtitle">Manage your file storage buckets</p>
+          <h1 className={styles['page-title']}>Storage</h1>
+          <p className={styles['page-subtitle']}>Manage your file storage buckets</p>
         </div>
-        <button className="primary-btn">
+        <button className={styles['primary-btn']}>
           <Upload size={18} />
           <span>Upload Files</span>
         </button>
       </div>
 
-      <div className="storage-overview">
-        <div className="storage-card">
+      <div className={styles['storage-overview']}>
+        <div className={styles['storage-card']}>
           <HardDrive size={24} />
           <div>
             <h3>68.6 GB</h3>
             <p>Total Storage Used</p>
-            <div className="storage-bar">
-              <div className="storage-progress" style={{ width: '68%' }}></div>
+            <div className={styles['storage-bar']}>
+              <div className={styles['storage-progress']} style={{ width: '68%' }}></div>
             </div>
-            <span className="storage-limit">of 100 GB limit</span>
+            <span className={styles['storage-limit']}>of 100 GB limit</span>
           </div>
         </div>
       </div>
 
-      <div className="buckets-section">
-        <div className="section-header">
+      <div className={styles['buckets-section']}>
+        <div className={styles['section-header']}>
           <h2>Buckets</h2>
-          <button className="secondary-btn">
+          <button className={styles['secondary-btn']}>
             <Folder size={18} />
             <span>New Bucket</span>
           </button>
         </div>
-        <div className="buckets-grid">
+        <div className={styles['buckets-grid']}>
           {buckets.map((bucket) => (
-            <div key={bucket.name} className="bucket-card">
-              <div className="bucket-header">
-                <div className="bucket-icon">
+            <div key={bucket.name} className={styles['bucket-card']}>
+              <div className={styles['bucket-header']}>
+                <div className={styles['bucket-icon']}>
                   <Folder size={24} />
                 </div>
-                <h3 className="bucket-name">{bucket.name}</h3>
+                <h3 className={styles['bucket-name']}>{bucket.name}</h3>
               </div>
-              <div className="bucket-stats">
-                <div className="bucket-stat">
+              <div className={styles['bucket-stats']}>
+                <div className={styles['bucket-stat']}>
                   <File size={16} />
                   <span>{bucket.files.toLocaleString()} files</span>
                 </div>
-                <div className="bucket-stat">
+                <div className={styles['bucket-stat']}>
                   <HardDrive size={16} />
                   <span>{bucket.size}</span>
                 </div>
               </div>
-              <div className="bucket-footer">
-                <span className="bucket-updated">Updated {bucket.updated}</span>
-                <button className="text-link">View Files</button>
+              <div className={styles['bucket-footer']}>
+                <span className={styles['bucket-updated']}>Updated {bucket.updated}</span>
+                <button className={styles['text-link']}>View Files</button>
               </div>
             </div>
           ))}

@@ -1,6 +1,6 @@
 import { Users, Key, Mail, Lock } from 'lucide-react';
 import ShieldIcon from '../components/Common/ShieldIcon';
-import './Auth.css';
+import styles from './Auth.module.css';
 
 export default function Auth() {
   const providers = [
@@ -11,30 +11,30 @@ export default function Auth() {
   ];
 
   return (
-    <div className="auth-page">
-      <div className="page-header">
+    <div className={styles['auth-page']}>
+      <div className={styles['page-header']}>
         <div>
-          <h1 className="page-title">Authentication</h1>
-          <p className="page-subtitle">Manage user authentication and providers</p>
+          <h1 className={styles['page-title']}>Authentication</h1>
+          <p className={styles['page-subtitle']}>Manage user authentication and providers</p>
         </div>
       </div>
 
-      <div className="auth-stats">
-        <div className="auth-stat-card">
+      <div className={styles['auth-stats']}>
+        <div className={styles['auth-stat-card']}>
           <Users size={24} />
           <div>
             <h3>5,560</h3>
             <p>Total Users</p>
           </div>
         </div>
-        <div className="auth-stat-card">
+        <div className={styles['auth-stat-card']}>
           <ShieldIcon size={24} />
           <div>
             <h3>3</h3>
             <p>Active Providers</p>
           </div>
         </div>
-        <div className="auth-stat-card">
+        <div className={styles['auth-stat-card']}>
           <Key size={24} />
           <div>
             <h3>98.5%</h3>
@@ -43,29 +43,29 @@ export default function Auth() {
         </div>
       </div>
 
-      <div className="providers-section">
-        <div className="section-header">
+      <div className={styles['providers-section']}>
+        <div className={styles['section-header']}>
           <h2>Authentication Providers</h2>
-          <button className="primary-btn">Configure</button>
+          <button className={styles['primary-btn']}>Configure</button>
         </div>
-        <div className="providers-list">
+        <div className={styles['providers-list']}>
           {providers.map((provider) => {
             const Icon = provider.icon;
             return (
-              <div key={provider.name} className="provider-card">
-                <div className="provider-info">
-                  <div className="provider-icon">
+              <div key={provider.name} className={styles['provider-card']}>
+                <div className={styles['provider-info']}>
+                  <div className={styles['provider-icon']}>
                     <Icon size={20} />
                   </div>
                   <div>
-                    <h3 className="provider-name">{provider.name}</h3>
-                    <p className="provider-users">{provider.users.toLocaleString()} users</p>
+                    <h3 className={styles['provider-name']}>{provider.name}</h3>
+                    <p className={styles['provider-users']}>{provider.users.toLocaleString()} users</p>
                   </div>
                 </div>
-                <div className="provider-toggle">
-                  <label className="toggle-switch">
+                <div className={styles['provider-toggle']}>
+                  <label className={styles['toggle-switch']}>
                     <input type="checkbox" checked={provider.enabled} readOnly />
-                    <span className="toggle-slider"></span>
+                    <span className={styles['toggle-slider']}></span>
                   </label>
                 </div>
               </div>

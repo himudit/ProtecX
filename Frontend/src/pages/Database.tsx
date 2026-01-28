@@ -1,5 +1,5 @@
 import { Plus, Table, Search, Filter } from 'lucide-react';
-import './Database.css';
+import styles from './Database.module.css';
 
 export default function Database() {
   const tables = [
@@ -10,60 +10,60 @@ export default function Database() {
   ];
 
   return (
-    <div className="database-page">
-      <div className="page-header">
+    <div className={styles['database-page']}>
+      <div className={styles['page-header']}>
         <div>
-          <h1 className="page-title">Database</h1>
-          <p className="page-subtitle">Manage your database tables and queries</p>
+          <h1 className={styles['page-title']}>Database</h1>
+          <p className={styles['page-subtitle']}>Manage your database tables and queries</p>
         </div>
-        <div className="header-actions">
-          <button className="secondary-btn">
+        <div className={styles['header-actions']}>
+          <button className={styles['secondary-btn']}>
             <Filter size={18} />
             <span>Filter</span>
           </button>
-          <button className="primary-btn">
+          <button className={styles['primary-btn']}>
             <Plus size={18} />
             <span>New Table</span>
           </button>
         </div>
       </div>
 
-      <div className="search-bar">
-        <Search size={18} className="search-icon" />
+      <div className={styles['search-bar']}>
+        <Search size={18} className={styles['search-icon']} />
         <input
           type="text"
           placeholder="Search tables..."
-          className="search-input"
+          className={styles['search-input']}
         />
       </div>
 
-      <div className="tables-section">
-        <div className="section-header">
+      <div className={styles['tables-section']}>
+        <div className={styles['section-header']}>
           <h2>Tables</h2>
-          <span className="section-count">{tables.length} tables</span>
+          <span className={styles['section-count']}>{tables.length} tables</span>
         </div>
-        <div className="tables-grid">
+        <div className={styles['tables-grid']}>
           {tables.map((table) => (
-            <div key={table.name} className="table-card">
-              <div className="table-header">
-                <div className="table-icon">
+            <div key={table.name} className={styles['table-card']}>
+              <div className={styles['table-header']}>
+                <div className={styles['table-icon']}>
                   <Table size={20} />
                 </div>
-                <h3 className="table-name">{table.name}</h3>
+                <h3 className={styles['table-name']}>{table.name}</h3>
               </div>
-              <div className="table-stats">
-                <div className="table-stat">
-                  <span className="stat-label">Rows</span>
-                  <span className="stat-value">{table.rows.toLocaleString()}</span>
+              <div className={styles['table-stats']}>
+                <div className={styles['table-stat']}>
+                  <span className={styles['stat-label']}>Rows</span>
+                  <span className={styles['stat-value']}>{table.rows.toLocaleString()}</span>
                 </div>
-                <div className="table-stat">
-                  <span className="stat-label">Size</span>
-                  <span className="stat-value">{table.size}</span>
+                <div className={styles['table-stat']}>
+                  <span className={styles['stat-label']}>Size</span>
+                  <span className={styles['stat-value']}>{table.size}</span>
                 </div>
               </div>
-              <div className="table-footer">
-                <span className="table-updated">Updated {table.updated}</span>
-                <button className="text-link">View Schema</button>
+              <div className={styles['table-footer']}>
+                <span className={styles['table-updated']}>Updated {table.updated}</span>
+                <button className={styles['text-link']}>View Schema</button>
               </div>
             </div>
           ))}

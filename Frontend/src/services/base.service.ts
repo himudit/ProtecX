@@ -1,17 +1,22 @@
-import axios from 'axios';
-
-export const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL,
-  timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-apiClient.interceptors.request.use((config) => {
+export async function apiClient<T>(
+  url: string,
+  options: RequestInit = {}
+): Promise<T> {
   const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
+  const res = await fetch(`${API_BASE_URL}${url}`, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token ? `Bearer ${token}` : '',
+      ...options.headers,
+    },
+  });
+
+  if (!res.ok) {
+    throw await res.json();
   }
-  return config;
-});
+
+  return res.json();
+}

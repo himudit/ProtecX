@@ -9,10 +9,10 @@
 
 /* HEADER */
 .branch-header {
-    border: 1px solid #262626;
-    border-radius: 12px;
+    /* border: 1px solid #262626; */
+    /* border-radius: 12px; */
     padding: 16px 20px;
-    background: #0f0f0f;
+    /* background: #0f0f0f; */
     margin-top: 15px;
 }
 
@@ -130,28 +130,138 @@
 
 /* USER ROW */
 .user-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2px;
 }
 
 .user-avatar {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #1f2937;
-  border: 1px solid #374151;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #1f2937;
+    border: 1px solid #374151;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  color: #d1d5db;
+    color: #d1d5db;
 }
 
 .user-name {
-  font-size: 14px;
-  font-weight: 500;
-  color: #f3f4f6;
+    font-size: 14px;
+    font-weight: 500;
+    color: #f3f4f6;
+}
+
+
+.keys-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    color: #e5e7eb;
+}
+
+/* CARD */
+.key-card {
+    background: #0f0f0f;
+    border: 1px solid #262626;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+/* TITLES */
+.card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #f9fafb;
+    margin-bottom: 6px;
+}
+
+.card-description {
+    font-size: 13px;
+    color: #9ca3af;
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+/* KEY ROW */
+.key-row,
+.secret-key-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.key-label {
+    font-size: 13px;
+    color: #9ca3af;
+}
+
+/* INPUT ROW */
+.key-input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.key-value {
+    flex: 1;
+    background: #0b0b0b;
+    border: 1px solid #262626;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: #e5e7eb;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* ICON BUTTONS */
+.icon-button {
+    background: #111827;
+    border: 1px solid #262626;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    color: #d1d5db;
+}
+
+.icon-button:hover {
+    background: #1f2937;
+}
+
+.icon-button-danger {
+    background: #111827;
+    border: 1px solid #3f1d1d;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    color: #f87171;
+}
+
+.icon-button-danger:hover {
+    background: #1f1f1f;
+}
+
+/* ADD KEY */
+.add-key-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 1px dashed #374151;
+    color: #d1d5db;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.add-key-button:hover {
+    background: #111827;
 }

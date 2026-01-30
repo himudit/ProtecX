@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { Database, Users, Activity, Clock, User } from 'lucide-react';
+import { Database, Users, Activity, Clock, User, Eye, EyeOff, Copy, Trash2, Plus } from 'lucide-react';
 import ShieldIcon from '../components/Common/ShieldIcon';
 import styles from './ProjectOverview.module.css';
 
@@ -29,7 +29,6 @@ export default function ProjectOverview() {
                     <h2 className={styles['branch-title']}>Branch overview</h2>
 
                     <div className={styles['branch-meta']}>
-                        <span className={styles['branch-name']}>production</span>
                         <span className={styles['branch-badge']}>Default</span>
                     </div>
                 </div>
@@ -68,32 +67,58 @@ export default function ProjectOverview() {
                 </div>
             </div>
 
-            {/* {INFO CARD} */}
-            <div className={styles['info-card']}>
-                <div className={styles['info-grid']}>
+            <div className={styles['keys-wrapper']}>
 
-                    <div className={styles['info-item']}>
-                        <div className={styles['info-label']}>ID</div>
-                        <div className={styles['info-value']}>br-floral-sun-ah65r1uw</div>
-                    </div>
+                {/* PUBLISHABLE KEY */}
+                <div className={styles['key-card']}>
+                    <h3 className={styles['card-title']}>API Key</h3>
+                    <p className={styles['card-description']}>
+                        The API Key is used to identify and access your project from client or server applications.
+                        This key is safe to expose and can be included in frontend code. It does not grant administrative access and cannot be used to generate or sign tokens.
+                    </p>
 
-                    <div className={styles['divider']} />
+                    <div className={styles['key-row']}>
+                        <span className={styles['key-label']}>apiKey</span>
 
-                    <div className={styles['info-item']}>
-                        <div className={styles['info-label']}>Created on</div>
-                        <div className={styles['info-value']}>
-                            2026-01-14 23:22:44 +05:30
+                        <div className={styles['key-input-row']}>
+                            <code className={styles['key-value']}>
+                                pk_live_Y2x1cmsub2VyZmFkYS5YSQ
+                            </code>
+                            <button className={styles['icon-button']}>
+                                <Copy size={16} />
+                            </button>
                         </div>
                     </div>
-
-                    <div className={styles['divider']} />
-
-                    <div className={styles['info-item']}>
-                        <div className={styles['info-label']}>Created by</div>
-                        <div className={styles['info-value']}>Mudit</div>
-                    </div>
-
                 </div>
+
+                {/* SECRET KEYS */}
+                <div className={styles['key-card']}>
+                    <h3 className={styles['card-title']}>JWT Public Key</h3>
+                    <p className={styles['card-description']}>
+                        The JWT Public Key is used to verify JSON Web Tokens (JWTs) issued by this project.
+                        It is generated using asymmetric cryptography (RS256) and can be safely shared with services that need to validate tokens. This key cannot be used to sign or modify tokens.
+                    </p>
+
+                    {/* SECRET KEY ITEM */}
+                    <div className={styles['secret-key-row']}>
+                        <span className={styles['key-label']}>Default secret key</span>
+
+                        <div className={styles['key-input-row']}>
+                            <code className={styles['key-value']}>
+                                sk_live_Y2x1cmsub2VyZmFkYS5YSQ
+                            </code>
+
+                            <button className={styles['icon-button']}>
+                                <Eye size={16} />
+                            </button>
+
+                            <button className={styles['icon-button']}>
+                                <Copy size={16} />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     );

@@ -24,9 +24,7 @@ export default function ProjectSidebar({ isCollapsed, onToggle }: ProjectSidebar
 
     const navItems = [
         { icon: LayoutDashboard, label: 'Overview', path: `/dashboard/projects/${projectId}` },
-        { icon: AlignEndHorizontalIcon, label: 'Usage', path: `/dashboard/projects/${projectId}/usage` },
         { icon: Database, label: 'Data Browser', path: `/dashboard/projects/${projectId}/data-browser` },
-        { icon: Key, label: 'API Keys', path: `/dashboard/projects/${projectId}/keys` },
         { icon: Activity, label: 'Logs', path: `/dashboard/projects/${projectId}/logs` },
         { icon: Settings, label: 'Settings', path: `/dashboard/projects/${projectId}/settings` },
     ];

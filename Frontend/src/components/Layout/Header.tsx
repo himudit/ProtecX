@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
-import { Search, Bell, User, ChevronDown, LogOut } from 'lucide-react';
+import { User, ChevronDown, LogOut } from 'lucide-react';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '@/store';
 import { logout } from '../../store/slices/authSlice';
+import { useNavigate } from 'react-router-dom';
+import ShieldIcon from '../Common/ShieldIcon';
 import styles from './Header.module.css';
 
 export default function Header() {
@@ -10,6 +12,7 @@ export default function Header() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { user } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -34,19 +37,12 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles['header-left']}>
-        <div className={styles['search-container']}>
-          <Search size={18} className={styles['search-icon']} />
-          <input
-            type="text"
-            placeholder="Search projects, databases..."
-            className={styles['search-input']}
-          />
+        <div className={styles.logo} onClick={() => navigate('/')}>
+          <ShieldIcon size={16} style={{ cursor: 'pointer' }} />
+          <span className={styles['logo-text']}>Shield</span>
         </div>
       </div>
       <div className={styles['header-right']}>
-        <button className={styles['header-icon-btn']}>
-          <Bell size={18} />
-        </button>
         <div className={styles['user-menu-container']} ref={dropdownRef}>
           <div
             className={styles['user-menu']}

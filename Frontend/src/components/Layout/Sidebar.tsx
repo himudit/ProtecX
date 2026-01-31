@@ -39,13 +39,7 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
   const navigate = useNavigate();
   return (
     <aside className={`${styles.sidebar} ${isCollapsed ? styles.collapsed : ''}`}>
-      <div className={styles['sidebar-header']}>
-        <div className={styles.logo} onClick={() => navigate('/')}>
-          <ShieldIcon size={16} style={{ cursor: 'pointer' }} />
-          {!isCollapsed && <span className={`${styles['logo-text']}`}>Shield</span>}
-        </div>
-
-      </div>
+      {/* Sidebar starting below Header */}
       <nav className={styles['sidebar-nav']}>
         {navItems.map((item) => {
           const Icon = item.icon;

@@ -83,3 +83,35 @@ tr:hover td {
     color: #6b7280;
     font-size: 14px;
 }
+
+
+.search-icon-skeleton {
+    width: 18px;
+    height: 18px;
+    background: #ddd;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.search-skeleton {
+    flex: 1;
+    height: 20px;
+    background: #eee;
+    border-radius: 4px;
+}
+
+.th-skeleton {
+    height: 16px;
+    width: 80px;
+    background: #ddd;
+    border-radius: 4px;
+    margin: auto;
+}
+
+.td-skeleton {
+    height: 16px;
+    width: 100%;
+    background: #eee;
+    border-radius: 4px;
+}

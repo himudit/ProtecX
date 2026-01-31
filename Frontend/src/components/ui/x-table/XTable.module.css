@@ -73,6 +73,7 @@ td {
 /* Row hover */
 tr:hover td {
     background: #0f0f10;
+    cursor: pointer;
 }
 
 /* Empty state */

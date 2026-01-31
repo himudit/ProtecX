@@ -7,7 +7,9 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 32px;
+  margin-top: 29px;
+  margin-left: 29px;
+
 }
 
 .primary-btn:hover {

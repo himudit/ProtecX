@@ -160,47 +160,6 @@ export default function Projects() {
         </div>
       )}
 
-      {/* <div className={styles['projects-grid']}>
-        {projects.map((project) => (
-          <div
-            key={project.id}
-            className={styles['project-card']}
-            onClick={() => navigate(`/dashboard/projects/${project.id}`)}
-            style={{ cursor: 'pointer' }}
-          >
-            <div className={styles['project-header']}>
-              <div className={styles['project-info']}>
-                <h3 className={styles['project-name']}>{project.name}</h3>
-                <p className={styles['project-description']}>{project.description}</p>
-              </div>
-              <button className={styles['icon-btn']} onClick={(e) => e.stopPropagation()}>
-                <MoreVertical size={18} />
-              </button>
-            </div>
-            <div className={styles['project-stats']}>
-              <div className={styles['project-stat']}>
-                <Database size={16} />
-                <span>{project.databases} Databases</span>
-              </div>
-              <div className={styles['project-stat']}>
-                <Users size={16} />
-                <span>{project.users.toLocaleString()} Users</span>
-              </div>
-              <div className={styles['project-stat']}>
-                <Globe size={16} />
-                <span>{project.region}</span>
-              </div>
-            </div>
-            <div className={styles['project-footer']}>
-              <span className={`${styles['status-badge']} ${styles[project.status]}`}>
-                {project.status}
-              </span>
-              <span className={styles['project-updated']}>Updated {project.updated}</span>
-            </div>
-          </div>
-        ))}
-      </div> */}
-
       <XTable
         data={data}
         columns={[

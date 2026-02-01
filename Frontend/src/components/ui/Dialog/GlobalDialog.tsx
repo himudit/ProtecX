@@ -92,15 +92,20 @@ export const GlobalDialog = () => {
                         </DialogActionTrigger>
 
                         <Button
-                            size="sm"
+                            size="md"
+                            px="6"
+                            h="42px"
                             bg="#f97316"
                             color="black"
                             fontWeight="600"
+                            borderRadius="8px"
                             _hover={{ bg: "#fb923c" }}
+                            _active={{ bg: "#f97316" }}
                             onClick={handleConfirm}
                         >
                             Log in
                         </Button>
+
                     </DialogFooter>
                 </DialogContent>
             </DialogPositioner>

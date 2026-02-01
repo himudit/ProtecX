@@ -2,13 +2,13 @@ import type { ProjectResponseDto } from '../modules/project/dto/project-response
 import { apiClient } from './base.service';
 
 
-export function createProject(data: {
-    name: string;
-    description?: string;
-}) {
+export function createProject(data: { name: string; description?: string }) {
     return apiClient<ProjectResponseDto>('/api/projects', {
         method: 'POST',
-        body: JSON.stringify(data),
+        data,
+        headers: {
+            'Content-Type': 'application/json',
+        },
     });
 }
 

@@ -1,13 +1,21 @@
-import { api } from './api.service';
+import { apiClient } from './base.service';
 import type { LoginRequest, AuthResponse, SignupRequest } from '../types/auth';
 
 export const authService = {
     login: (data: LoginRequest) =>
-        api.post<AuthResponse>('/api/auth/login', data),
+        apiClient<AuthResponse>('/api/auth/login', {
+            method: 'POST',
+            data,
+        }),
 
     signup: (data: SignupRequest) =>
-        api.post<AuthResponse>('/api/auth/signup', data),
+        apiClient<AuthResponse>('/api/auth/signup', {
+            method: 'POST',
+            data,
+        }),
 
     logout: () =>
-        api.post<void>('/api/auth/logout'),
+        apiClient<void>('/api/auth/logout', {
+            method: 'POST',
+        }),
 };

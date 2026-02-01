@@ -125,6 +125,7 @@
     font-size: 0.875rem;
     transition: all 0.2s ease;
     white-space: nowrap;
+    height: 40px;
 }
 
 .project-sidebar.collapsed .project-nav-item {

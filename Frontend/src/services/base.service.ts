@@ -11,13 +11,13 @@ export async function apiClient<T>(
 
   try {
     const response = await axios<T>({
+      ...options,
       url: `${API_BASE_URL}${url}`,
       headers: {
         "Content-Type": "application/json",
         Authorization: token ? `Bearer ${token}` : "",
-        ...options.headers,
+        ...(options.headers || {}),
       },
-      ...options,
     });
 
     console.log("baseService", response.data);

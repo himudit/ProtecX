@@ -6,18 +6,18 @@
   --bg-hover: #1f1f1f;
   --border-color: #2a2a2a;
   --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
-  --text-tertiary: #6b6b6b;
-  --accent: #f97316;
+  --text-secondary: #c3c0b6;
+  --text-tertiary: #30302e;
+  --accent: #fe902d;
   --accent-hover: #ea580c;
-  --accent-light: #ff8c42;
+  --accent-light: #d97757;
   --auth-grey: #171717;
 
   /* White & Orange Theme (for light sections) */
   --white-bg: #ffffff;
   --white-text: #000000;
   --white-text-secondary: #1f1f1f;
-  --orange-accent: #f97316;
+  --orange-accent: #fe902d;
 
   --sidebar-width: 190px;
   --sidebar-header-height: 64px;

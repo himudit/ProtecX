@@ -13,13 +13,13 @@ export const api = {
   post: <T>(url: string, body?: object) =>
     apiClient<T>(url, {
       method: 'POST',
-      body: JSON.stringify(body),
+      data: body,
     }),
 
   put: <T>(url: string, body?: object) =>
     apiClient<T>(url, {
       method: 'PUT',
-      body: JSON.stringify(body),
+      data: body,
     }),
 
   delete: <T>(url: string) =>

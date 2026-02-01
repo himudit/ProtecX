@@ -54,11 +54,12 @@ export default function Projects() {
   const handleCreateProject = async () => {
     setIsCreating(true);
     try {
-      await createProject({
+      const response = await createProject({
         name,
         description,
       });
       setIsCreateOpen(false);
+      navigate(`/projects/${response.data.project.id}`);
       // refresh project list later
     } catch (err) {
       console.error(err);
@@ -92,7 +93,9 @@ export default function Projects() {
       {isCreateOpen && (
         <div
           className={styles['dialog-overlay']}
-          onClick={() => setIsCreateOpen(false)}
+          onClick={() => {
+            if (!isCreating) setIsCreateOpen(false);
+          }}
         >
           <div
             className={styles['dialog']}
@@ -103,6 +106,7 @@ export default function Projects() {
               <button
                 className={styles['icon-btn']}
                 onClick={() => setIsCreateOpen(false)}
+                disabled={isCreating}
               >
                 <X size={20} />
               </button>
@@ -133,21 +137,22 @@ export default function Projects() {
               <button
                 className={styles['secondary-btn']}
                 onClick={() => setIsCreateOpen(false)}
+                disabled={isCreating}
               >
                 Cancel
               </button>
               <button
-                className={`${styles['primary-btn']} ${isLoading ? styles['loading'] : ''}`}
+                className={`${styles['primary-btn']} ${isCreating ? styles['loading'] : ''}`}
                 onClick={handleCreateProject}
-                disabled={isLoading}
+                disabled={isCreating}
               >
-                {isLoading ? (
+                {isCreating ? (
                   <>
                     <span className={styles.loader}></span>
                     <span className={styles.dimText}>Creating...</span>
                   </>
                 ) : (
-                  'Create Project'
+                  'Create project'
                 )}
               </button>
             </div>

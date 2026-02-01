@@ -99,22 +99,22 @@ tr:hover td {
 
 .search-skeleton {
     flex: 1;
-    height: 20px;
-    background: #eee;
+    height: 40px;
+    background: var(--text-tertiary);
     border-radius: 4px;
 }
 
 .th-skeleton {
-    height: 16px;
-    width: 80px;
-    background: #ddd;
+    height: 25px;
+    width: 70%;
+    background: var(--text-tertiary);
     border-radius: 4px;
-    margin: auto;
+    /* margin: auto; */
 }
 
 .td-skeleton {
-    height: 16px;
-    width: 100%;
-    background: #eee;
+    height: 25px;
+    width: 80%;
+    background: var(--text-tertiary);
     border-radius: 4px;
 }

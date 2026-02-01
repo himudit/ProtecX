@@ -1,50 +1,60 @@
 import { useParams } from 'react-router-dom';
-import { Database, Users, Activity, Clock, User, Eye, EyeOff, Copy, Trash2, Plus } from 'lucide-react';
+import { Database, Users, Activity, Clock, User, Eye, EyeOff, Copy, Trash2, Plus, Check } from 'lucide-react';
 import ShieldIcon from '../components/Common/ShieldIcon';
 import styles from './ProjectOverview.module.css';
 import { useEffect, useState } from 'react';
 import { getProjectById } from '../services/project.api';
 import type { ProjectMetaResponseDto } from '../modules/projectById/dto/projectMeta-response.dto';
 import type { ProjectResponseDto } from '../modules/project/dto/project-response.dto';
-
-// export interface Project {
-//     id: string;
-//     name: string;
-//     description: string;
-//     createdAt: Date;
-//     updatedAt: Date;
-//     ownerId: string;
-// }
+import SkeletonDiv from '../components/ui/Skeleton/SkeletonDiv/SkeletonDiv';
 
 export default function ProjectOverview() {
     const { projectId } = useParams();
     const [isLoading, setIsLoading] = useState(false);
     const [projectData, setProjectData] = useState<ProjectMetaResponseDto | null>(null);
+    const [showApiKey, setShowApiKey] = useState(false);
+    const [showJwtKey, setShowJwtKey] = useState(false);
+    const [copiedKey, setCopiedKey] = useState<string | null>(null);
+
+    const copyToClipboard = (text: string, keyId: string) => {
+        navigator.clipboard.writeText(text);
+        setCopiedKey(keyId);
+        setTimeout(() => setCopiedKey(null), 2000);
+    };
+
+    const getStatusClass = (status: string | undefined) => {
+        if (!status) return '';
+        switch (status.toUpperCase()) {
+            case 'ACTIVE': return styles['status-active'];
+            case 'INACTIVE': return styles['status-inactive'];
+            case 'ARCHIVED': return styles['status-archived'];
+            default: return '';
+        }
+    };
 
     useEffect(() => {
-        const fetchProject = async () => {
-            if (!projectId) {
-                console.warn("ProjectOverview: No projectId found in params");
-                return;
-            }
-
-            try {
-                setIsLoading(true);
-                console.log("ProjectOverview: Fetching project for ID:", projectId);
-                const res = await getProjectById(projectId);
-                console.log("ProjectOverview: Received response:", res);
-                if (res && res.data) {
-                    setProjectData(res.data);
-                }
-            } catch (err) {
-                console.error("ProjectOverview: Error fetching project:", err);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
         fetchProject();
     }, [projectId]);
+
+    const fetchProject = async () => {
+        if (!projectId) {
+            console.warn("ProjectOverview: No projectId found in params");
+            return;
+        }
+        try {
+            setIsLoading(true);
+            console.log("ProjectOverview: Fetching project for ID:", projectId);
+            const res = await getProjectById(projectId);
+            console.log("ProjectOverview: Received response:", res);
+            if (res && res.data) {
+                setProjectData(res.data);
+            }
+        } catch (err) {
+            console.error("ProjectOverview: Error fetching project:", err);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return (
         <div className={styles['branch-overview']}>
@@ -52,10 +62,18 @@ export default function ProjectOverview() {
             {/* HEADER */}
             <div className={styles['branch-header']}>
                 <div className={styles['branch-title-row']}>
-                    <h2 className={styles['branch-title']}>{projectData?.project.name || 'Project Overview'}</h2>
+                    <h2 className={styles['branch-title']}>
+                        {isLoading ? <SkeletonDiv width="250px" height="36px" /> : (projectData?.project.name || 'Project Overview')}
+                    </h2>
 
                     <div className={styles['branch-meta']}>
-                        <span className={styles['branch-badge']}>{projectData?.project.status || 'Active'}</span>
+                        {isLoading ? (
+                            <SkeletonDiv width="80px" height="24px" borderRadius="999px" />
+                        ) : (
+                            <span className={`${styles['branch-badge']} ${getStatusClass(projectData?.project.status)}`}>
+                                {projectData?.project.status || 'Active'}
+                            </span>
+                        )}
                     </div>
                 </div>
             </div>
@@ -73,7 +91,11 @@ export default function ProjectOverview() {
                     <div className={styles['info-item']}>
                         <div className={styles['info-label']}>Created on</div>
                         <div className={styles['info-value']}>
-                            {projectData?.project.createdAt ? new Date(projectData.project.createdAt).toLocaleString() : 'Loading...'}
+                            {isLoading ? (
+                                <SkeletonDiv width="150px" height="18px" />
+                            ) : (
+                                projectData?.project.createdAt ? new Date(projectData.project.createdAt).toLocaleString() : 'N/A'
+                            )}
                         </div>
                     </div>
 
@@ -86,7 +108,9 @@ export default function ProjectOverview() {
                             <div className={styles['user-avatar']}>
                                 <User size={16} />
                             </div>
-                            <div className={styles['user-name']}>{projectData?.project.ownerId || 'Owner'}</div>
+                            <div className={styles['user-name']}>
+                                {isLoading ? <SkeletonDiv width="100px" height="18px" /> : (projectData?.project.ownerId || 'Owner')}
+                            </div>
                         </div>
                     </div>
 
@@ -108,10 +132,17 @@ export default function ProjectOverview() {
 
                         <div className={styles['key-input-row']}>
                             <code className={styles['key-value']}>
-                                {projectData?.apiKey.apiKey || 'Loading...'}
+                                {isLoading ? (
+                                    <SkeletonDiv width="100%" height="18px" />
+                                ) : (
+                                    showApiKey ? (projectData?.apiKey.apiKey || 'N/A') : '••••••••••••••••••••••••••••'
+                                )}
                             </code>
-                            <button className={styles['icon-button']}>
-                                <Copy size={16} />
+                            <button className={styles['icon-button']} onClick={() => setShowApiKey(!showApiKey)}>
+                                {showApiKey ? <EyeOff size={16} /> : <Eye size={16} />}
+                            </button>
+                            <button className={styles['icon-button']} onClick={() => projectData?.apiKey.apiKey && copyToClipboard(projectData.apiKey.apiKey, 'api')}>
+                                {copiedKey === 'api' ? <Check size={16} style={{ color: '#10b981' }} /> : <Copy size={16} />}
                             </button>
                         </div>
                     </div>
@@ -126,25 +157,38 @@ export default function ProjectOverview() {
                     </p>
 
                     {/* SECRET KEY ITEM */}
-                    <div className={styles['secret-key-row']}>
-                        <span className={styles['key-label']}>Public Key</span>
+                    <div className={styles['public-key-container']}>
+                        <div className={styles['key-label-row']}>
+                            <span className={styles['key-label']}>Public Key</span>
+                            <div className={styles['key-actions']}>
+                                <button className={styles['icon-button']} onClick={() => setShowJwtKey(!showJwtKey)}>
+                                    {showJwtKey ? <EyeOff size={16} /> : <Eye size={16} />}
+                                    <span>{showJwtKey ? 'Hide' : 'Show'}</span>
+                                </button>
+                                <button className={styles['icon-button']} onClick={() => projectData?.jwtKey.publicKey && copyToClipboard(projectData.jwtKey.publicKey, 'jwt')}>
+                                    {copiedKey === 'jwt' ? <Check size={16} style={{ color: '#10b981' }} /> : <Copy size={16} />}
+                                    <span>{copiedKey === 'jwt' ? 'Copied' : 'Copy'}</span>
+                                </button>
+                            </div>
+                        </div>
 
-                        <div className={styles['key-input-row']}>
-                            <code className={styles['key-value']} style={{ wordBreak: 'break-all', whiteSpace: 'pre-wrap', fontSize: '12px' }}>
-                                {projectData?.jwtKey.publicKey || 'Loading...'}
+                        <div className={styles['public-key-box']}>
+                            <code className={styles['public-key-value']}>
+                                {isLoading ? (
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                        <SkeletonDiv width="100%" />
+                                        <SkeletonDiv width="95%" />
+                                        <SkeletonDiv width="98%" />
+                                        <SkeletonDiv width="90%" />
+                                    </div>
+                                ) : (
+                                    showJwtKey
+                                        ? (projectData?.jwtKey.publicKey || 'N/A')
+                                        : (projectData?.jwtKey.publicKey
+                                            ? projectData.jwtKey.publicKey.substring(0, 150) + '...'
+                                            : 'N/A')
+                                )}
                             </code>
-
-                            <button className={styles['icon-button']}>
-                                <Eye size={16} />
-                            </button>
-
-                            <button className={styles['icon-button']} onClick={() => {
-                                if (projectData?.jwtKey.publicKey) {
-                                    navigator.clipboard.writeText(projectData.jwtKey.publicKey);
-                                }
-                            }}>
-                                <Copy size={16} />
-                            </button>
                         </div>
                     </div>
                 </div>

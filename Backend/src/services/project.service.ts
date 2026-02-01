@@ -1,5 +1,5 @@
 import { prisma } from '../config/primsa';
-import { CreateProjectDto, ProjectResponseDto, ApiKeyCreateResponseDto, JwtKeyResponseDto, CreateProjectResponseDto } from '../interfaces/project.interface';
+import { CreateProjectDto, ProjectResponseDto, ApiKeyCreateResponseDto, JwtKeyResponseDto, CreateProjectResponseDto, ProjectMetaResponseDto, ApiKeyResponseDto } from '../interfaces/project.interface';
 import * as projectApiKeyService from './projectApiKey.service';
 import * as projectJwtKeyService from './projectJwtKey.service';
 import { ApiEnvironment } from '../enums/api-environment.enum';
@@ -111,4 +111,92 @@ export const getProjects = async (userId: string): Promise<ProjectResponseDto[]>
   }));
 
   return projectsDto;
+};
+
+export const getProjectById = async (userId: string, projectId: string): Promise<ProjectMetaResponseDto> => {
+
+  const projectModel = await prisma.project.findFirst({
+    where: {
+      id: projectId,
+      ownerId: userId,
+    },
+    select: {
+      id: true,
+      ownerId: true,
+      name: true,
+      description: true,
+      status: true,
+      createdAt: true,
+      updatedAt: true,
+
+      apiKeys: {
+        where: { isActive: true },
+        select: {
+          id: true,
+          apiKey: true,
+          environment: true,
+          isActive: true,
+          createdAt: true,
+        },
+      },
+
+      jwtKeys: {
+        where: { isActive: true },
+        select: {
+          id: true,
+          kid: true,
+          publicKey: true,
+          algorithm: true,
+          isActive: true,
+          createdAt: true,
+        },
+      },
+    },
+  });
+
+
+  if (!projectModel) {
+    throw new Error('Project not found');
+  }
+
+  const projectDto: ProjectResponseDto = {
+    id: projectModel.id,
+    ownerId: projectModel.ownerId,
+    name: projectModel.name,
+    description: projectModel.description,
+    status: projectModel.status,
+    createdAt: projectModel.createdAt,
+    updatedAt: projectModel.updatedAt,
+  };
+
+  const activeApiKey = projectModel.apiKeys[0];
+  const apiKeyDto: ApiKeyResponseDto | null = activeApiKey ? {
+    id: activeApiKey.id,
+    apiKey: activeApiKey.apiKey,
+    environment: activeApiKey.environment,
+    isActive: activeApiKey.isActive,
+    createdAt: activeApiKey.createdAt,
+  } : null;
+
+  const activeJwtKey = projectModel.jwtKeys[0];
+  const jwtKeyDto: JwtKeyResponseDto | null = activeJwtKey ? {
+    id: activeJwtKey.id,
+    kid: activeJwtKey.kid,
+    publicKey: activeJwtKey.publicKey,
+    algorithm: activeJwtKey.algorithm,
+    isActive: activeJwtKey.isActive,
+    createdAt: activeJwtKey.createdAt
+  } : null;
+
+  if (!apiKeyDto || !jwtKeyDto) {
+    throw new Error('Project configuration is incomplete (missing active keys)');
+  }
+
+  const result: ProjectMetaResponseDto = {
+    project: projectDto,
+    apiKey: apiKeyDto,
+    jwtKey: jwtKeyDto,
+  };
+
+  return result;
 };

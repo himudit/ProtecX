@@ -1,15 +1,24 @@
 import { ProjectStatus } from "../generated/prisma";
 import { ApiEnvironment } from "../generated/prisma";
 
+export interface CreateProjectDto {
+    name: string;
+    description?: string;
+}
+
 export interface CreateProjectResponseDto {
     project: ProjectResponseDto;
     apiKey: ApiKeyCreateResponseDto;
     jwtKey: JwtKeyResponseDto;
 }
 
-export interface CreateProjectDto {
-    name: string;
-    description?: string;
+export interface ApiKeyCreateResponseDto {
+    id: string;
+    apiKey: string;
+    secretKey: string; // shown ONCE
+    environment: string;
+    isActive: boolean;
+    createdAt: Date;
 }
 
 export interface ProjectResponseDto {
@@ -20,15 +29,6 @@ export interface ProjectResponseDto {
     status: ProjectStatus;
     createdAt: Date;
     updatedAt: Date;
-}
-
-export interface ApiKeyCreateResponseDto {
-    id: string;
-    apiKey: string;
-    secretKey: string; // shown ONCE
-    environment: string;
-    isActive: boolean;
-    createdAt: Date;
 }
 
 export interface ApiKeyResponseDto {

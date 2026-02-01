@@ -4,6 +4,7 @@ import ShieldIcon from '../components/Common/ShieldIcon';
 import styles from './ProjectOverview.module.css';
 import { useEffect, useState } from 'react';
 import { getProjectById } from '../services/project.api';
+import type { ProjectMetaResponseDto } from '../modules/projectById/dto/projectMeta-response.dto';
 import type { ProjectResponseDto } from '../modules/project/dto/project-response.dto';
 
 // export interface Project {
@@ -18,23 +19,32 @@ import type { ProjectResponseDto } from '../modules/project/dto/project-response
 export default function ProjectOverview() {
     const { projectId } = useParams();
     const [isLoading, setIsLoading] = useState(false);
-    const [project, setProject] = useState<ProjectResponseDto | null>(null);
+    const [projectData, setProjectData] = useState<ProjectMetaResponseDto | null>(null);
 
     useEffect(() => {
         const fetchProject = async () => {
+            if (!projectId) {
+                console.warn("ProjectOverview: No projectId found in params");
+                return;
+            }
+
             try {
                 setIsLoading(true);
-                const res = await getProjectById(projectId as string);
-                setProject(res.data as ProjectResponseDto);
+                console.log("ProjectOverview: Fetching project for ID:", projectId);
+                const res = await getProjectById(projectId);
+                console.log("ProjectOverview: Received response:", res);
+                if (res && res.data) {
+                    setProjectData(res.data);
+                }
             } catch (err) {
-                console.error(err);
+                console.error("ProjectOverview: Error fetching project:", err);
             } finally {
                 setIsLoading(false);
             }
         };
 
         fetchProject();
-    }, []);
+    }, [projectId]);
 
     return (
         <div className={styles['branch-overview']}>
@@ -42,10 +52,10 @@ export default function ProjectOverview() {
             {/* HEADER */}
             <div className={styles['branch-header']}>
                 <div className={styles['branch-title-row']}>
-                    <h2 className={styles['branch-title']}>Branch overview</h2>
+                    <h2 className={styles['branch-title']}>{projectData?.project.name || 'Project Overview'}</h2>
 
                     <div className={styles['branch-meta']}>
-                        <span className={styles['branch-badge']}>Default</span>
+                        <span className={styles['branch-badge']}>{projectData?.project.status || 'Active'}</span>
                     </div>
                 </div>
             </div>
@@ -63,7 +73,7 @@ export default function ProjectOverview() {
                     <div className={styles['info-item']}>
                         <div className={styles['info-label']}>Created on</div>
                         <div className={styles['info-value']}>
-                            2026-01-14 23:22:44 +05:30
+                            {projectData?.project.createdAt ? new Date(projectData.project.createdAt).toLocaleString() : 'Loading...'}
                         </div>
                     </div>
 
@@ -76,7 +86,7 @@ export default function ProjectOverview() {
                             <div className={styles['user-avatar']}>
                                 <User size={16} />
                             </div>
-                            <div className={styles['user-name']}>Mudit</div>
+                            <div className={styles['user-name']}>{projectData?.project.ownerId || 'Owner'}</div>
                         </div>
                     </div>
 
@@ -98,7 +108,7 @@ export default function ProjectOverview() {
 
                         <div className={styles['key-input-row']}>
                             <code className={styles['key-value']}>
-                                pk_live_Y2x1cmsub2VyZmFkYS5YSQ
+                                {projectData?.apiKey.apiKey || 'Loading...'}
                             </code>
                             <button className={styles['icon-button']}>
                                 <Copy size={16} />
@@ -107,7 +117,7 @@ export default function ProjectOverview() {
                     </div>
                 </div>
 
-                {/* SECRET KEYS */}
+                {/* SECRET KEYS (JWT Public Key) */}
                 <div className={styles['key-card']}>
                     <h3 className={styles['card-title']}>JWT Public Key</h3>
                     <p className={styles['card-description']}>
@@ -117,18 +127,22 @@ export default function ProjectOverview() {
 
                     {/* SECRET KEY ITEM */}
                     <div className={styles['secret-key-row']}>
-                        <span className={styles['key-label']}>Default secret key</span>
+                        <span className={styles['key-label']}>Public Key</span>
 
                         <div className={styles['key-input-row']}>
-                            <code className={styles['key-value']}>
-                                sk_live_Y2x1cmsub2VyZmFkYS5YSQ
+                            <code className={styles['key-value']} style={{ wordBreak: 'break-all', whiteSpace: 'pre-wrap', fontSize: '12px' }}>
+                                {projectData?.jwtKey.publicKey || 'Loading...'}
                             </code>
 
                             <button className={styles['icon-button']}>
                                 <Eye size={16} />
                             </button>
 
-                            <button className={styles['icon-button']}>
+                            <button className={styles['icon-button']} onClick={() => {
+                                if (projectData?.jwtKey.publicKey) {
+                                    navigator.clipboard.writeText(projectData.jwtKey.publicKey);
+                                }
+                            }}>
                                 <Copy size={16} />
                             </button>
                         </div>

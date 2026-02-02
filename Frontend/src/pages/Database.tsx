@@ -1,12 +1,48 @@
-import { Plus, Table, Search, Filter } from 'lucide-react';
+import { Plus, Filter } from 'lucide-react';
 import styles from './Database.module.css';
+import { XTable } from '@/components/ui/x-table/XTable';
+import type { ProjectUserRowResponseDto } from '@/modules/projectUser/dto/projectUserRow-response.dto';
+import { ProjectRole } from '@/enums/enum';
+import type { Column } from '@/components/ui/x-table/types';
 
 export default function Database() {
-  const tables = [
-    { name: 'users', rows: 1250, size: '2.4 MB', updated: '2 hours ago' },
-    { name: 'products', rows: 3420, size: '8.1 MB', updated: '5 hours ago' },
-    { name: 'orders', rows: 8920, size: '12.3 MB', updated: '1 day ago' },
-    { name: 'payments', rows: 5670, size: '6.8 MB', updated: '2 days ago' },
+  const dummyUsers: ProjectUserRowResponseDto[] = [
+    {
+      id: '1',
+      name: 'John Doe',
+      email: 'john@example.com',
+      role: ProjectRole.OWNER,
+      isVerified: true,
+      createdAt: new Date().toISOString(),
+      lastLoginAt: new Date().toISOString(),
+    },
+    {
+      id: '2',
+      name: 'Jane Smith',
+      email: 'jane@example.com',
+      role: ProjectRole.ADMIN,
+      isVerified: true,
+      createdAt: new Date().toISOString(),
+      lastLoginAt: 'Never',
+    },
+    {
+      id: '3',
+      name: 'Bob Wilson',
+      email: 'bob@example.com',
+      role: ProjectRole.MEMBER,
+      isVerified: false,
+      createdAt: new Date().toISOString(),
+      lastLoginAt: 'Never',
+    },
+  ];
+
+  const columns: Column<ProjectUserRowResponseDto>[] = [
+    { key: 'name', label: 'Name' },
+    { key: 'email', label: 'Email' },
+    { key: 'role', label: 'Role' },
+    { key: 'isVerified', label: 'Verified' },
+    { key: 'createdAt', label: 'Created At' },
+    { key: 'lastLoginAt', label: 'Last Login' },
   ];
 
   return (
@@ -14,7 +50,7 @@ export default function Database() {
       <div className={styles['page-header']}>
         <div>
           <h1 className={styles['page-title']}>Database</h1>
-          <p className={styles['page-subtitle']}>Manage your database tables and queries</p>
+          <p className={styles['page-subtitle']}>Manage your project users and permissions</p>
         </div>
         <div className={styles['header-actions']}>
           <button className={styles['secondary-btn']}>
@@ -23,52 +59,26 @@ export default function Database() {
           </button>
           <button className={styles['primary-btn']}>
             <Plus size={18} />
-            <span>New Table</span>
+            <span>Add User</span>
           </button>
         </div>
       </div>
 
-      <div className={styles['search-bar']}>
-        <Search size={18} className={styles['search-icon']} />
-        <input
-          type="text"
-          placeholder="Search tables..."
-          className={styles['search-input']}
-        />
-      </div>
-
       <div className={styles['tables-section']}>
         <div className={styles['section-header']}>
-          <h2>Tables</h2>
-          <span className={styles['section-count']}>{tables.length} tables</span>
+          <h2>Project Users</h2>
+          <span className={styles['section-count']}>{dummyUsers.length} users</span>
         </div>
-        <div className={styles['tables-grid']}>
-          {tables.map((table) => (
-            <div key={table.name} className={styles['table-card']}>
-              <div className={styles['table-header']}>
-                <div className={styles['table-icon']}>
-                  <Table size={20} />
-                </div>
-                <h3 className={styles['table-name']}>{table.name}</h3>
-              </div>
-              <div className={styles['table-stats']}>
-                <div className={styles['table-stat']}>
-                  <span className={styles['stat-label']}>Rows</span>
-                  <span className={styles['stat-value']}>{table.rows.toLocaleString()}</span>
-                </div>
-                <div className={styles['table-stat']}>
-                  <span className={styles['stat-label']}>Size</span>
-                  <span className={styles['stat-value']}>{table.size}</span>
-                </div>
-              </div>
-              <div className={styles['table-footer']}>
-                <span className={styles['table-updated']}>Updated {table.updated}</span>
-                <button className={styles['text-link']}>View Schema</button>
-              </div>
-            </div>
-          ))}
+
+        <div className={styles['table-container']}>
+          <XTable
+            data={dummyUsers}
+            columns={columns}
+            onRowClick={(row) => console.log('Clicked row:', row)}
+          />
         </div>
       </div>
     </div>
   );
 }
+

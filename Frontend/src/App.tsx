@@ -15,6 +15,7 @@ import PublicRoute from './components/Auth/PublicRoute';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import { GlobalDialog } from './components/ui/Dialog/GlobalDialog';
 import './App.css';
+import Database from './pages/Database';
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
             <Route path="projects" element={<Projects />} />
             <Route path="projects/:projectId" element={<ProjectLayout />}>
               <Route index element={<ProjectOverview />} />
-              <Route path="data-browser" element={<div>Security Page</div>} />
+              <Route path="data-browser" element={<Database />} />
               <Route path="logs" element={<div>Logs Page</div>} />
               <Route path="settings" element={<div>Project Settings Page</div>} />
             </Route>

@@ -7,5 +7,5 @@ export interface ProjectUserRowResponseDto {
     role: ProjectRole;
     isVerified: boolean;
     createdAt: string;
-    lastLoginAt?: string | null;
+    lastLoginAt: string;
 }

@@ -1,10 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowRight, User, ChevronDown, LogOut } from "lucide-react";
+import { ArrowRight, ChevronDown, LogOut } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from '@/store';
 import { logout } from "../store/slices/authSlice";
 import styles from "./Navbar.module.css";
+import { Avatar } from "../components/ui/Avatar/Avatar";
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -78,7 +79,7 @@ const Navbar = () => {
                                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                             >
                                 <div className={styles['user-avatar']}>
-                                    <User size={16} />
+                                    <Avatar name={user?.name || 'User'} size={24} />
                                 </div>
                                 <ChevronDown size={16} className={styles['chevron-icon']} />
                             </div>

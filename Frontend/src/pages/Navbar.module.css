@@ -194,11 +194,12 @@
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: var(--accent);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: var(--bg-tertiary);
+    overflow: hidden;
 }
 
 .chevron-icon {

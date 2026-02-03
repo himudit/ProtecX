@@ -1,16 +1,20 @@
 import { useParams } from 'react-router-dom';
-import { Database, Users, Activity, Clock, User, Eye, EyeOff, Copy, Trash2, Plus, Check } from 'lucide-react';
-import styles from './ProjectOverview.module.css';
+import { Database, Users, Activity, Clock, Eye, EyeOff, Copy, Trash2, Plus, Check } from 'lucide-react';
+import { Avatar } from '../components/ui/Avatar/Avatar';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import type { RootState } from '@/store';
 import { getProjectById } from '../services/project.api';
 import type { ProjectMetaResponseDto } from '../modules/projectById/dto/projectMeta-response.dto';
 import type { ProjectResponseDto } from '../modules/project/dto/project-response.dto';
 import SkeletonDiv from '../components/ui/Skeleton/SkeletonDiv/SkeletonDiv';
+import styles from './ProjectOverview.module.css';
 
 export default function ProjectOverview() {
     const { projectId } = useParams();
     const [isLoading, setIsLoading] = useState(false);
     const [projectData, setProjectData] = useState<ProjectMetaResponseDto | null>(null);
+    const user = useSelector((state: RootState) => state.auth.user);
     const [showApiKey, setShowApiKey] = useState(false);
     const [showJwtKey, setShowJwtKey] = useState(false);
     const [copiedKey, setCopiedKey] = useState<string | null>(null);
@@ -104,12 +108,18 @@ export default function ProjectOverview() {
                         <div className={styles['info-label']}>Created by</div>
 
                         <div className={styles['user-row']}>
-                            <div className={styles['user-avatar']}>
-                                <User size={16} />
-                            </div>
-                            <div className={styles['user-name']}>
-                                {isLoading ? <SkeletonDiv width="100px" height="18px" /> : (projectData?.project.ownerId || 'Owner')}
-                            </div>
+                            {isLoading ? (
+                                <SkeletonDiv width="100px" height="18px" />
+                            ) : (
+                                <>
+                                    <div className={styles['user-avatar']}>
+                                        <Avatar name={user?.name || 'Owner'} size={24} />
+                                    </div>
+                                    <div className={styles['user-name']}>
+                                        {user?.name || 'Owner'}
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
 

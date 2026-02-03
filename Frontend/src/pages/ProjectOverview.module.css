@@ -141,14 +141,12 @@
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: #1f2937;
-    border: 1px solid #374151;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    color: #d1d5db;
+    border: 1px solid #374151;
+    overflow: hidden;
+    background-color: #1f2937;
 }
 
 .user-name {

@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
-import { User, ChevronDown, LogOut } from 'lucide-react';
+import { ChevronDown, LogOut } from 'lucide-react';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '@/store';
 import { logout } from '../../store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
+import { Avatar } from '../ui/Avatar/Avatar';
 
 export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -48,7 +49,7 @@ export default function Header() {
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
             <div className={styles['user-avatar']}>
-              <User size={16} />
+              <Avatar name={user?.name || 'User'} size={24} />
             </div>
             <ChevronDown size={16} />
           </div>

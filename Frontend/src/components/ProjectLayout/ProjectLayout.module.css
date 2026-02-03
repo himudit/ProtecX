@@ -2,12 +2,12 @@
     display: flex;
     min-height: 100%;
     width: 100%;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid #1c1c1c;
 }
 
 .project-content {
     flex: 1;
     overflow-y: auto;
-    background-color: #0b0b0b;
+    background-color: #0c0c0c;
     /* Matching the main theme background */
 }

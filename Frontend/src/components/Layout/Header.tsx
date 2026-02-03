@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '@/store';
 import { logout } from '../../store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
-import ShieldIcon from '../Common/ShieldIcon';
 import styles from './Header.module.css';
 
 export default function Header() {
@@ -38,7 +37,7 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles['header-left']}>
         <div className={styles.logo} onClick={() => navigate('/')}>
-          <ShieldIcon size={16} style={{ cursor: 'pointer' }} />
+          <img src="/shield.png" alt="Shield" className={styles['logo-img']} />
           <span className={styles['logo-text']}>Shield</span>
         </div>
       </div>

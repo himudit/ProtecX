@@ -13,7 +13,6 @@ import {
 } from 'lucide-react';
 import styles from './Sidebar.module.css';
 import { useNavigate } from 'react-router-dom';
-import ShieldIcon from '../Common/ShieldIcon';
 
 interface NavItem {
   icon: React.ElementType;

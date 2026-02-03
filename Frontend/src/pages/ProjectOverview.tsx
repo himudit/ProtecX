@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import { Database, Users, Activity, Clock, User, Eye, EyeOff, Copy, Trash2, Plus, Check } from 'lucide-react';
-import ShieldIcon from '../components/Common/ShieldIcon';
 import styles from './ProjectOverview.module.css';
 import { useEffect, useState } from 'react';
 import { getProjectById } from '../services/project.api';

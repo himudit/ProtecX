@@ -1,5 +1,4 @@
 import { ArrowRight, Database, Lock, HardDrive, Code, Globe } from 'lucide-react';
-import ShieldIcon from '../components/Common/ShieldIcon';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -66,7 +65,7 @@ export default function Landing() {
       description: 'Subscribe to database changes. Broadcast messages to connected clients.',
     },
     {
-      icon: ShieldIcon,
+      icon: () => <img src="/shield.png" alt="Security" style={{ width: '24px', height: '24px' }} />,
       title: 'Security',
       description: 'SSL everywhere, encryption at rest. SOC 2 compliant infrastructure.',
     },
@@ -188,7 +187,7 @@ export default function Landing() {
         <div className={styles['footer-container']}>
           <div className={styles['footer-brand']}>
             <div className={styles['footer-logo']}>
-              <ShieldIcon size={20} />
+              <img src="/shield.png" alt="Shield" className={styles['footer-logo-img']} />
               <span>Shield</span>
             </div>
             <p className={styles['footer-tagline']}>Backend as a Service</p>

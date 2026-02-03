@@ -5,8 +5,8 @@
   right: 0;
   /* height: var(--header-height); */
   height: 68.5px;
-  background-color: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
+  background-color: black;
+  border-bottom: 1px solid #1c1c1c;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -32,10 +32,10 @@
   flex-shrink: 0;
 }
 
-.logo svg {
-  width: 32px;
-  height: 32px;
-  color: var(--accent);
+.logo-img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
 }
 
 .logo-text {

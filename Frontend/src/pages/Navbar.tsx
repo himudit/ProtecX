@@ -4,7 +4,6 @@ import { ArrowRight, User, ChevronDown, LogOut } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from '@/store';
 import { logout } from "../store/slices/authSlice";
-import ShieldIcon from "../components/Common/ShieldIcon";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
@@ -51,7 +50,7 @@ const Navbar = () => {
                 {/* Logo */}
                 <div className={styles['navbar-logo']} onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
                     <div className={`${styles['logo-icon']} ${scrolled ? styles.scrolled : ""}`}>
-                        <ShieldIcon size={20} />
+                        <img src="/shield.png" alt="ShieldX" className={styles['logo-img']} />
                     </div>
                     <span className={styles['logo-text']}>Shield</span>
                 </div>

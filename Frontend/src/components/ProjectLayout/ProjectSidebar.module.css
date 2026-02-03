@@ -1,7 +1,7 @@
 .project-sidebar {
     width: 190px;
-    background: var(--bg-primary);
-    border-right: 1px solid var(--border-color);
+    background: #0c0c0c;
+    border-right: 1px solid #1c1c1c;
     display: flex;
     flex-direction: column;
     height: calc(100vh - var(--header-height));

@@ -1,5 +1,4 @@
 import { User, Bell, CreditCard, Globe } from 'lucide-react';
-import ShieldIcon from '../components/Common/ShieldIcon';
 import styles from './Settings.module.css';
 
 export default function Settings() {
@@ -17,7 +16,7 @@ export default function Settings() {
       items: ['Email Notifications', 'Push Notifications', 'SMS Alerts'],
     },
     {
-      icon: ShieldIcon,
+      icon: () => <img src="/shield.png" alt="Security" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />,
       title: 'Security',
       description: 'Security and authentication settings',
       items: ['Two-Factor Authentication', 'API Keys', 'Sessions'],

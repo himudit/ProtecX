@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: 24px;
     color: #e5e7eb;
+    background: #0c0c0c;
     width: 95%;
     margin-left: 1.6rem;
 }

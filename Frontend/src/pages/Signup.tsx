@@ -5,7 +5,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../store/slices/authSlice';
-import ShieldIcon from '../components/Common/ShieldIcon';
 import { signupSchema, SignupInput } from '../schemas/auth.schema';
 import { authService } from '../services/auth.service';
 import type { AuthResponse } from '../types/auth';
@@ -102,7 +101,7 @@ const Signup: React.FC = () => {
                                     color: 'var(--accent)'
                                 }}
                             >
-                                <ShieldIcon size={24} />
+                                <img src="/shield.png" alt="ShieldX" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
                                 <span style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--text-primary)' }}>ShieldX</span>
                             </button>
 

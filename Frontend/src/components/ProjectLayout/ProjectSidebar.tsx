@@ -1,18 +1,34 @@
+import React, { useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import {
     LayoutDashboard,
-    Settings,
+    FileText,
+    CheckCircle,
+    MessageSquare,
+    Calendar,
+    ChevronDown,
+    ChevronRight,
+    Box,
+    GripVertical,
     Database,
-    Users,
     Activity,
+    Settings,
+    Users,
     Key,
     ChevronLeft,
-    ChevronRight,
     AlignEndHorizontalIcon,
-    GripVertical,
-    Boxes
 } from 'lucide-react';
 import styles from './ProjectSidebar.module.css';
+
+interface NavItem {
+    label: string;
+    path: string;
+    icon: React.ElementType;
+    badge?: {
+        text: string;
+        type: 'orange' | 'green';
+    };
+}
 
 interface ProjectSidebarProps {
     isCollapsed: boolean;
@@ -21,6 +37,7 @@ interface ProjectSidebarProps {
 
 export default function ProjectSidebar({ isCollapsed, onToggle }: ProjectSidebarProps) {
     const { projectId } = useParams();
+    const [isProductExpanded, setIsProductExpanded] = useState(true);
 
     const navItems = [
         { icon: LayoutDashboard, label: 'Overview', path: `/dashboard/projects/${projectId}` },
@@ -30,27 +47,64 @@ export default function ProjectSidebar({ isCollapsed, onToggle }: ProjectSidebar
     ];
 
     return (
-        <aside className={`${styles['project-sidebar']} ${isCollapsed ? styles.collapsed : ''}`}>
-            <div className={styles['project-sidebar-header']}>
-                <h3>
-                    <Boxes size={30} />
-                    {!isCollapsed && <span className={styles['project-title']}>Project</span>}
-                </h3>
+        <aside className={`${styles.sidebar} ${isCollapsed ? styles.collapsed : ''}`}>
+            <div className={styles.section}>
+                <button
+                    className={styles.sectionHeader}
+                    onClick={() => !isCollapsed && setIsProductExpanded(!isProductExpanded)}
+                    title={isCollapsed ? 'Product' : ''}
+                >
+                    <div className={styles.headerTitle}>
+                        <Box size={18} className={styles.sectionIcon} />
+                        {!isCollapsed && <span className="text-white">Product</span>}
+                    </div>
+
+                </button>
+
+                {isProductExpanded && !isCollapsed && (
+                    <div className={styles.treeContainer}>
+                        <nav className={styles.navList}>
+                            {navItems.map((item) => (
+                                <NavLink
+                                    key={item.path}
+                                    to={item.path}
+                                    end={item.label === 'Overview'}
+                                    className={({ isActive }) =>
+                                        `${styles.navItem} ${isActive ? styles.active : ''}`
+                                    }
+                                >
+                                    <div className={styles.itemConnector}>
+                                        <div className={styles.curve}></div>
+                                    </div>
+                                    <div className={styles.itemContent}>
+                                        <item.icon size={18} className={styles.itemIcon} />
+                                        <span className={styles.label}>{item.label}</span>
+                                    </div>
+                                </NavLink>
+                            ))}
+                        </nav>
+                    </div>
+                )}
+
+                {isCollapsed && (
+                    <nav className={styles.collapsedNav}>
+                        {navItems.map((item) => (
+                            <NavLink
+                                key={item.path}
+                                to={item.path}
+                                end={item.label === 'Overview'}
+                                className={({ isActive }) =>
+                                    `${styles.collapsedNavItem} ${isActive ? styles.active : ''}`
+                                }
+                                title={item.label}
+                            >
+                                <item.icon size={22} />
+                            </NavLink>
+                        ))}
+                    </nav>
+                )}
             </div>
-            <nav className={styles['project-sidebar-nav']}>
-                {navItems.map((item) => (
-                    <NavLink
-                        key={item.path}
-                        to={item.path}
-                        end={item.path === `/dashboard/projects/${projectId}`}
-                        className={({ isActive }) => `${styles['project-nav-item']} ${isActive ? styles.active : ''}`}
-                        title={isCollapsed ? item.label : ''}
-                    >
-                        <item.icon size={18} />
-                        {!isCollapsed && <span>{item.label}</span>}
-                    </NavLink>
-                ))}
-            </nav>
+
             <div
                 className={styles['project-resizer-handle']}
                 onMouseDown={(e) => {

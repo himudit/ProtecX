@@ -76,7 +76,7 @@
 
 .metric-label {
     font-size: 13px;
-    color: #9ca3af;
+    color: #7e7e7e;
 }
 
 .metric-value {
@@ -100,7 +100,7 @@
 
 .info-label {
     font-size: 13px;
-    color: #9ca3af;
+    color: #7e7e7e;
 }
 
 .info-value {
@@ -181,7 +181,7 @@
 
 .card-description {
     font-size: 13px;
-    color: #9ca3af;
+    color: #7e7e7e;
     margin-bottom: 16px;
     line-height: 1.5;
 }
@@ -197,7 +197,7 @@
 
 .key-label {
     font-size: 13px;
-    color: #9ca3af;
+    color: #7e7e7e;
 }
 
 /* INPUT ROW */

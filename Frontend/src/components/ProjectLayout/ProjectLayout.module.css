@@ -1,8 +1,9 @@
 .project-layout {
     display: flex;
-    min-height: 100%;
+    height: calc(100vh - var(--header-height));
     width: 100%;
-    border-top: 1px solid #1c1c1c;
+    overflow: hidden;
+    /* Prevent body scroll */
 }
 
 .project-content {
@@ -10,4 +11,5 @@
     overflow-y: auto;
     background-color: #0c0c0c;
     /* Matching the main theme background */
+    height: 100%;
 }

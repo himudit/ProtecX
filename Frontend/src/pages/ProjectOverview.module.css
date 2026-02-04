@@ -221,7 +221,7 @@
 
 /* ICON BUTTONS */
 .icon-button {
-    background: #111827;
+    background: #222222;
     border: 1px solid #262626;
     border-radius: 8px;
     padding: 8px;
@@ -230,7 +230,7 @@
 }
 
 .icon-button:hover {
-    background: #1f2937;
+    background: #333333;
 }
 
 .icon-button-danger {

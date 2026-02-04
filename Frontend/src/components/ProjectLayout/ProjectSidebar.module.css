@@ -76,7 +76,7 @@
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: var(--text-secondary, #999999);
+    color: #a9a9a9;
     padding: 4px 0;
     transition: all 0.2s ease;
 }
@@ -117,11 +117,11 @@
 
 .navItem:hover .itemContent {
     background-color: var(--bg-hover, #161616);
-    color: var(--text-primary, #ffffff);
+    color: var(--text-primary);
 }
 
 .navItem.active .itemContent {
-    background-color: #1f1f1f;
+    background-color: var(--bg-hover);
     /* Premium subtle white/grey pill */
     color: #ffffff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);

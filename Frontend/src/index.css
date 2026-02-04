@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-@plugin "tailwindcss-animate";
-@import "tw-animate-css";
-
-@custom-variant dark (&:is(.dark *));
-
 :root {
   /* Orange & Black Theme */
   --bg-primary: #000000;
@@ -15,10 +10,10 @@
   --text-primary: #ffffff;
   --text-secondary: #c3c0b6;
   --text-tertiary: #30302e;
-  --accent: oklch(0.967 0.001 286.375);
+  --accent: #ea580c;
   --accent-hover: #ea580c;
   --accent-light: #d97757;
-  --auth-grey: #171717;
+  --auth-grey: #181818;
 
   /* White & Orange Theme (for light sections) */
   --white-bg: #ffffff;
@@ -194,6 +189,7 @@ code {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

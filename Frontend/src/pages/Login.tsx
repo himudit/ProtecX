@@ -75,7 +75,7 @@ const Login: React.FC = () => {
                 {/* 35% Section - Visible on all screens */}
                 <div
                     style={{
-                        width: '35%',
+                        width: '45%',
                         backgroundColor: 'var(--auth-grey)',
                         display: 'flex',
                         flexDirection: 'column',
@@ -87,7 +87,7 @@ const Login: React.FC = () => {
                     }}
                     className="auth-sidebar"
                 >
-                    <div style={{ maxWidth: '400px', width: '100%' }}>
+                    <div style={{ maxWidth: '350px', width: '100%' }}>
                         <div style={{ marginBottom: '2rem' }}>
                             <button
                                 onClick={() => navigate('/')}
@@ -179,7 +179,7 @@ const Login: React.FC = () => {
                                 style={{
                                     padding: '0.5rem 0.65rem',
                                     borderRadius: '0.5rem',
-                                    backgroundColor: 'var(--accent)',
+                                    backgroundColor: '#ea580c',
                                     color: 'white',
                                     fontWeight: '600',
                                     border: 'none',

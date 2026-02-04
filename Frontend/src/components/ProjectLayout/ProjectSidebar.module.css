@@ -31,7 +31,6 @@
     padding: 10px 8px;
     background: none;
     border: none;
-    cursor: pointer;
     color: var(--text-secondary, #888888);
     font-weight: 500;
     font-size: 13px;

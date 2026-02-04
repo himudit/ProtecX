@@ -8,6 +8,8 @@ import { setCredentials } from '../store/slices/authSlice';
 import { signupSchema, SignupInput } from '../schemas/auth.schema';
 import { authService } from '../services/auth.service';
 import type { AuthResponse } from '../types/auth';
+import orangeBackground from '../assets/orange_background.jpg';
+
 
 const Signup: React.FC = () => {
     const navigate = useNavigate();
@@ -76,7 +78,7 @@ const Signup: React.FC = () => {
                 {/* 35% Section - Visible on all screens */}
                 <div
                     style={{
-                        width: '35%',
+                        width: '45%',
                         backgroundColor: 'var(--auth-grey)',
                         display: 'flex',
                         flexDirection: 'column',
@@ -88,26 +90,13 @@ const Signup: React.FC = () => {
                     }}
                     className="auth-sidebar"
                 >
-                    <div style={{ maxWidth: '400px', width: '100%' }}>
+                    <div style={{ maxWidth: '330px', width: '100%' }}>
                         <div style={{ marginBottom: '2rem' }}>
-                            <button
-                                onClick={() => navigate('/')}
-                                style={{
-                                    all: 'unset',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '0.5rem',
-                                    cursor: 'pointer',
-                                    color: 'var(--accent)'
-                                }}
-                            >
-                                <img src="/shield.png" alt="ShieldX" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
-                                <span style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--text-primary)' }}>ShieldX</span>
-                            </button>
 
                             <p style={{ fontSize: '2rem', color: 'var(--text-primary)', marginTop: '0.5rem' }}>Create an account</p>
                             <p style={{ fontSize: '0.8745em', color: 'var(--text-secondary)', marginTop: '0.5rem' }}>Start securing your applications today</p>
                         </div>
+
 
                         {apiError && (
                             <div style={{
@@ -213,7 +202,7 @@ const Signup: React.FC = () => {
                                 style={{
                                     padding: '0.5rem 0.65rem',
                                     borderRadius: '0.5rem',
-                                    backgroundColor: 'var(--accent)',
+                                    backgroundColor: '#ea580c',
                                     color: 'white',
                                     fontWeight: '600',
                                     border: 'none',
@@ -222,7 +211,7 @@ const Signup: React.FC = () => {
                                     opacity: isLoading ? 0.7 : 1
                                 }}
                                 onMouseOver={(e) => !isLoading && (e.currentTarget.style.backgroundColor = 'var(--accent-hover)')}
-                                onMouseOut={(e) => !isLoading && (e.currentTarget.style.backgroundColor = 'var(--accent)')}
+                                onMouseOut={(e) => !isLoading && (e.currentTarget.style.backgroundColor = 'var(--accent-hover)')}
                             >
                                 {isLoading ? 'Creating account...' : 'Sign Up'}
                             </button>
@@ -230,7 +219,7 @@ const Signup: React.FC = () => {
 
                         <p style={{ marginTop: '1.5rem', fontSize: '0.875rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
                             Already have an account?{' '}
-                            <Link to="/login" style={{ color: 'var(--accent)', textDecoration: 'none' }}>
+                            <Link to="/login" style={{ color: 'white', textDecoration: 'none' }}>
                                 Log In
                             </Link>
                         </p>
@@ -241,7 +230,9 @@ const Signup: React.FC = () => {
                 <div
                     style={{
                         width: '65%',
-                        backgroundColor: 'var(--bg-primary)',
+                        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${orangeBackground})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
@@ -249,11 +240,28 @@ const Signup: React.FC = () => {
                     }}
                     className="auth-main"
                 >
-                    <div style={{ textAlign: 'center', color: 'white' }}>
-                        <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Secure your applications with ShieldX</h2>
-                        <p style={{ color: 'var(--text-secondary)', fontSize: '1.125rem', maxWidth: '600px' }}>
-                            The most advanced security platform for modern web applications. Protect your data and your users with ease.
-                        </p>
+                    <div style={{ textAlign: 'center', color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
+                        <button
+                            onClick={() => navigate('/')}
+                            style={{
+                                all: 'unset',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.5rem',
+                                cursor: 'pointer',
+                                color: 'var(--accent)',
+                                marginBottom: '1rem'
+                            }}
+                        >
+                            <img src="/shield.png" alt="ShieldX" style={{ width: '60px', height: '60px', objectFit: 'contain' }} />
+                            <span style={{ fontSize: '3rem', fontWeight: '700', color: 'white' }}>ShieldX</span>
+                        </button>
+                        <div style={{ textAlign: 'center' }}>
+                            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Secure your applications with ShieldX</h2>
+                            <p style={{ color: 'var(--text-secondary)', fontSize: '1.125rem', maxWidth: '600px' }}>
+                                The most advanced security platform for modern web applications. Protect your data and your users with ease.
+                            </p>
+                        </div>
                     </div>
                 </div>
 

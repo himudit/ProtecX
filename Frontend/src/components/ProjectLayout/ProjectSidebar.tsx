@@ -51,12 +51,11 @@ export default function ProjectSidebar({ isCollapsed, onToggle }: ProjectSidebar
             <div className={styles.section}>
                 <button
                     className={styles.sectionHeader}
-                    onClick={() => !isCollapsed && setIsProductExpanded(!isProductExpanded)}
                     title={isCollapsed ? 'Product' : ''}
                 >
                     <div className={styles.headerTitle}>
                         <Box size={18} className={styles.sectionIcon} />
-                        {!isCollapsed && <span className="text-white">Product</span>}
+                        {!isCollapsed && <span className="text-white">Project</span>}
                     </div>
 
                 </button>

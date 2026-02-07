@@ -13,7 +13,7 @@
 }
 
 .primary-btn:hover {
-  background-color: var(--accent-hover);
+  background-color: #ea580c;
 }
 
 .projects-grid {
@@ -288,12 +288,12 @@ textarea.form-control {
   padding: 6px 12px;
 
   background: linear-gradient(180deg,
-      var(--accent) 0%,
-      color-mix(in srgb, var(--accent) 85%, black) 100%);
+      #ea580c 0%,
+      color-mix(in srgb, #ea580c 85%, #111111) 100%);
 
-  color: var(--bg-primary);
+  color: #e6e8eb;
 
-  border: 1px solid color-mix(in srgb, var(--accent) 75%, black);
+  border: 1px solid color-mix(in srgb, #ea580c 75%, #111111);
   border-radius: 18px;
 
   font-size: 13px;

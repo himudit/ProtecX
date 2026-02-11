@@ -27,11 +27,11 @@ router.get('/projects/users/me', authMiddleware, projectController.getProjectUse
 router.get('/projects/:projectId', authMiddleware, projectController.getProjectById);
 
 // iam routes (connection for microservice)
-router.post('/iam/register', authMiddleware, gatwayController.gateWaySignup);
-router.post('/iam/login', authMiddleware, gatwayController.gateWayLogin);
-// router.get('/iam/profile', authMiddleware, gatwayController.gateWayProfile);
-// router.post('/iam/refresh', authMiddleware, gatwayController.gateWayRefresh);
-// router.post('/iam/logout', authMiddleware, gatwayController.gateWayLogout);
+router.post('/iam/register', gatwayController.gateWaySignup);
+router.post('/iam/login', gatwayController.gateWayLogin);
+// router.get('/iam/profile', gatwayController.gateWayProfile);
+router.post('/iam/refresh', gatwayController.gateWayRefresh);
+// router.post('/iam/logout',  gatwayController.gateWayLogout);
 
 export default router;
 

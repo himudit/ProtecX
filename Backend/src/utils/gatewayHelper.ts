@@ -1,27 +1,22 @@
 import { prisma } from '../config/primsa';
 
-export const validateApiKey = async (apiKey: string, userId: string): Promise<string | null> => {
-    try {
-        const apiKeyRecord = await prisma.projectApiKey.findFirst({
-            where: {
-                apiKey: apiKey,
-                isActive: true,
-                project: {
-                    ownerId: userId,
-                },
+export const validateApiKey = async (apiKey: string, projectId: string): Promise<string | null> => {
+    const apiKeyRecord = await prisma.projectApiKey.findUnique({
+        where: { apiKey },
+        select: {
+            isActive: true,
+            projectId: true,
+            project: {
+                select: { ownerId: true },
             },
-            select: {
-                projectId: true,
-            },
-        });
+        },
+    });
 
-        if (!apiKeyRecord) {
-            return null;
-        }
-
-        return apiKeyRecord.projectId;
-    } catch (error) {
-        console.error('Error validating API key:', error);
+    if (!apiKeyRecord || !apiKeyRecord.isActive || apiKeyRecord.projectId !== projectId) {
         return null;
     }
+
+    return apiKeyRecord.project.ownerId;
 };
+
+

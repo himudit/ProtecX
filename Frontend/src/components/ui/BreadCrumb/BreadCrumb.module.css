@@ -21,7 +21,7 @@
 }
 
 .item.current {
-    color: #a9a9a9;
+    color: white;
     pointer-events: none;
 }
 

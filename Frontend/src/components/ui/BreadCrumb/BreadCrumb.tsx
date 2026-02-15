@@ -17,7 +17,7 @@ export const BreadCrumb: React.FC = () => {
 
                 // Replace UUIDs or complex IDs with something more readable if needed
                 // For now just show the path segment
-                const label = value.replace(/-/g, ' ');
+                const label = value.length > 20 ? value : value.replace(/-/g, ' ');
 
                 return (
                     <React.Fragment key={to}>

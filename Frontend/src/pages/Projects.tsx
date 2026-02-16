@@ -16,6 +16,7 @@ export default function Projects() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [projects, setProjects] = useState<ProjectResponseDto[]>([]);
+  const [nameError, setNameError] = useState('');
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -48,22 +49,38 @@ export default function Projects() {
   const openCreateDialog = () => {
     setName('');
     setDescription('');
+    setNameError('');
     setIsCreateOpen(true);
   };
 
 
   const handleCreateProject = async () => {
+    const trimmedName = name.trim();
+
+    // Client-side validation
+    if (trimmedName.length < 3) {
+      setName(trimmedName);
+      setNameError('Project name must be at least 3 characters');
+      return;
+    }
+    if (trimmedName.length > 15) {
+      setName(trimmedName);
+      setNameError('Project name must not exceed 15 characters');
+      return;
+    }
+
+    setNameError('');
     setIsCreating(true);
     try {
       const response = await createProject({
-        name,
+        name: trimmedName,
         description,
       });
       setIsCreateOpen(false);
-      navigate(`/projects/${response.data.project.id}`);
-      // refresh project list later
-    } catch (err) {
+      navigate(`/dashboard/projects/${response.data.project.id}`, { state: { confetti: true } });
+    } catch (err: any) {
       console.error(err);
+      setNameError(err.response?.data?.message || 'Failed to create project');
     }
     finally {
       setIsCreating(false);
@@ -117,15 +134,19 @@ export default function Projects() {
               <label>Name</label>
               <input
                 type="text"
-                className={styles['form-control']}
+                className={`${styles['form-control']} ${nameError ? styles['error-border'] : ''}`}
                 placeholder="Project name"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  if (nameError) setNameError('');
+                }}
               />
+              {nameError && <span className={styles['error-message']}>{nameError}</span>}
             </div>
 
             <div className={styles['form-group']}>
-              <label>Description</label>
+              <label>Description <span className={styles['optional-text']}>(optional)</span></label>
               <textarea
                 className={styles['form-control']}
                 placeholder="Briefly describe your project..."

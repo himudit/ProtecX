@@ -28,6 +28,43 @@
     font-weight: 600;
     color: #f9fafb;
     margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.project-id-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.project-id-badge:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.project-id-text {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    color: #a0a0a0;
+    font-weight: 400;
+}
+
+.copy-icon {
+    color: #6d6d6d;
+    transition: color 0.1s ease;
+}
+
+.project-id-badge:hover .copy-icon {
+    color: #a0a0a0;
 }
 
 .branch-meta {

@@ -29,3 +29,7 @@ export function getProjectUsers() {
         '/api/projects/users/me'
     );
 }
+
+export function getProjectLogs(projectId: string) {
+    return apiClient<ApiResponse<any[]>>(`/api/projects/${projectId}/logs`);
+}

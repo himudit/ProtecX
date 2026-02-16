@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useRelativeTime } from '../utils/useRelativeTime';
 import { Database, Users, Activity, Clock, Eye, EyeOff, Copy, Trash2, Plus, Check } from 'lucide-react';
 import { Avatar } from '../components/ui/Avatar/Avatar';
@@ -10,6 +10,7 @@ import type { ProjectMetaResponseDto } from '../modules/projectById/dto/projectM
 import type { ProjectResponseDto } from '../modules/project/dto/project-response.dto';
 import SkeletonDiv from '../components/ui/Skeleton/SkeletonDiv/SkeletonDiv';
 import styles from './ProjectOverview.module.css';
+import confetti from 'canvas-confetti';
 
 export default function ProjectOverview() {
     const { projectId } = useParams();
@@ -19,6 +20,8 @@ export default function ProjectOverview() {
     const [showApiKey, setShowApiKey] = useState(false);
     const [showJwtKey, setShowJwtKey] = useState(false);
     const [copiedKey, setCopiedKey] = useState<string | null>(null);
+
+    const location = useLocation();
 
     const copyToClipboard = (text: string, keyId: string) => {
         navigator.clipboard.writeText(text);
@@ -39,6 +42,25 @@ export default function ProjectOverview() {
     useEffect(() => {
         fetchProject();
     }, [projectId]);
+
+
+    useEffect(() => {
+        if (!isLoading && projectData && location.state?.confetti) {
+            confetti({
+                particleCount: 170,
+                spread: 70,
+                origin: {
+                    x: 0.63,
+                    y: 0.7
+                },
+                colors: ['#ea580c', '#f97316', '#fb923c', '#ffffff']
+            });
+
+            // clear state so refresh doesn't retrigger
+            window.history.replaceState({}, document.title);
+        }
+    }, [isLoading, location.state]);
+
 
     const fetchProject = async () => {
         if (!projectId) {
@@ -67,7 +89,29 @@ export default function ProjectOverview() {
             <div className={styles['branch-header']}>
                 <div className={styles['branch-title-row']}>
                     <h2 className={styles['branch-title']}>
-                        {isLoading ? <SkeletonDiv width="250px" height="36px" /> : (projectData?.project.name || 'Project Overview')}
+                        {isLoading ? (
+                            <SkeletonDiv width="250px" height="36px" />
+                        ) : (
+                            <>
+                                <span>{projectData?.project.name || 'Project Overview'}</span>
+                                {projectId && (
+                                    <div
+                                        className={styles['project-id-badge']}
+                                        onClick={() => copyToClipboard(projectId, 'pid')}
+                                        title={`Project ID: ${projectId}\nClick to copy`}
+                                    >
+                                        <span className={styles['project-id-text']}>
+                                            {projectId.length > 12 ? `${projectId.slice(0, 25)}...${projectId.slice(-4)}` : projectId}
+                                        </span>
+                                        {copiedKey === 'pid' ? (
+                                            <Check size={12} className={styles['copy-icon']} style={{ color: '#10b981' }} />
+                                        ) : (
+                                            <Copy size={12} className={styles['copy-icon']} />
+                                        )}
+                                    </div>
+                                )}
+                            </>
+                        )}
                     </h2>
 
                     <div className={styles['branch-meta']}>

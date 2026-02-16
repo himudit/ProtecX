@@ -9,7 +9,9 @@ import {
   ChevronRight,
   ChevronLeft,
   Menu,
-  GripVertical
+  GripVertical,
+  PanelLeftOpen,
+  PanelRightOpen
 } from 'lucide-react';
 import styles from './Sidebar.module.css';
 import { useNavigate } from 'react-router-dom';
@@ -59,6 +61,16 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
           );
         })}
       </nav>
+      <div className={styles['sidebar-footer']}>
+        <button
+          className={styles['toggle-button']}
+          onClick={onToggle}
+          title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+        >
+          {isCollapsed ? <PanelRightOpen size={20} /> : <PanelLeftOpen size={20} />}
+        </button>
+      </div>
+
       <div
         className={styles['resizer-handle']}
         onMouseDown={(e) => {

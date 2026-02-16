@@ -16,7 +16,8 @@ import {
     Users,
     Key,
     ChevronLeft,
-    AlignEndHorizontalIcon,
+    PanelLeftOpen,
+    PanelRightOpen,
 } from 'lucide-react';
 import styles from './ProjectSidebar.module.css';
 
@@ -54,7 +55,7 @@ export default function ProjectSidebar({ isCollapsed, onToggle }: ProjectSidebar
                     title={isCollapsed ? 'Product' : ''}
                 >
                     <div className={styles.headerTitle}>
-                        <Box size={18} className={styles.sectionIcon} />
+                        <Box size={23} className={styles.sectionIcon} />
                         {!isCollapsed && <span className="text-white">Project</span>}
                     </div>
 
@@ -102,6 +103,16 @@ export default function ProjectSidebar({ isCollapsed, onToggle }: ProjectSidebar
                         ))}
                     </nav>
                 )}
+            </div>
+
+            <div className={styles.footer}>
+                <button
+                    className={styles.toggleButton}
+                    onClick={onToggle}
+                    title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+                >
+                    {isCollapsed ? <PanelRightOpen size={20} /> : <PanelLeftOpen size={20} />}
+                </button>
             </div>
 
             <div

@@ -43,7 +43,7 @@ export default function ProjectSidebar({ isCollapsed, onToggle }: ProjectSidebar
         { icon: LayoutDashboard, label: 'Overview', path: `/dashboard/projects/${projectId}` },
         { icon: Database, label: 'Data Browser', path: `/dashboard/projects/${projectId}/data-browser` },
         { icon: Activity, label: 'Logs', path: `/dashboard/projects/${projectId}/logs` },
-        { icon: Settings, label: 'Settings', path: `/dashboard/projects/${projectId}/settings` },
+        // { icon: Settings, label: 'Settings', path: `/dashboard/projects/${projectId}/settings` },
     ];
 
     return (

@@ -45,6 +45,7 @@
 .table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
 /* Header */
@@ -68,6 +69,18 @@ td {
     font-size: 14px;
     color: #e5e7eb;
     border-bottom: 1px solid #2a2a2e;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: background-color 0.1s ease;
+}
+
+.cell-text {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /* Row hover */
@@ -149,7 +162,8 @@ tr:hover td {
     border: 1px solid #2a2a2e;
     border-radius: 6px;
     padding: 4px 10px;
-    width: fit-content;
+    width: 100%;
+    max-width: fit-content;
     transition: all 0.2s ease;
     cursor: pointer;
 }
@@ -180,6 +194,9 @@ tr:hover td {
 }
 
 .copy-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-family: 'JetBrains Mono', 'Fira Code', monospace;
     font-size: 13px;
     color: #e5e7eb;

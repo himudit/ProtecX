@@ -98,12 +98,12 @@ export function XTable<T extends Record<string, any>>({
                                     const isCopied = copiedId === uniqueId;
 
                                     return (
-                                        <td key={String(col.key)}>
+                                        <td key={String(col.key)} title={String(value)}>
                                             {col.copyable ? (
                                                 <div
                                                     className={styles['copy-container']}
                                                     onClick={(e) => handleCopy(e, String(value), uniqueId)}
-                                                    title="Click to copy"
+                                                    title={`Copy: ${String(value)}`}
                                                 >
                                                     <div className={`${styles['copy-btn']} ${isCopied ? styles.copied : ''}`}>
                                                         {isCopied ? <Check size={14} /> : <Copy size={14} />}
@@ -111,7 +111,7 @@ export function XTable<T extends Record<string, any>>({
                                                     <span className={styles['copy-text']}>{displayValue}</span>
                                                 </div>
                                             ) : (
-                                                displayValue
+                                                <span className={styles['cell-text']}>{displayValue}</span>
                                             )}
                                         </td>
                                     );

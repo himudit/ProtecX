@@ -27,7 +27,7 @@ export default function Auth() {
           </div>
         </div>
         <div className={styles['auth-stat-card']}>
-          <img src="/shield.png" alt="Providers" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
+          <img src="/shield.png" alt="ProtecX Providers" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
           <div>
             <h3>3</h3>
             <p>Active Providers</p>

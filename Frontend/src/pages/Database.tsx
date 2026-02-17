@@ -1,4 +1,4 @@
-import { Plus, Filter, Loader2 } from 'lucide-react';
+import { Plus, Filter, RefreshCw } from 'lucide-react';
 import { useRelativeTime } from '@/utils/useRelativeTime';
 import styles from './Database.module.css';
 import { XTable } from '@/components/ui/x-table/XTable';
@@ -16,34 +16,31 @@ export default function Database() {
   const [users, setUsers] = useState<ProjectUserRowResponseDto[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      if (!projectId) return;
-      try {
-        setIsLoading(true);
-        const response = await getProjectUsers(projectId);
-        if (response.success) {
-          setUsers(response.data);
-        } else {
-          // toast.error(response.message || 'Failed to fetch users');
-        }
-      } catch (error) {
-        console.error('Error fetching users:', error);
-        // toast.error('An error occurred while fetching users');
-      } finally {
-        setIsLoading(false);
+  const fetchUsers = async () => {
+    if (!projectId) return;
+    try {
+      setIsLoading(true);
+      const response = await getProjectUsers(projectId);
+      if (response.success) {
+        setUsers(response.data);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [projectId]);
 
   const columns: Column<ProjectUserRowResponseDto>[] = [
     { key: 'id', label: 'User Id', copyable: true },
     { key: 'name', label: 'Name' },
     { key: 'email', label: 'Email' },
     { key: 'role', label: 'Role' },
-    { key: 'isVerified', label: 'Verified' },
+    // { key: 'isVerified', label: 'Verified' },
     {
       key: 'createdAt',
       label: 'Created At',
@@ -60,8 +57,18 @@ export default function Database() {
     <div className={styles['database-page']}>
       <div className={styles['tables-section']}>
         <div className={styles['section-header']}>
-          <h2>Project Users</h2>
-          <span className={styles['section-count']}>{users.length} users</span>
+          <div className={styles['header-left']}>
+            <h2>Project Users</h2>
+            <span className={styles['section-count']}>{users.length} users</span>
+          </div>
+          <button
+            className={styles['refresh-btn']}
+            onClick={fetchUsers}
+            disabled={isLoading}
+            title="Refresh Users"
+          >
+            <RefreshCw size={18} className={isLoading ? styles.spinning : ''} />
+          </button>
         </div>
 
         <div className={styles['table-container']}>

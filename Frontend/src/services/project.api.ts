@@ -1,11 +1,13 @@
 import type { ProjectResponseDto } from '../modules/project/dto/project-response.dto';
+import type { CreateProjectResponseDto } from '../modules/project/dto/create-project-response.dto';
 import type { ProjectMetaResponseDto } from '../modules/projectById/dto/projectMeta-response.dto';
+import type { ProjectUserRowResponseDto } from '../modules/projectUser/dto/projectUserRow-response.dto';
 import { apiClient } from './base.service';
 import type { ApiResponse } from '../interfaces/api.interface';
 
 
 export function createProject(data: { name: string; description?: string }) {
-    return apiClient<ApiResponse<ProjectResponseDto>>('/api/projects', {
+    return apiClient<ApiResponse<CreateProjectResponseDto>>('/api/projects', {
         method: 'POST',
         data,
         headers: {

@@ -5,7 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../store/slices/authSlice';
-import { signupSchema, SignupInput } from '../schemas/auth.schema';
+import { signupSchema } from '../schemas/auth.schema';
+import type { SignupInput } from '../schemas/auth.schema';
 import { authService } from '../services/auth.service';
 import type { AuthResponse } from '../types/auth';
 import orangeBackground from '../assets/orange_background.jpg';
@@ -40,7 +41,7 @@ const Signup: React.FC = () => {
                 setToast(null);
                 navigate('/dashboard/overview');
             }
-        } catch (error: unknown) {
+        } catch (error: any) {
             const message = error.response?.data?.message || 'Invalid Login credentials';
             setApiError(message);
             setToast({ visible: true, message: 'Invalid Login credentials', type: 'error' });

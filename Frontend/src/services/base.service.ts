@@ -41,13 +41,13 @@ export async function apiClient<T>(
               },
             })
           );
-          return;
+          return undefined as T;
         }
 
         if (data?.message === "Authentication required" || data?.message === "Invalid authentication token") {
           store.dispatch(logout());
           window.location.href = "/login";
-          return;
+          return undefined as T;
         }
 
       }

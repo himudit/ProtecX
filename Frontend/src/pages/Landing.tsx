@@ -123,7 +123,7 @@ export default function Landing() {
       <section id="code" className={styles['code-section']}>
         <div className={styles['code-container']}>
           <CodeBlock.AdapterProvider value={shikiAdapter}>
-            <CodeBlock.Root code={file.code} language={file.language} variant="subtle">
+            <CodeBlock.Root code={file.code} language={file.language}>
               <CodeBlock.Header>
                 <CodeBlock.Title>{file.title}</CodeBlock.Title>
                 <CodeBlock.CopyTrigger asChild>

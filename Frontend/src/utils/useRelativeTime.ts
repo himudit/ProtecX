@@ -1,4 +1,4 @@
-export function useRelativeTime(dateString?: string) {
+export function useRelativeTime(dateString?: string | Date) {
     if (!dateString) return "";
 
     const now = new Date();

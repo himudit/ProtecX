@@ -1,30 +1,10 @@
+import Navbar from './Navbar';
+import styles from './Landing.module.css';
+
 import { ArrowRight, Database, Lock, HardDrive, Code, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CodeBlock, IconButton, createShikiAdapter } from "@chakra-ui/react"
-import type { HighlighterGeneric } from "shiki"
-import Navbar from './Navbar';
-import styles from './Landing.module.css';
-
-const shikiAdapter = createShikiAdapter<HighlighterGeneric<any, any>>({
-  async load() {
-    const { createHighlighter } = await import("shiki")
-    return createHighlighter({
-      langs: ["tsx", "scss", "html", "bash", "json"],
-      themes: ["github-dark"],
-    })
-  },
-  theme: "github-dark",
-})
-
-const file = {
-  code: `<div class="container">
-  <h1>Hello, world!</h1>
-</div>`,
-  language: "tsx",
-  title: "example.ts",
-}
 
 export default function Landing() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -109,8 +89,8 @@ export default function Landing() {
               Start Building
               <ArrowRight size={20} />
             </Link>
-            <a href="#code" className={styles['cta-secondary']}>
-              View Code Example
+            <a href="#dashboard" className={styles['cta-secondary']}>
+              View Dashboard
             </a>
           </div>
           <div className={styles['hero-note']}>
@@ -119,26 +99,17 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Code Preview Section */}
-      <section id="code" className={styles['code-section']}>
-        <div className={styles['code-container']}>
-          <CodeBlock.AdapterProvider value={shikiAdapter}>
-            <CodeBlock.Root code={file.code} language={file.language}>
-              <CodeBlock.Header>
-                <CodeBlock.Title>{file.title}</CodeBlock.Title>
-                <CodeBlock.CopyTrigger asChild>
-                  <IconButton variant="ghost" size="2xs">
-                    <CodeBlock.CopyIndicator />
-                  </IconButton>
-                </CodeBlock.CopyTrigger>
-              </CodeBlock.Header>
-              <CodeBlock.Content>
-                <CodeBlock.Code>
-                  <CodeBlock.CodeText />
-                </CodeBlock.Code>
-              </CodeBlock.Content>
-            </CodeBlock.Root>
-          </CodeBlock.AdapterProvider>
+      {/* Dashboard Preview Section */}
+      <section id="dashboard" className={styles['dashboard-section']}>
+        <div className={styles['dashboard-container']}>
+          <div className={styles['dashboard-glow']} />
+          <div className={styles['dashboard-image-wrapper']}>
+            <img
+              src="/Dashboard-img.png"
+              alt="ProtecX Dashboard"
+              className={styles['dashboard-img']}
+            />
+          </div>
         </div>
       </section>
 

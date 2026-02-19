@@ -180,16 +180,54 @@
   font-weight: 400;
 }
 
-/* Code Section */
-.code-section {
+/* Dashboard Image Section */
+.dashboard-section {
   position: relative;
   z-index: 10;
-  padding: 80px 48px;
+  padding: 40px 48px 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.code-container {
-  max-width: 1000px;
-  margin: 0 auto;
+.dashboard-container {
+  /* border: 2px solid white; */
+
+  max-width: 1100px;
+  width: 100%;
+  position: relative;
+}
+
+.dashboard-image-wrapper {
+  /* border: 2px solid yellow; */
+
+  position: relative;
+  border-radius: 41px;
+  overflow: hidden;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.dashboard-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+}
+
+.dashboard-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.2) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  filter: blur(40px);
 }
 
 /* Features Section */

@@ -100,7 +100,7 @@ export default function Landing() {
             Build <span className={styles.strikethrough}>faster</span> <span className={styles['fastest-text']}>fastest</span> backend with <span className={styles['gradient-text']}>ProtecX</span>
           </h1>
           <p className={styles['hero-description']}>
-            ProtecX is a backend platform that gives you everything you need to build modern apps.
+            ProtecX is a backend platform that provides everything need to build modern apps.
             <br />
             Database, authentication, storage, and edge functions, all in one place.
           </p>

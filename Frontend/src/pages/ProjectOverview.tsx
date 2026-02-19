@@ -101,7 +101,7 @@ export default function ProjectOverview() {
                                         title={`Project ID: ${projectId}\nClick to copy`}
                                     >
                                         <span className={styles['project-id-text']}>
-                                            {projectId.length > 12 ? `${projectId.slice(0, 25)}...${projectId.slice(-4)}` : projectId}
+                                            {projectId.length > 12 ? `${projectId.slice(0, 20)}...${projectId.slice(-4)}` : projectId}
                                         </span>
                                         {copiedKey === 'pid' ? (
                                             <Check size={12} className={styles['copy-icon']} style={{ color: '#10b981' }} />

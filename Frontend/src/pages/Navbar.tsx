@@ -7,6 +7,8 @@ import { logout } from "../store/slices/authSlice";
 import styles from "./Navbar.module.css";
 import { Avatar } from "../components/ui/Avatar/Avatar";
 
+import { initLenis, getLenis } from "../utils/lenis";
+
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -21,12 +23,28 @@ const Navbar = () => {
     };
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
+        const lenis = initLenis();
+
+        const handleScroll = (e?: any) => {
+            const scrollY = e?.scroll ?? lenis?.scroll ?? window.scrollY;
+            setScrolled(scrollY > 20);
         };
 
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+        const onNativeScroll = () => handleScroll();
+
+        if (lenis) {
+            lenis.on('scroll', handleScroll);
+        } else {
+            window.addEventListener("scroll", onNativeScroll);
+        }
+
+        return () => {
+            if (lenis) {
+                lenis.off('scroll', handleScroll);
+            } else {
+                window.removeEventListener("scroll", onNativeScroll);
+            }
+        };
     }, []);
 
     useEffect(() => {

@@ -1,8 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import Layout from './components/Layout/Layout';
 import Landing from './pages/Landing';
-import Lenis from '@studio-freight/lenis';
-import { useEffect } from 'react';
 import Overview from './pages/Overview';
 import Projects from './pages/Projects';
 import SDK from './pages/SDK';
@@ -19,30 +18,13 @@ import { GlobalDialog } from './components/ui/Dialog/GlobalDialog';
 import './App.css';
 import Database from './pages/Database';
 import Logs from './pages/Logs';
+import { initLenis, destroyLenis } from './utils/lenis';
 
 function App() {
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
-    });
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
+    initLenis();
     return () => {
-      lenis.destroy();
+      destroyLenis();
     };
   }, []);
 

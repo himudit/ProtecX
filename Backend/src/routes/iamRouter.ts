@@ -12,6 +12,6 @@ iamRouter.post('/register', gatewayController.gateWaySignup);
 iamRouter.post('/login', gatewayController.gateWayLogin);
 // iamRouter.get('/profile', gatewayController.gateWayProfile);
 iamRouter.post('/refresh', gatewayController.gateWayRefresh);
-// iamRouter.post('/logout',  gatewayController.gateWayLogout);
+iamRouter.post('/logout', gatewayController.gateWayLogout);
 
 export default iamRouter;

@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
 // User routes
 router.post('/auth/signup', userController.signup);
 router.post('/auth/login', userController.login);
+router.post('/auth/logout', userController.logout);
 router.get('/auth/profile', authMiddleware, userController.getProfile);
 
 // Project routes

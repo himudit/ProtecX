@@ -84,3 +84,23 @@ export const getProfile = async (
   }
 };
 
+/**
+ * Logout the current user
+ */
+export const logout = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    // For JWT based auth, logout is primarily handled on the client side 
+    // by removing the token. Here we just return a success response.
+    res.status(200).json({
+      success: true,
+      message: 'Logged out successfully',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+

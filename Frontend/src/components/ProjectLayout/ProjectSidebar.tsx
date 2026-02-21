@@ -77,7 +77,7 @@ export default function ProjectSidebar({ isCollapsed, onToggle }: ProjectSidebar
                                         <div className={styles.curve}></div>
                                     </div>
                                     <div className={styles.itemContent}>
-                                        <item.icon size={18} className={styles.itemIcon} />
+                                        <item.icon size={23} className={styles.itemIcon} />
                                         <span className={styles.label}>{item.label}</span>
                                     </div>
                                 </NavLink>

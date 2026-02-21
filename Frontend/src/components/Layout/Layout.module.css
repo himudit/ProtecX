@@ -15,5 +15,5 @@
   width: calc(100% - var(--current-sidebar-width));
   min-height: calc(100vh - var(--header-height));
   background-color: var(--bg-primary);
-  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: margin-left 0.4s cubic-bezier(0.19, 1, 0.22, 1), width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }

@@ -4,6 +4,17 @@
     min-height: 100%;
 }
 
+.logs-container::-webkit-scrollbar,
+.logs-container *::-webkit-scrollbar {
+    display: none !important;
+}
+
+.logs-container,
+.logs-container * {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
+
 .page-header {
     margin-bottom: 24px;
     display: flex;
@@ -47,7 +58,7 @@
 }
 
 .log-list {
-    max-height: 70vh;
+    max-height: 57.4vh;
     overflow-y: auto;
     font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
 }
@@ -110,23 +121,6 @@
     padding: 0 4px;
 }
 
-/* Scrollbar Styles */
-.log-list::-webkit-scrollbar {
-    width: 6px;
-}
-
-.log-list::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.log-list::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
-}
-
-.log-list::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
 
 .empty-state {
     padding: 60px;
@@ -141,6 +135,7 @@
     align-items: center;
     gap: 16px;
     color: #f97316;
+    height: 53vh;
 }
 
 .loader {

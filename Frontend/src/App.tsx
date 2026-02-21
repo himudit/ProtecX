@@ -18,16 +18,9 @@ import { GlobalDialog } from './components/ui/Dialog/GlobalDialog';
 import './App.css';
 import Database from './pages/Database';
 import Logs from './pages/Logs';
-import { initLenis, destroyLenis } from './utils/lenis';
 
 
 function App() {
-  useEffect(() => {
-    initLenis();
-    return () => {
-      destroyLenis();
-    };
-  }, []);
 
   return (
     <BrowserRouter>

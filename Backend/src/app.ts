@@ -25,16 +25,18 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 app.use(
   cors({
-    origin: env.FRONTEND_URL,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: [
-      'Content-Type',
-      'Authorization',
-      'x-project-id',
-      'x-api-key'
+      "Content-Type",
+      "Authorization",
+      "x-project-id",
+      "x-api-key"
     ],
   })
 );
+
+app.options("*", cors());
 
 
 // app.use((req, res, next) => {

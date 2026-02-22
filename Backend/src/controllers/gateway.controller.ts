@@ -230,7 +230,7 @@ export const gateWayLogout = async (
     try {
         const projectId = req.headers['x-project-id'];
         const apiKey = req.headers['x-api-key'];
-        const accessToken = req.body?.accessToken;
+        const authHeader = req.headers['authorization'];
 
         if (!apiKey || !projectId) {
             return res.status(400).json({
@@ -240,10 +240,10 @@ export const gateWayLogout = async (
             });
         }
 
-        if (!accessToken) {
+        if (!authHeader) {
             return res.status(401).json({
                 success: false,
-                message: 'Authentication required',
+                message: 'Authorization header is required',
             });
         }
 
@@ -264,10 +264,10 @@ export const gateWayLogout = async (
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': authHeader as string,
                 'x-project-id': projectId as string,
                 'x-provider-id': userId as string,
             },
-            body: JSON.stringify({ accessToken }),
         });
 
         let data: any = null;
@@ -288,6 +288,82 @@ export const gateWayLogout = async (
         return res.status(200).json({
             success: true,
             message: 'Logout successful',
+            data: data,
+        });
+    } catch (error: any) {
+        return res.status(500).json({
+            success: false,
+            message: 'Gateway error',
+            data: error?.message || null,
+        });
+    }
+};
+
+export const gateWayProfile = async (
+    req: AuthRequest,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const projectId = req.headers['x-project-id'];
+        const apiKey = req.headers['x-api-key'];
+        const authHeader = req.headers['authorization'];
+
+        if (!apiKey || !projectId) {
+            return res.status(400).json({
+                success: false,
+                message: 'API key and project ID are required',
+                data: null,
+            });
+        }
+
+        if (!authHeader) {
+            return res.status(401).json({
+                success: false,
+                message: 'Authorization header is required',
+            });
+        }
+
+        const userId = await validateApiKey(
+            apiKey as string,
+            projectId as string
+        );
+
+        if (!userId) {
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid API key or ProjectId',
+                data: null,
+            });
+        }
+
+        const response = await fetch(`${env.AUTH_MICROSERVICE}/iam/profile`, {
+            method: 'GET',
+            headers: {
+                'Authorization': authHeader,
+                'x-project-id': projectId as string,
+                'x-provider-id': userId as string,
+            },
+        });
+
+        let data: any = null;
+        try {
+            data = await response.json();
+        } catch {
+            data = null;
+        }
+
+        if (!response.ok) {
+            return res.status(response.status).json({
+                success: false,
+                message: data?.message || 'Profile retrieval failed',
+                data: data,
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: 'Profile retrieved successfully',
             data: data,
         });
     } catch (error: any) {

@@ -16,8 +16,10 @@ export const gateWaySignup = async (
         if (!apiKey || !projectId) {
             return res.status(400).json({
                 success: false,
-                message: 'API key and project ID are required',
-                data: null,
+                message: 'Signup failed',
+                data: {
+                    error: 'API key and project ID are required',
+                },
             });
         }
 
@@ -29,8 +31,10 @@ export const gateWaySignup = async (
         if (!userId) {
             return res.status(401).json({
                 success: false,
-                message: 'Invalid API key or ProjectId',
-                data: null,
+                message: 'Signup failed',
+                data: {
+                    error: 'Invalid API key or ProjectId',
+                },
             });
         }
 
@@ -88,8 +92,10 @@ export const gateWayLogin = async (
         if (!apiKey || !projectId) {
             return res.status(400).json({
                 success: false,
-                message: 'API key and project ID are required',
-                data: null,
+                message: 'Login failed',
+                data: {
+                    error: 'API key and project ID are required',
+                },
             });
         }
 
@@ -101,8 +107,10 @@ export const gateWayLogin = async (
         if (!userId) {
             return res.status(401).json({
                 success: false,
-                message: 'Invalid API key or ProjectId',
-                data: null,
+                message: 'Login failed',
+                data: {
+                    error: 'Invalid API key or ProjectId',
+                },
             });
         }
 
@@ -158,8 +166,10 @@ export const gateWayRefresh = async (
         if (!apiKey || !projectId) {
             return res.status(400).json({
                 success: false,
-                message: 'API key and project ID are required',
-                data: null,
+                message: 'Session refresh failed',
+                data: {
+                    error: 'API key and project ID are required',
+                },
             });
         }
 
@@ -178,8 +188,10 @@ export const gateWayRefresh = async (
         if (!userId) {
             return res.status(401).json({
                 success: false,
-                message: 'Invalid API key or ProjectId',
-                data: null,
+                message: 'Session refresh failed',
+                data: {
+                    error: 'Invalid API key or ProjectId',
+                },
             });
         }
 
@@ -235,8 +247,10 @@ export const gateWayLogout = async (
         if (!apiKey || !projectId) {
             return res.status(400).json({
                 success: false,
-                message: 'API key and project ID are required',
-                data: null,
+                message: 'Logout failed',
+                data: {
+                    error: 'API key and project ID are required',
+                },
             });
         }
 
@@ -255,8 +269,10 @@ export const gateWayLogout = async (
         if (!userId) {
             return res.status(401).json({
                 success: false,
-                message: 'Invalid API key or ProjectId',
-                data: null,
+                message: 'Logout failed',
+                data: {
+                    error: 'Invalid API key or ProjectId',
+                },
             });
         }
 
@@ -312,8 +328,10 @@ export const gateWayProfile = async (
         if (!apiKey || !projectId) {
             return res.status(400).json({
                 success: false,
-                message: 'API key and project ID are required',
-                data: null,
+                message: 'Profile retrieval failed',
+                data: {
+                    error: 'API key and project ID are required',
+                },
             });
         }
 
@@ -332,8 +350,10 @@ export const gateWayProfile = async (
         if (!userId) {
             return res.status(401).json({
                 success: false,
-                message: 'Invalid API key or ProjectId',
-                data: null,
+                message: 'Profile retrieval failed',
+                data: {
+                    error: 'Invalid API key or ProjectId',
+                },
             });
         }
 

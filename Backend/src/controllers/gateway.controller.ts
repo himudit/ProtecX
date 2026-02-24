@@ -176,7 +176,10 @@ export const gateWayRefresh = async (
         if (!refreshToken) {
             return res.status(401).json({
                 success: false,
-                message: 'Authentication required',
+                message: 'Session refresh failed',
+                data: {
+                    error: 'Authentication required (Refresh token is missing)',
+                },
             });
         }
 
@@ -257,7 +260,10 @@ export const gateWayLogout = async (
         if (!authHeader) {
             return res.status(401).json({
                 success: false,
-                message: 'Authorization header is required',
+                message: 'Logout failed',
+                data: {
+                    error: 'Authorization header is required',
+                },
             });
         }
 
@@ -338,7 +344,10 @@ export const gateWayProfile = async (
         if (!authHeader) {
             return res.status(401).json({
                 success: false,
-                message: 'Authorization header is required',
+                message: 'Profile retrieval failed',
+                data: {
+                    error: 'Authorization header is required',
+                },
             });
         }
 

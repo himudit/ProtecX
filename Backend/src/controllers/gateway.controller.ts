@@ -78,7 +78,6 @@ export const gateWaySignup = async (
     }
 };
 
-
 export const gateWayLogin = async (
     req: AuthRequest,
     res: Response,

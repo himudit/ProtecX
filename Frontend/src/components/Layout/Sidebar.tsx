@@ -3,30 +3,27 @@ import {
   LayoutDashboard,
   FolderKanban,
   Code,
-  Package,
+  Codesandbox,
   Webhook,
   Settings,
   ChevronRight,
-  ChevronLeft,
-  Menu,
-  GripVertical,
   PanelLeftOpen,
-  PanelRightOpen
+  PanelRightOpen,
+  GripVertical
 } from 'lucide-react';
 import styles from './Sidebar.module.css';
-import { useNavigate } from 'react-router-dom';
 
-interface NavItem {
+export interface NavItem {
   icon: React.ElementType;
   label: string;
   path: string;
   badge?: string;
 }
 
-const navItems: NavItem[] = [
+const defaultNavItems: NavItem[] = [
   { icon: LayoutDashboard, label: 'Overview', path: '/dashboard/overview' },
   { icon: FolderKanban, label: 'Projects', path: '/dashboard/projects' },
-  { icon: Package, label: 'SDK', path: '/dashboard/sdk' },
+  { icon: Codesandbox, label: 'SDK', path: '/dashboard/sdk' },
   { icon: Webhook, label: 'API', path: '/dashboard/api' },
   { icon: Settings, label: 'Settings', path: '/dashboard/settings' },
 ];
@@ -34,15 +31,15 @@ const navItems: NavItem[] = [
 interface SidebarProps {
   isCollapsed: boolean;
   onToggle: () => void;
+  items?: NavItem[];
 }
 
-export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
-  const navigate = useNavigate();
+export default function Sidebar({ isCollapsed, onToggle, items = defaultNavItems }: SidebarProps) {
   return (
     <aside className={`${styles.sidebar} ${isCollapsed ? styles.collapsed : ''}`}>
       {/* Sidebar starting below Header */}
       <nav className={styles['sidebar-nav']}>
-        {navItems.map((item) => {
+        {items.map((item) => {
           const Icon = item.icon;
           return (
             <NavLink
@@ -104,8 +101,6 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
           document.addEventListener('mouseup', handleMouseUp);
         }}
         onClick={(e) => {
-          // Prevent click if we were dragging
-          // Actually, a simple click should still work as a fallback
           onToggle();
         }}
       >

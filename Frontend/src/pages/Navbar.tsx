@@ -77,7 +77,7 @@ const Navbar = () => {
                 {/* Links */}
                 <div className={styles['navbar-links-container']}>
                     <a href="#features" className={styles['nav-link']}>Features</a>
-                    <a href="#docs" className={styles['nav-link']}>Docs</a>
+                    <Link to="/docs/overview" className={styles['nav-link']}>Docs</Link>
                 </div>
 
                 {/* Actions */}

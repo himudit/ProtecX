@@ -21,7 +21,7 @@
   --white-text-secondary: #1f1f1f;
   --orange-accent: #fe902d;
 
-  --sidebar-width: 185px;
+  --sidebar-width: 195px;
   --sidebar-header-height: 64px;
   --header-height: 68.5px;
 
@@ -29,7 +29,7 @@
   font-family: 'JetBrainsMono Nerd Font', monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  font-feature-settings: 'cv02', 'cv03', 'cv0 4', 'cv11';
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);

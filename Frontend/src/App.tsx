@@ -18,7 +18,7 @@ import Logs from './pages/Logs';
 
 // Docs Pages
 import DocsOverview from './pages/Docs/Overview';
-import GetStarted from './pages/Docs/GetStarted';
+import QuickStart from './pages/Docs/QuickStart';
 import SDKs from './pages/Docs/SDKs';
 import DocsAPI from './pages/Docs/API';
 import Features from './pages/Docs/Features';
@@ -33,7 +33,7 @@ import {
 
 const docsNavItems = [
   { icon: FileText, label: 'Overview', path: '/docs/overview' },
-  { icon: TvMinimalPlay, label: 'Quickstart', path: '/docs/get-started' },
+  { icon: TvMinimalPlay, label: 'QuickStart', path: '/docs/quickstart' },
   { icon: Codesandbox, label: 'SDKs', path: '/docs/sdks' },
   { icon: Code, label: 'API', path: '/docs/api' },
 ];
@@ -72,7 +72,7 @@ function App() {
         <Route path="/docs" element={<Layout sidebarItems={docsNavItems} />}>
           <Route index element={<Navigate to="overview" replace />} />
           <Route path="overview" element={<DocsOverview />} />
-          <Route path="get-started" element={<GetStarted />} />
+          <Route path="quickstart" element={<QuickStart />} />
           <Route path="sdks" element={<SDKs />} />
           <Route path="api" element={<DocsAPI />} />
         </Route>

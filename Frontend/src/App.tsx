@@ -33,7 +33,7 @@ import {
 
 const docsNavItems = [
   { icon: FileText, label: 'Overview', path: '/docs/overview' },
-  { icon: TvMinimalPlay, label: 'QuickStart', path: '/docs/quickstart' },
+  { icon: TvMinimalPlay, label: 'Quick Start', path: '/docs/quickstart' },
   { icon: Codesandbox, label: 'SDKs', path: '/docs/sdks' },
   { icon: Code, label: 'API', path: '/docs/api' },
 ];

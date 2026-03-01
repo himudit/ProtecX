@@ -23,8 +23,6 @@ export interface NavItem {
 const defaultNavItems: NavItem[] = [
   { icon: LayoutDashboard, label: 'Overview', path: '/dashboard/overview' },
   { icon: FolderKanban, label: 'Projects', path: '/dashboard/projects' },
-  { icon: Codesandbox, label: 'SDK', path: '/dashboard/sdk' },
-  { icon: Webhook, label: 'API', path: '/dashboard/api' },
   { icon: Settings, label: 'Settings', path: '/dashboard/settings' },
 ];
 

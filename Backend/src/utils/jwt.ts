@@ -7,20 +7,18 @@ export const signToken = (userId: string, email: string): string => {
     throw new Error('JWT_SECRET is not configured');
   }
 
-  const now = Math.floor(Date.now() / 1000);
   const ttl = parseInt(env.JWT_TTL || '3600', 10);
-  const expiresAt = now + ttl;
 
-  const payload: JWTPayload = {
-    user_id: userId,
-    email: email,
-    issued_at: now,
-    expires_at: expiresAt,
-  };
-
-  return jwt.sign(payload, env.JWT_SECRET, {
-    expiresIn: ttl,
-  });
+  return jwt.sign(
+    {
+      sub: userId,
+      email,
+    },
+    env.JWT_SECRET,
+    {
+      expiresIn: ttl,
+    }
+  );
 };
 
 export const verifyToken = (token: string): JWTPayload => {

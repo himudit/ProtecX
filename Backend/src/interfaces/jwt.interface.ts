@@ -3,9 +3,8 @@
  */
 
 export interface JWTPayload {
-  user_id: string;
+  sub: string;
   email: string;
-  issued_at: number;
-  expires_at: number;
+  iat?: number;
+  exp?: number;
 }
-

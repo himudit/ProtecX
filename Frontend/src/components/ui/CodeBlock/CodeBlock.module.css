@@ -1,0 +1,113 @@
+.codeBlockContainer {
+    background-color: #0d0d0d;
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', Courier, monospace;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transition: border-color 0.2s ease;
+}
+
+.codeBlockContainer:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px;
+    background-color: #161616;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.labelWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pill {
+    background-color: #2a2a2a;
+    color: #a1a1aa;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+.copyButton {
+    background: #2a2a2a;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #a1a1aa;
+    padding: 6px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copyButton:hover {
+    background-color: #3f3f46;
+    color: white;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.copyButton:active {
+    transform: scale(0.92);
+}
+
+.contentWrapper {
+    overflow-x: auto;
+    position: relative;
+    padding: 16px 0;
+    display: flex;
+    background-color: #0d0d0d;
+}
+
+.lineNumbers {
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: right;
+    user-select: none;
+    color: #3f3f46;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    min-width: 60px;
+    font-weight: 400;
+}
+
+.codeArea {
+    padding-left: 8px;
+    padding-right: 24px;
+    color: #e4e4e7;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    white-space: pre;
+    flex: 1;
+}
+
+/* Scrollbar styling */
+.contentWrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+.contentWrapper::-webkit-scrollbar-track {
+    background: #0d0d0d;
+}
+
+.contentWrapper::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 10px;
+    border: 2px solid #0d0d0d;
+}
+
+.contentWrapper::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46;
+}

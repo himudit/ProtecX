@@ -8,17 +8,27 @@ datasource db {
 }
 
 model User {
-  id       String   @id @default(uuid())
-  email    String   @unique
-  password String
-  name     String
-  role     UserRole @default(USER)
+  id       String  @id @default(uuid())
+  email    String  @unique
+  password String? // nullable for OAuth users
+  name     String?
+  image    String?
+
+  authProvider AuthProvider @default(EMAIL)
+  providerId   String? // Google "sub" ID
+
+  role       UserRole @default(USER)
+  isVerified Boolean  @default(false)
+  isActive   Boolean  @default(true)
 
   ownedProjects Project[]
   providedUsers ProjectUser[] @relation("UserProvidedProjectUsers")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([providerId])
 }
 
 model Project {
@@ -112,6 +122,11 @@ model Logs {
   createdAt DateTime @default(now())
 
   @@index([projectId, createdAt])
+}
+
+enum AuthProvider {
+  EMAIL
+  GOOGLE
 }
 
 enum ProjectRole {

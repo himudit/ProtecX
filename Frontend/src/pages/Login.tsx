@@ -33,11 +33,10 @@ const Login: React.FC = () => {
     const googleLogin = useGoogleLogin({
         flow: "auth-code",
         onSuccess: async (codeResponse) => {
-            console.log("Google Auth Code:", codeResponse.code);
             setToast({ visible: true, message: 'Signing in with Google...', type: 'loading' });
 
             try {
-                const response = await fetch(`${process.env.VITE_BACKEND_URL}/api/auth/google`, {
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/google`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ code: codeResponse.code }),

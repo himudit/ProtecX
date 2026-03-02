@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import SectionBar from "./SectionBar";
 import styles from './QuickStart.module.css';
 import createProjectImg from '../../assets/QuickStart/create_project.png';
+import copyCredentialImg from '../../assets/QuickStart/copy_credential.png';
 import CodeBlock from "../../components/ui/CodeBlock/CodeBlock";
 
 
@@ -76,13 +77,26 @@ const QuickStart = () => {
 
                                 <div className={styles['section-content']}>
                                     {section.id === "create-project" && (
-                                        <div className="my-10 p-6 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-lg">
+                                        <div className="my-10 p-6 rounded-2xl border border- dark:border-gray-800 shadow-lg">
                                             <p className=" text-gray-400">
                                                 Head over to the dashboard and click on the Create Project button to get started.
                                             </p>
                                             <img
                                                 src={createProjectImg}
                                                 alt="Create Project"
+                                                className={styles['section-image']}
+                                            />
+                                        </div>
+                                    )}
+
+                                    {section.id === "import-sdk" && (
+                                        <div className="my-10 p-6 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-lg">
+                                            <p className=" text-gray-400">
+                                                Copy the credentials from the dashboard and paste them in your project.
+                                            </p>
+                                            <img
+                                                src={copyCredentialImg}
+                                                alt="Copy Credential"
                                                 className={styles['section-image']}
                                             />
                                         </div>

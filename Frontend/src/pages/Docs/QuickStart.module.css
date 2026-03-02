@@ -111,15 +111,8 @@
     margin-top: 20px;
 }
 
-.code-block {
-    background-color: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
-    padding: 1rem;
-    font-family: monospace;
-    font-size: 0.875rem;
-    margin: 1rem 0;
-}
+
+
 
 .placeholder-card {
     padding: 3rem;

@@ -2,10 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import SectionBar from "./SectionBar";
 import styles from './QuickStart.module.css';
 import createProjectImg from '../../assets/QuickStart/create_project.png';
+import CodeBlock from "../../components/ui/CodeBlock/CodeBlock";
+
 
 const sections = [
     { id: "create-project", title: "Create project" },
-    { id: "create-react", title: "Create React project" },
     { id: "install-sdk", title: "Install SDK" },
     { id: "import-sdk", title: "Import SDK" },
     { id: "create-login", title: "Create Login Page" },
@@ -90,10 +91,14 @@ const QuickStart = () => {
 
 
                                     {section.id === "install-sdk" && (
-                                        <div className={styles['code-block']}>
-                                            <span className="text-pink-500">$</span> npm install @protecx/sdk
+                                        <div className="mt-4">
+                                            <CodeBlock
+                                                text="npm i protecX-js"
+                                                label="Shell"
+                                            />
                                         </div>
                                     )}
+
 
                                     {section.id !== "create-project" && section.id !== "install-sdk" && (
                                         <div className={styles['placeholder-card']}>

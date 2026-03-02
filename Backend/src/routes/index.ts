@@ -18,6 +18,7 @@ router.get('/', (req, res) => {
 router.post('/auth/signup', userController.signup);
 router.post('/auth/login', userController.login);
 router.post('/auth/logout', userController.logout);
+router.post('/auth/google', userController.googleLogin);
 router.get('/auth/profile', authMiddleware, userController.getProfile);
 
 // Project routes

@@ -50,13 +50,14 @@
 }
 
 .docs-section {
-    min-height: 70vh;
+    min-height: 30vh;
     scroll-margin-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 6rem;
     position: relative;
+
 }
 
 .section-header {
@@ -94,7 +95,6 @@
 
 .section-title {
     font-size: 1.875rem;
-    /* 3xl */
     font-weight: 700;
     letter-spacing: -0.025em;
     color: var(--text-primary);

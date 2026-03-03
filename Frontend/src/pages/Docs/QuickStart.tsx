@@ -59,69 +59,88 @@ const QuickStart = () => {
                 </div>
 
                 <div className={styles['section-container']}>
-                    <div className="space-y-32">
-                        {sections.map((section, index) => (
-                            <section
-                                key={section.id}
-                                id={section.id}
-                                className={`${styles['docs-section']} animate-in fade-in slide-in-from-bottom-4 duration-700`}
-                            >
-                                <div className={styles['section-header']}>
-                                    <div className={styles['section-badge']}>
-                                        {index + 1}
-                                    </div>
-                                    <h2 className={styles['section-title']}>
-                                        {section.title}
-                                    </h2>
+                    <div className="flex flex-col">
+                        {/* Step 1: Create Project */}
+                        <section id="create-project" className={`${styles['docs-section']} mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700`}>
+                            <div className={styles['section-header']}>
+                                <div className={styles['section-badge']}>1</div>
+                                <h2 className={styles['section-title']}>Create project</h2>
+                            </div>
+                            <div className={styles['section-content']}>
+                                <div className="mt-8 mb-12 p-6 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-lg">
+                                    <p className="text-gray-400">
+                                        Head over to the dashboard and click on the Create Project button to get started.
+                                    </p>
+                                    <img
+                                        src={createProjectImg}
+                                        alt="Create Project"
+                                        className={styles['section-image']}
+                                    />
                                 </div>
+                            </div>
+                        </section>
 
-                                <div className={styles['section-content']}>
-                                    {section.id === "create-project" && (
-                                        <div className="my-10 p-6 rounded-2xl border border- dark:border-gray-800 shadow-lg">
-                                            <p className=" text-gray-400">
-                                                Head over to the dashboard and click on the Create Project button to get started.
-                                            </p>
-                                            <img
-                                                src={createProjectImg}
-                                                alt="Create Project"
-                                                className={styles['section-image']}
-                                            />
-                                        </div>
-                                    )}
-
-                                    {section.id === "import-sdk" && (
-                                        <div className="my-10 p-6 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-lg">
-                                            <p className=" text-gray-400">
-                                                Copy the credentials from the dashboard and paste them in your project.
-                                            </p>
-                                            <img
-                                                src={copyCredentialImg}
-                                                alt="Copy Credential"
-                                                className={styles['section-image']}
-                                            />
-                                        </div>
-                                    )}
-
-
-
-                                    {section.id === "install-sdk" && (
-                                        <div className="mt-4">
-                                            <CodeBlock
-                                                text="npm i protecX-js"
-                                                label="Shell"
-                                            />
-                                        </div>
-                                    )}
-
-
-                                    {section.id !== "create-project" && section.id !== "install-sdk" && (
-                                        <div className={styles['placeholder-card']}>
-                                            Detailed implementation guide for {section.title} goes here...
-                                        </div>
-                                    )}
+                        {/* Step 2: Install SDK */}
+                        <section id="install-sdk" className={`${styles['docs-section']}  animate-in fade-in slide-in-from-bottom-4 duration-700`}>
+                            <div className={styles['section-header']}>
+                                <div className={styles['section-badge']}>2</div>
+                                <h2 className={styles['section-title']}>Install SDK</h2>
+                            </div>
+                            <div className={styles['section-content']}>
+                                <div className="mt-4">
+                                    <CodeBlock
+                                        text="npm i protecX-js"
+                                        label="Shell"
+                                    />
                                 </div>
-                            </section>
-                        ))}
+                            </div>
+                        </section>
+
+                        {/* Step 3: Import SDK */}
+                        <section id="import-sdk" className={`${styles['docs-section']} -mt-10 mb-16 animate-in fade-in slide-in-from-bottom-4 border-t-2 border-amber-400 duration-700`}>
+                            <div className={styles['section-header']}>
+                                <div className={styles['section-badge']}>3</div>
+                                <h2 className={styles['section-title']}>Import SDK</h2>
+                            </div>
+                            <div className={styles['section-content']}>
+                                <div className="mt-2 mb-10 p-6 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-lg">
+                                    <p className="text-gray-400">
+                                        Copy the credentials from the dashboard and paste them in your project.
+                                    </p>
+                                    <img
+                                        src={copyCredentialImg}
+                                        alt="Copy Credential"
+                                        className={styles['section-image']}
+                                    />
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Step 4: Create Login Page */}
+                        <section id="create-login" className={`${styles['docs-section']} mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700`}>
+                            <div className={styles['section-header']}>
+                                <div className={styles['section-badge']}>4</div>
+                                <h2 className={styles['section-title']}>Create Login Page</h2>
+                            </div>
+                            <div className={styles['section-content']}>
+                                <div className={styles['placeholder-card']}>
+                                    Detailed implementation guide for Create Login Page goes here...
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Step 5: All Set */}
+                        <section id="all-set" className={`${styles['docs-section']} mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700`}>
+                            <div className={styles['section-header']}>
+                                <div className={styles['section-badge']}>5</div>
+                                <h2 className={styles['section-title']}>All Set</h2>
+                            </div>
+                            <div className={styles['section-content']}>
+                                <div className={styles['placeholder-card']}>
+                                    Detailed implementation guide for All Set goes here...
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
             </div>

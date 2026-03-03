@@ -113,6 +113,39 @@ const QuickStart = () => {
                                         className={styles['section-image']}
                                     />
                                 </div>
+                                <p className="text-gray-400">
+                                    Create a new file <span className="font-mono text-white">src/lib/protecx.js</span>
+                                    and add the following code to it, replace{" "}
+
+                                    <span className="inline-block rounded-2xl bg-gray-700 text-white px-3 py-1 font-mono">
+                                        &lt;PROJECT_ID&gt;
+                                    </span>{" "}
+
+                                    with your project ID and{" "}
+
+                                    <span className="inline-block bg-gray-700 text-white px-3 py-1 font-mono">
+                                        &lt;API_KEY&gt;
+                                    </span>{" "}
+
+                                    with your API key.
+                                </p>
+
+
+                                {/* <div className={styles['section-content']}> */}
+                                <div className="mt-4">
+                                    <CodeBlock
+                                        text={`import { ProtecX, ProtecXError } from '@protecx/js';
+
+export const protecx = new ProtecX({
+  baseUrl: "https://protecx.onrender.com/api/v1",
+  projectId: <PROJECT_ID>, // Replace with actual project ID
+  apiKey: <API_KEY>,   // Replace with actual API key
+  persistTokens: true // Automatically saves session to localStorage
+});`}
+                                        label="JS"
+                                    />
+                                </div>
+                                {/* </div> */}
                             </div>
                         </section>
 

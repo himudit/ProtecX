@@ -30,6 +30,7 @@ import {
   Codesandbox,
   ListChecks
 } from 'lucide-react';
+import Toast from './components/ui/Toast/Toast';
 
 const docsNavItems = [
   { icon: FileText, label: 'Overview', path: '/docs/overview' },
@@ -43,6 +44,7 @@ function App() {
   return (
     <BrowserRouter>
       <GlobalDialog />
+      <Toast />
       <Routes>
         <Route path="/" element={<Landing />} />
 

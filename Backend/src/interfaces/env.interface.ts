@@ -16,5 +16,7 @@ export interface EnvConfig {
   RABBITMQ_URL?: string;
   RABBITMQ_QUEUE?: string;
   RABBITMQ_PREFETCH?: number;
+  GOOGLE_CLIENT_ID?: string;
+  GOOGLE_CLIENT_SECRET?: string;
 }
 

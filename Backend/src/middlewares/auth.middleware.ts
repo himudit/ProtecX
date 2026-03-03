@@ -34,7 +34,7 @@ export const authMiddleware = async (
 
     const decoded = verifyToken(token);
 
-    req.userId = decoded.user_id;
+    req.userId = decoded.sub;
 
     next();
   } catch (error) {

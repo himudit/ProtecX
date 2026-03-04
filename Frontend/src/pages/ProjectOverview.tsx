@@ -173,34 +173,61 @@ export default function ProjectOverview() {
 
             <div className={styles['keys-wrapper']}>
 
-                {/* PUBLISHABLE KEY */}
-                <div className={styles['key-card']}>
-                    <h3 className={styles['card-title']}>API Key</h3>
-                    <p className={styles['card-description']}>
-                        The API Key is used to identify and access your project from client or server applications.
-                        This key is safe to expose and can be included in frontend code. It does not grant administrative access and cannot be used to generate or sign tokens.
-                    </p>
+                {/* API CREDENTIALS */}
+                <div className={styles['credentials-container']}>
+                    <div className={styles['credentials-left']}>
+                        <h3 className={styles['card-title']}>API credentials</h3>
+                        <p className={styles['card-description']}>
+                            Access ProtecX services using this project's API Endpoint and API Key.
+                        </p>
+                    </div>
 
-                    <div className={styles['key-row']}>
-                        <span className={styles['key-label']}>apiKey</span>
-
-                        <div className={styles['key-input-row']}>
-                            <code className={styles['key-value']}>
-                                {isLoading ? (
-                                    <SkeletonDiv width="100%" height="18px" />
-                                ) : (
-                                    showApiKey ? (projectData?.apiKey.apiKey || 'N/A') : '••••••••••••••••••••••••••••'
-                                )}
-                            </code>
-                            <button className={styles['icon-button']} onClick={() => setShowApiKey(!showApiKey)}>
-                                {showApiKey ? <EyeOff size={16} /> : <Eye size={16} />}
-                            </button>
-                            <button className={styles['icon-button']} onClick={() => projectData?.apiKey.apiKey && copyToClipboard(projectData.apiKey.apiKey, 'api')}>
-                                {copiedKey === 'api' ? <Check size={16} style={{ color: '#10b981' }} /> : <Copy size={16} />}
-                            </button>
+                    <div className={styles['credentials-right']}>
+                        {/* API ENDPOINT FIELD */}
+                        <div className={styles['field-group']}>
+                            <span className={styles['field-label']}>API Endpoint</span>
+                            <div className={styles['field-input-wrapper']}>
+                                <div className={styles['field-value']}>
+                                    {isLoading ? (
+                                        <SkeletonDiv width="100%" height="18px" />
+                                    ) : (
+                                        `https://protecx.onrender.com/api/v1/`
+                                    )}
+                                </div>
+                                <div className={styles['field-actions']}>
+                                    <button className={styles['icon-button']} onClick={() => copyToClipboard(`https://protecx.onrender.com/api/v1/`, 'endpoint')}>
+                                        {copiedKey === 'endpoint' ? <Check size={16} style={{ color: '#10b981' }} /> : <Copy size={16} />}
+                                    </button>
+                                </div>
+                            </div>
                         </div>
+
+                        {/* API KEY FIELD */}
+                        <div className={styles['field-group']}>
+                            <span className={styles['field-label']}>API Key</span>
+                            <div className={styles['field-input-wrapper']}>
+                                <div className={styles['field-value']}>
+                                    {isLoading ? (
+                                        <SkeletonDiv width="100%" height="18px" />
+                                    ) : (
+                                        showApiKey ? (projectData?.apiKey.apiKey || 'N/A') : '••••••••••••••••••••••••••••'
+                                    )}
+                                </div>
+                                <div className={styles['field-actions']}>
+                                    <button className={styles['icon-button']} onClick={() => setShowApiKey(!showApiKey)}>
+                                        {showApiKey ? <EyeOff size={16} /> : <Eye size={16} />}
+                                    </button>
+                                    <button className={styles['icon-button']} onClick={() => projectData?.apiKey.apiKey && copyToClipboard(projectData.apiKey.apiKey, 'api')}>
+                                        {copiedKey === 'api' ? <Check size={16} style={{ color: '#10b981' }} /> : <Copy size={16} />}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
+
 
                 {/* SECRET KEYS (JWT Public Key) */}
                 <div className={styles['key-card']}>

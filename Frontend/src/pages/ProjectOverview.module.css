@@ -200,6 +200,71 @@
     color: #e5e7eb;
 }
 
+.credentials-container {
+    display: flex;
+    gap: 48px;
+    background: #0f0f0f;
+    border: 1px solid #262626;
+    border-radius: 12px;
+    padding: 32px;
+    align-items: flex-start;
+}
+
+.credentials-left {
+    flex: 1;
+    min-width: 300px;
+}
+
+.credentials-right {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.field-label {
+    font-size: 13px;
+    color: #f9fafb;
+    font-weight: 500;
+}
+
+.field-input-wrapper {
+    display: flex;
+    align-items: center;
+    background: #0b0b0b;
+    border: 1px solid #262626;
+    border-radius: 8px;
+    padding: 2px 4px;
+    /* Reduced vertical padding since input height is handled by flex */
+}
+
+.field-value {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: #a0a0a0;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.field-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding-right: 8px;
+}
+
+
 /* CARD */
 .key-card {
     background: #0f0f0f;

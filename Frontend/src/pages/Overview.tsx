@@ -1,13 +1,24 @@
 import { Activity, Database, Users, Zap, TrendingUp, Server } from 'lucide-react';
 import styles from './Overview.module.css';
+import { useDispatch } from 'react-redux';
+import { showToast } from '../store/slices/toastSlice';
 
 export default function Overview() {
+  const dispatch = useDispatch();
+
   const stats = [
     { label: 'Total Projects', value: '12', icon: Server, change: '+2 this month', color: '#f97316' },
     { label: 'API Requests', value: '1.2M', icon: Activity, change: '+12% from last month', color: '#ff8c42' },
     { label: 'Database Size', value: '45.2 GB', icon: Database, change: '+5.1 GB', color: '#ea580c' },
     { label: 'Active Users', value: '8,432', icon: Users, change: '+234 this week', color: '#f97316' },
   ];
+
+  const handleAction = (message: string) => {
+    dispatch(showToast({ message: `${message} feature coming soon!`, type: 'loading' }));
+    setTimeout(() => {
+      dispatch(showToast({ message: `${message} initiated!`, type: 'success' }));
+    }, 1500);
+  };
 
   return (
     <div className={styles['overview-page']}>
@@ -42,7 +53,7 @@ export default function Overview() {
         <div className={styles['content-card']}>
           <div className={styles['card-header']}>
             <h2>Recent Activity</h2>
-            <button className={styles['text-link']}>View all</button>
+            <button className={styles['text-link']} onClick={() => handleAction('Full activity log')}>View all</button>
           </div>
           <div className={styles['activity-list']}>
             {[
@@ -68,15 +79,15 @@ export default function Overview() {
             <h2>Quick Actions</h2>
           </div>
           <div className={styles['quick-actions']}>
-            <button className={styles['action-btn']}>
+            <button className={styles['action-btn']} onClick={() => handleAction('Create Project')}>
               <Zap size={18} />
               <span>Create Project</span>
             </button>
-            <button className={styles['action-btn']}>
+            <button className={styles['action-btn']} onClick={() => handleAction('New Database')}>
               <Database size={18} />
               <span>New Database</span>
             </button>
-            <button className={styles['action-btn']}>
+            <button className={styles['action-btn']} onClick={() => handleAction('View Analytics')}>
               <TrendingUp size={18} />
               <span>View Analytics</span>
             </button>

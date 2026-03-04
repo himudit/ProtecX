@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowRight, ChevronDown, LogOut, FileText, ListChecks } from "lucide-react";
+import { ArrowRight, ChevronDown, LogOut, FileText, ListChecks, ListCheck } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from '@/store';
 import { logout } from "../store/slices/authSlice";
@@ -92,8 +92,7 @@ const Navbar = () => {
                         <>
                             <Link to="/login" className={styles['nav-link-btn']}>Sign In</Link>
                             <Link to="/signup" className={`${styles['nav-primary-btn']} ${scrolled ? styles.scrolled : ""}`}>
-                                Get Started
-                                <ArrowRight size={16} />
+                                Quick Start
                             </Link>
                         </>
                     ) : (

@@ -12,6 +12,7 @@ import type { AuthResponse } from '../types/auth';
 import { useGoogleLogin } from "@react-oauth/google";
 import orangeBackground from '../assets/orange_background.jpg';
 import styles from './Login.module.css';
+import { showToast } from '../store/slices/toastSlice';
 
 
 const Login: React.FC = () => {
@@ -20,7 +21,7 @@ const Login: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [apiError, setApiError] = useState<string | null>(null);
     const [showPassword, setShowPassword] = useState(false);
-    const [toast, setToast] = useState<{ visible: boolean; message: string; type: 'loading' | 'error' } | null>(null);
+
 
     const {
         register,
@@ -33,7 +34,7 @@ const Login: React.FC = () => {
     const googleLogin = useGoogleLogin({
         flow: "auth-code",
         onSuccess: async (codeResponse) => {
-            setToast({ visible: true, message: 'Signing in with Google...', type: 'loading' });
+            dispatch(showToast({ message: 'Signing in with Google...', type: 'loading' }));
 
             try {
                 const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/google`, {
@@ -46,41 +47,38 @@ const Login: React.FC = () => {
 
                 if (data.success) {
                     dispatch(setCredentials(data.data));
-                    setToast(null);
+                    dispatch(showToast({ message: 'Login successful!', type: 'success' }));
                     navigate("/dashboard/overview");
                 } else {
                     throw new Error(data.message || 'Google login failed');
                 }
             } catch (error: any) {
                 console.error("Google Login Error:", error);
-                setToast({ visible: true, message: 'Google Login Failed', type: 'error' });
-                setTimeout(() => setToast(null), 3000);
+                dispatch(showToast({ message: 'Google Login Failed', type: 'error' }));
             }
         },
         onError: () => {
             console.log("Login Failed");
-            setToast({ visible: true, message: 'Google Login Failed', type: 'error' });
-            setTimeout(() => setToast(null), 3000);
+            dispatch(showToast({ message: 'Google Login Failed', type: 'error' }));
         }
     });
 
     const onSubmit = async (data: LoginInput) => {
         setIsLoading(true);
         setApiError(null);
-        setToast({ visible: true, message: 'Signing in...', type: 'loading' });
+        dispatch(showToast({ message: 'Signing in...', type: 'loading' }));
         try {
             const response = await authService.login(data);
             if (response.success) {
                 const { user, token } = response.data;
                 dispatch(setCredentials({ user, token }));
-                setToast(null);
+                dispatch(showToast({ message: 'Login successful!', type: 'success' }));
                 navigate('/dashboard/overview');
             }
         } catch (error: any) {
             const message = error.response?.data?.message || 'Invalid Login credentials';
             setApiError(message);
-            setToast({ visible: true, message: 'Invalid Login credentials', type: 'error' });
-            setTimeout(() => setToast(null), 3000);
+            dispatch(showToast({ message: message, type: 'error' }));
         } finally {
             setIsLoading(false);
         }
@@ -88,27 +86,7 @@ const Login: React.FC = () => {
 
     return (
         <>
-            {toast && (
-                <div style={{
-                    position: 'fixed',
-                    top: '20px',
-                    right: '20px',
-                    zIndex: 1000,
-                    backgroundColor: toast.type === 'loading' ? 'var(--bg-tertiary)' : '#ef4444',
-                    color: 'white',
-                    padding: '12px 20px',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '12px',
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
-                    border: toast.type === 'loading' ? '1px solid var(--border-color)' : 'none',
-                    animation: 'slideIn 0.3s ease-out'
-                }}>
-                    {toast.type === 'loading' && <Loader2 size={18} className="animate-spin" style={{ animation: 'spin 1s linear infinite' }} />}
-                    <span style={{ fontSize: '14px', fontWeight: '500' }}>{toast.message}</span>
-                </div>
-            )}
+
 
             <div style={{ display: 'flex', minHeight: '100vh', width: '100%' }}>
                 {/* 35% Section - Visible on all screens */}
@@ -298,32 +276,7 @@ const Login: React.FC = () => {
                     </div>
                 </div>
 
-                <style>
-                    {`
-          @media (max-width: 768px) {
-            .auth-sidebar {
-              width: 100% !important;
-            }
-            .auth-main {
-              display: none !important;
-            }
-          }
-          
-          @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-          }
-          
-          @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-          }
-          
-          .animate-spin {
-            animation: spin 1s linear infinite;
-          }
-        `}
-                </style>
+
             </div>
         </>
     );

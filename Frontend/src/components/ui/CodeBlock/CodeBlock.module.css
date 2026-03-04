@@ -1,113 +1,166 @@
 .codeBlockContainer {
-    background-color: #0d0d0d;
-    border-radius: 12px;
+    --code-bg: #1e1e1e;
+    /* VS Code Dark+ background */
+    --header-bg: #252526;
+    /* VS Code header background */
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-primary: #d4d4d4;
+    --text-muted: #858585;
+    --accent: #3b82f6;
+
+    background-color: var(--code-bg);
+    border-radius: 8px;
     overflow: hidden;
     font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', Courier, monospace;
     position: relative;
     display: flex;
     flex-direction: column;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    transition: border-color 0.2s ease;
-}
-
-.codeBlockContainer:hover {
-    border-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    margin: 1.5rem 0;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 18px;
-    background-color: #161616;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 8px 16px;
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .labelWrapper {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
 }
 
 .pill {
-    background-color: #2a2a2a;
-    color: #a1a1aa;
-    padding: 4px 12px;
-    border-radius: 8px;
-    font-size: 0.75rem;
+    background-color: #333333;
+    color: var(--text-muted);
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 0.7rem;
     font-weight: 500;
-    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.filename {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 400;
 }
 
 .copyButton {
-    background: #2a2a2a;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    color: #a1a1aa;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
     padding: 6px;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .copyButton:hover {
-    background-color: #3f3f46;
-    color: white;
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
-.copyButton:active {
-    transform: scale(0.92);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
 }
 
 .contentWrapper {
     overflow-x: auto;
     position: relative;
-    padding: 16px 0;
+    padding: 20px 0;
     display: flex;
-    background-color: #0d0d0d;
+    background-color: var(--code-bg);
 }
 
 .lineNumbers {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 16px;
+    padding-right: 16px;
     text-align: right;
     user-select: none;
-    color: #3f3f46;
+    color: #454545;
+    /* VS Code line number color */
     font-size: 0.85rem;
     line-height: 1.6;
-    min-width: 60px;
+    min-width: 50px;
     font-weight: 400;
 }
 
 .codeArea {
     padding-left: 8px;
     padding-right: 24px;
-    color: #e4e4e7;
-    font-size: 0.875rem;
+    color: var(--text-primary);
+    font-size: 0.9rem;
     line-height: 1.6;
     white-space: pre;
     flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.shikiWrapper {
+    width: 100%;
+}
+
+.shikiWrapper pre {
+    background-color: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-family: inherit !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+}
+
+.plainCode {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.highlightOverlayContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.lineHighlight {
+    background-color: rgba(255, 255, 255, 0.03);
+    border-left: 2px solid var(--accent);
+    height: 1.6rem;
+}
+
+.emptyLine {
+    height: 1.6rem;
+}
+
+.highlightLineNumber {
+    color: #c6c6c6 !important;
+    font-weight: 600;
 }
 
 /* Scrollbar styling */
 .contentWrapper::-webkit-scrollbar {
-    height: 8px;
+    height: 10px;
 }
 
 .contentWrapper::-webkit-scrollbar-track {
-    background: #0d0d0d;
+    background: var(--code-bg);
 }
 
 .contentWrapper::-webkit-scrollbar-thumb {
-    background: #27272a;
+    background: #333333;
     border-radius: 10px;
-    border: 2px solid #0d0d0d;
 }
 
 .contentWrapper::-webkit-scrollbar-thumb:hover {
-    background: #3f3f46;
+    background: #444444;
 }

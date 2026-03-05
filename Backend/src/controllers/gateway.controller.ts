@@ -3,7 +3,7 @@ import { AuthRequest } from '../interfaces/auth-request.interface';
 import { validateApiKey } from '../helpers/gatewayHelper';
 import { env } from '../config/env';
 
-export const gateWaySignup = async (
+export const gateWayRegister = async (
     req: AuthRequest,
     res: Response,
     next: NextFunction

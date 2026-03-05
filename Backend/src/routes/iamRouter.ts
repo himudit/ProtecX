@@ -8,7 +8,7 @@ const iamRouter = Router();
 iamRouter.use(requestLogger);
 
 // iam routes (connection for microservice)
-iamRouter.post('/register', gatewayController.gateWaySignup);
+iamRouter.post('/register', gatewayController.gateWayRegister);
 iamRouter.post('/login', gatewayController.gateWayLogin);
 iamRouter.get('/profile', gatewayController.gateWayProfile);
 iamRouter.post('/refresh', gatewayController.gateWayRefresh);

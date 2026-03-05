@@ -7,7 +7,7 @@ export const signToken = (userId: string, email: string): string => {
     throw new Error('JWT_SECRET is not configured');
   }
 
-  const ttl = parseInt(env.JWT_TTL || '3600', 10);
+  const ttl = parseInt(env.JWT_TTL || '28800', 10);
 
   return jwt.sign(
     {

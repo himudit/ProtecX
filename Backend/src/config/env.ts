@@ -25,7 +25,7 @@ export const env: EnvConfig = {
   CORS_ORIGIN: process.env.CORS_ORIGIN ?? 'http://localhost:5173',
   DATABASE_URL: process.env.DATABASE_URL,
   JWT_SECRET: process.env.JWT_SECRET,
-  JWT_TTL: process.env.JWT_TTL ?? '3600',
+  JWT_TTL: process.env.JWT_TTL ?? '28800',
   API_KEY: process.env.API_KEY,
   ENCRYPTION_KEY: process.env.ENCRYPTION_KEY,
   AUTH_MICROSERVICE: process.env.AUTH_MICROSERVICE || 'http://localhost:8080',

@@ -98,7 +98,7 @@ model ProjectUser {
   isVerified   Boolean     @default(false)
 
   project  Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  provider User    @relation("UserProvidedProjectUsers", fields: [providerId], references: [id])
+  provider User    @relation("UserProvidedProjectUsers", fields: [providerId], references: [id], onDelete: Cascade)
 
   createdAt   DateTime  @default(now())
   lastLoginAt DateTime?

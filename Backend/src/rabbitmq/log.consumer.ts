@@ -2,7 +2,7 @@ import { getChannel } from './connection';
 import { QUEUES } from './queues';
 import { ApiLogEvent } from './types';
 import { ConsumeMessage } from 'amqplib';
-import { prisma } from '../config/primsa';
+import { prisma } from '../config/prisma';
 
 /**
  * Starts the log consumer.
@@ -45,7 +45,7 @@ export async function startLogConsumer(): Promise<void> {
                             message: data.message ?? '',
                             error: data.error,
                             createdAt: new Date(data.createdAt),
-                    },
+                        },
                     });
 
                     channel.ack(msg);

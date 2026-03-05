@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { AuthRequest } from '../interfaces/auth-request.interface';
-import { validateApiKey } from '../utils/gatewayHelper';
+import { validateApiKey } from '../helpers/gatewayHelper';
 import { env } from '../config/env';
 
 export const gateWaySignup = async (

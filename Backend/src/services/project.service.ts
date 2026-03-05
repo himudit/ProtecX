@@ -1,4 +1,4 @@
-import { prisma } from '../config/primsa';
+import { prisma } from '../config/prisma';
 import { CreateProjectDto, ProjectResponseDto, ApiKeyCreateResponseDto, JwtKeyResponseDto, CreateProjectResponseDto, ProjectMetaResponseDto, ApiKeyResponseDto, ProjectUserRowResponseDto } from '../interfaces/project.interface';
 import * as projectApiKeyService from './projectApiKey.service';
 import * as projectJwtKeyService from './projectJwtKey.service';

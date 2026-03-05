@@ -1,4 +1,4 @@
-import { prisma } from '../config/primsa';
+import { prisma } from '../config/prisma';
 import { hashPassword, verifyPassword } from '../utils/password';
 import { signToken } from '../utils/jwt';
 import { OAuth2Client } from 'google-auth-library';

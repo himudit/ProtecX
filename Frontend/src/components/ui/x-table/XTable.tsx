@@ -8,12 +8,14 @@ type Props<T> = {
     data: T[];
     columns: Column<T>[];
     onRowClick?: (row: T) => void;
+    maxHeight?: string;
 };
 
 export function XTable<T extends Record<string, any>>({
     data,
     columns,
     onRowClick,
+    maxHeight,
 }: Props<T>) {
     const [search, setSearch] = useState('');
     const [sortBy, setSortBy] = useState<keyof T | null>(null);
@@ -65,62 +67,67 @@ export function XTable<T extends Record<string, any>>({
                 />
             </div>
 
-            <table className={styles.table}>
-                <thead>
-                    <tr>
-                        {columns.map((col) => (
-                            <th key={String(col.key)} onClick={() => handleSort(col.key)}>
-                                {col.label}
-                                {sortBy === col.key && (reverse ? ' 🔽' : ' 🔼')}
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {sortedData.length === 0 ? (
+            <div
+                className={styles['table-container']}
+                style={{ maxHeight: maxHeight || '400px' }}
+            >
+                <table className={styles.table}>
+                    <thead>
                         <tr>
-                            <td colSpan={columns.length} className={styles.empty}>
-                                Nothing found
-                            </td>
+                            {columns.map((col) => (
+                                <th key={String(col.key)} onClick={() => handleSort(col.key)}>
+                                    {col.label}
+                                    {sortBy === col.key && (reverse ? ' 🔽' : ' 🔼')}
+                                </th>
+                            ))}
                         </tr>
-                    ) : (
-                        sortedData.map((row, idx) => (
-                            <tr
-                                key={idx}
-                                onClick={() => onRowClick?.(row)}
-                                className={onRowClick ? styles.clickable : ''}
-                            >
-                                {columns.map((col) => {
-                                    const value = row[col.key];
-                                    const displayValue = col.render ? col.render(value, row) : String(value);
-                                    const uniqueId = `${idx}-${String(col.key)}`;
-                                    const isCopied = copiedId === uniqueId;
+                    </thead>
 
-                                    return (
-                                        <td key={String(col.key)} title={String(value)}>
-                                            {col.copyable ? (
-                                                <div
-                                                    className={styles['copy-container']}
-                                                    onClick={(e) => handleCopy(e, String(value), uniqueId)}
-                                                    title={`Copy: ${String(value)}`}
-                                                >
-                                                    <div className={`${styles['copy-btn']} ${isCopied ? styles.copied : ''}`}>
-                                                        {isCopied ? <Check size={14} /> : <Copy size={14} />}
-                                                    </div>
-                                                    <span className={styles['copy-text']}>{displayValue}</span>
-                                                </div>
-                                            ) : (
-                                                <span className={styles['cell-text']}>{displayValue}</span>
-                                            )}
-                                        </td>
-                                    );
-                                })}
+                    <tbody>
+                        {sortedData.length === 0 ? (
+                            <tr>
+                                <td colSpan={columns.length} className={styles.empty}>
+                                    Nothing found
+                                </td>
                             </tr>
-                        ))
-                    )}
-                </tbody>
-            </table>
+                        ) : (
+                            sortedData.map((row, idx) => (
+                                <tr
+                                    key={idx}
+                                    onClick={() => onRowClick?.(row)}
+                                    className={onRowClick ? styles.clickable : ''}
+                                >
+                                    {columns.map((col) => {
+                                        const value = row[col.key];
+                                        const displayValue = col.render ? col.render(value, row) : String(value);
+                                        const uniqueId = `${idx}-${String(col.key)}`;
+                                        const isCopied = copiedId === uniqueId;
+
+                                        return (
+                                            <td key={String(col.key)} title={String(value)}>
+                                                {col.copyable ? (
+                                                    <div
+                                                        className={styles['copy-container']}
+                                                        onClick={(e) => handleCopy(e, String(value), uniqueId)}
+                                                        title={`Copy: ${String(value)}`}
+                                                    >
+                                                        <div className={`${styles['copy-btn']} ${isCopied ? styles.copied : ''}`}>
+                                                            {isCopied ? <Check size={14} /> : <Copy size={14} />}
+                                                        </div>
+                                                        <span className={styles['copy-text']}>{displayValue}</span>
+                                                    </div>
+                                                ) : (
+                                                    <span className={styles['cell-text']}>{displayValue}</span>
+                                                )}
+                                            </td>
+                                        );
+                                    })}
+                                </tr>
+                            ))
+                        )}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }

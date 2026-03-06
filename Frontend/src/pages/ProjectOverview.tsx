@@ -114,7 +114,7 @@ export default function ProjectOverview() {
                         )}
                     </h2>
 
-                    <div className={styles['branch-meta']}>
+                    {/* <div className={styles['branch-meta']}>
                         {isLoading ? (
                             <SkeletonDiv width="80px" height="24px" borderRadius="999px" />
                         ) : (
@@ -122,7 +122,7 @@ export default function ProjectOverview() {
                                 {projectData?.project.status || 'Active'}
                             </span>
                         )}
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
@@ -130,8 +130,16 @@ export default function ProjectOverview() {
             <div className={styles['overview-card']}>
                 <div className={styles['metric-grid']}>
                     <div className={styles['metric-box']}>
-                        <div className={styles['metric-label']}>Storage</div>
-                        <div className={styles['metric-value']}>38.76 MB</div>
+                        <div className={styles['metric-label']}>Active</div>
+                        <div className={styles['metric-value']}>
+                            {isLoading ? (
+                                <SkeletonDiv width="80px" height="18px" />
+                            ) : (
+                                <span className={`${styles['branch-badge']} ${getStatusClass(projectData?.project.status)}`}>
+                                    {projectData?.project.status || 'Active'}
+                                </span>
+                            )}
+                        </div>
                     </div>
 
                     <div className={styles['divider']} />
@@ -158,7 +166,7 @@ export default function ProjectOverview() {
                             ) : (
                                 <>
                                     <div className={styles['user-avatar']}>
-                                        <Avatar name={user?.name || 'Owner'} size={24} />
+                                        <Avatar name={user?.name || 'Owner'} src={user?.image} size={24} />
                                     </div>
                                     <div className={styles['user-name']}>
                                         {user?.name || 'Owner'}

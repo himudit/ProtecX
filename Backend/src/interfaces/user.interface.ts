@@ -16,6 +16,7 @@ export interface SignupResult {
     name: string | null;
     role: UserRole;
     createdAt: Date;
+    image: string | null;
   };
   token: string;
 }
@@ -32,6 +33,7 @@ export interface LoginResult {
     name: string | null;
     role: UserRole;
     createdAt: Date;
+    image: string | null;
   };
   token: string;
 }
@@ -43,4 +45,5 @@ export interface ProfileResult {
   role: UserRole;
   createdAt: Date;
   updatedAt: Date;
-}
+  image: string | null;
+} 

@@ -71,6 +71,7 @@ export const signup = async (data: SignupData): Promise<SignupResult> => {
       name: user.name,
       role: user.role,
       createdAt: user.createdAt,
+      image: user.image,
     },
     token,
   };
@@ -127,6 +128,7 @@ export const login = async (data: LoginData): Promise<LoginResult> => {
       name: user.name,
       role: user.role,
       createdAt: user.createdAt,
+      image: user.image,
     },
     token,
   };
@@ -144,6 +146,7 @@ export const getProfile = async (userId: string): Promise<ProfileResult> => {
       email: true,
       name: true,
       role: true,
+      image: true,
       createdAt: true,
       updatedAt: true,
     },
@@ -284,6 +287,7 @@ export const googleLogin = async (code: string): Promise<LoginResult> => {
         name: user.name,
         role: user.role,
         createdAt: user.createdAt,
+        image: user.image,
       },
       token,
     };

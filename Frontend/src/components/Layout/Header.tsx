@@ -55,7 +55,7 @@ export default function Header() {
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
             <div className={styles['user-avatar']}>
-              <Avatar name={user?.name || 'User'} size={24} />
+              <Avatar name={user?.name || 'User'} src={user?.image} size={24} />
             </div>
             <ChevronDown size={16} />
           </div>

@@ -2,6 +2,7 @@ import { Activity, Database, Users, Zap, TrendingUp, Server } from 'lucide-react
 import styles from './Overview.module.css';
 import { useDispatch } from 'react-redux';
 import { showToast } from '../store/slices/toastSlice';
+import RequestContributionGraph from '../components/ui/RequestContributionGraph/RequestContributionGraph';
 
 export default function Overview() {
   const dispatch = useDispatch();
@@ -49,50 +50,9 @@ export default function Overview() {
         })}
       </div>
 
-      <div className={styles['content-grid']}>
-        <div className={styles['content-card']}>
-          <div className={styles['card-header']}>
-            <h2>Recent Activity</h2>
-            <button className={styles['text-link']} onClick={() => handleAction('Full activity log')}>View all</button>
-          </div>
-          <div className={styles['activity-list']}>
-            {[
-              { action: 'New project created', project: 'ecommerce-api', time: '2h ago' },
-              { action: 'Database migration completed', project: 'analytics-db', time: '5h ago' },
-              { action: 'Function deployed', project: 'payment-service', time: '1d ago' },
-              { action: 'Storage bucket updated', project: 'media-files', time: '2d ago' },
-            ].map((activity, idx) => (
-              <div key={idx} className={styles['activity-item']}>
-                <div className={styles['activity-dot']}></div>
-                <div className={styles['activity-content']}>
-                  <span className={styles['activity-action']}>{activity.action}</span>
-                  <span className={styles['activity-project']}>{activity.project}</span>
-                </div>
-                <span className={styles['activity-time']}>{activity.time}</span>
-              </div>
-            ))}
-          </div>
-        </div>
 
-        <div className={styles['content-card']}>
-          <div className={styles['card-header']}>
-            <h2>Quick Actions</h2>
-          </div>
-          <div className={styles['quick-actions']}>
-            <button className={styles['action-btn']} onClick={() => handleAction('Create Project')}>
-              <Zap size={18} />
-              <span>Create Project</span>
-            </button>
-            <button className={styles['action-btn']} onClick={() => handleAction('New Database')}>
-              <Database size={18} />
-              <span>New Database</span>
-            </button>
-            <button className={styles['action-btn']} onClick={() => handleAction('View Analytics')}>
-              <TrendingUp size={18} />
-              <span>View Analytics</span>
-            </button>
-          </div>
-        </div>
+      <div style={{ marginTop: '32px' }}>
+        <RequestContributionGraph title="Total API Request Activity" />
       </div>
     </div>
   );

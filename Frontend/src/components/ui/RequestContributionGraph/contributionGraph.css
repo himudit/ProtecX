@@ -1,0 +1,156 @@
+/* 
+   Modern GitHub-style analytical colors.
+   Using CSS variables for easy updates.
+*/
+/* :root {
+    --heatmap-empty: #161b22;
+    --heatmap-level-1: #2d333b;
+    --heatmap-level-2: #484f58;
+    --heatmap-level-3: #6e7681;
+    --heatmap-level-4: #c9d1d9;
+    --heatmap-text: #e6edf3;
+    --heatmap-border: rgba(255, 255, 255, 0.05);
+    --heatmap-tooltip-bg: #0d1117;
+    --heatmap-tooltip-border: #30363d;
+} */
+
+
+:root {
+    /* true black based scale */
+    --heatmap-empty: #0b0b0b;
+    --heatmap-level-1: #1a1a1a;
+    --heatmap-level-2: #2e2e2e;
+    --heatmap-level-3: #4a4a4a;
+    --heatmap-level-4: #7a7a7a;
+
+    --heatmap-text: #e5e5e5;
+    --heatmap-border: rgba(255, 255, 255, 0.06);
+    --heatmap-tooltip-bg: #000000;
+    --heatmap-tooltip-border: #2a2a2a;
+}
+
+.heatmap-container {
+    background: transparent;
+    padding: 24px;
+    border-radius: 12px;
+    color: var(--heatmap-text);
+    width: 100%;
+    overflow-x: auto;
+}
+
+.heatmap-card {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--heatmap-border);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
+}
+
+.heatmap-header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.heatmap-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+}
+
+/* Base styles for heatmap svg */
+.react-calendar-heatmap {
+    user-select: none;
+}
+
+.react-calendar-heatmap text {
+    font-size: 9px;
+    fill: white;
+}
+
+.react-calendar-heatmap .react-calendar-heatmap-small-text {
+    font-size: 5px;
+}
+
+.react-calendar-heatmap rect {
+    rx: 1px;
+    ry: 1px;
+    shape-rendering: crispEdges;
+}
+
+/* .react-calendar-heatmap rect:hover {
+    stroke: rgba(255, 255, 255, 0.8);
+    stroke-width: 0.8px;
+    cursor: pointer;
+} */
+
+/* .react-calendar-heatmap rect {
+    transition: filter 0.15s ease;
+}
+
+.react-calendar-heatmap rect:hover {
+    filter: brightness(1.35);
+    cursor: pointer;
+} */
+
+/* Color levels using CSS variables for both SVG (fill) and DIV (background-color) */
+.color-empty {
+    fill: var(--heatmap-empty);
+    background-color: var(--heatmap-empty) !important;
+}
+
+.color-level-1 {
+    fill: var(--heatmap-level-1);
+    background-color: var(--heatmap-level-1) !important;
+}
+
+.color-level-2 {
+    fill: var(--heatmap-level-2);
+    background-color: var(--heatmap-level-2) !important;
+}
+
+.color-level-3 {
+    fill: var(--heatmap-level-3);
+    background-color: var(--heatmap-level-3) !important;
+}
+
+.color-level-4 {
+    fill: var(--heatmap-level-4);
+    background-color: var(--heatmap-level-4) !important;
+}
+
+/* Legend section */
+.heatmap-legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: white;
+}
+
+.legend-square {
+    width: 11px;
+    height: 11px;
+    border-radius: 1px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Tooltip container style */
+.custom-tooltip {
+    position: absolute;
+    background: #000;
+    color: #fff;
+    padding: 6px 10px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    pointer-events: none;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+}

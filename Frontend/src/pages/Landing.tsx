@@ -171,7 +171,7 @@ export default function Landing() {
                 <img src="/X.png" alt="X" className={styles.logoX} />
               </span>
             </div>
-            <p className={styles['footer-tagline']}>Backend as a Service</p>
+            <p className={styles['footer-tagline']}>Auth as a Service</p>
           </div>
           <div className={styles['footer-links']}>
             <div className={styles['footer-column']}>

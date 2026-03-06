@@ -7,7 +7,7 @@ type Props<T> = {
 };
 
 // SkeletonXTable does not need real data
-export function SkeletonXTable<T>({ columns, rowCount = 4 }: Props<T>) {
+export function SkeletonXTable<T>({ columns, rowCount = 5 }: Props<T>) {
     return (
         <div className={styles.wrapper}>
             {/* Search input skeleton */}

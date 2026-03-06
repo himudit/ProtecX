@@ -283,6 +283,7 @@ export default function ProjectOverview() {
                 </div>
 
             </div>
-        </div>
+
+        </div >
     );
 }

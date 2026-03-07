@@ -4,10 +4,8 @@ import { requestLogger } from '../middlewares/requestLogger.middleware';
 
 const iamRouter = Router();
 
-// Apply requestLogger ONLY to iam routes
 iamRouter.use(requestLogger);
 
-// iam routes (connection for microservice)
 iamRouter.post('/register', gatewayController.gateWayRegister);
 iamRouter.post('/login', gatewayController.gateWayLogin);
 iamRouter.get('/profile', gatewayController.gateWayProfile);

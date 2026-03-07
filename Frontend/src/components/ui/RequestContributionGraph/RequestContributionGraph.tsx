@@ -57,28 +57,30 @@ const RequestContributionGraph: React.FC<Props> = ({
         }).filter(Boolean) as DataPoint[];
     }, [data, selectedYear, startDate]);
 
-    const getClassForValue = (value: DataPoint | undefined) => {
-        if (!value || value.count === 0) return "color-empty";
-        if (value.count <= 10) return "color-level-1";
-        if (value.count <= 30) return "color-level-2";
-        if (value.count <= 60) return "color-level-3";
+    const getClassForValue = (value: any) => {
+        const dataValue = value as DataPoint | undefined;
+        if (!dataValue || dataValue.count === undefined || dataValue.count === 0) return "color-empty";
+        if (dataValue.count <= 10) return "color-level-1";
+        if (dataValue.count <= 30) return "color-level-2";
+        if (dataValue.count <= 60) return "color-level-3";
         return "color-level-4";
     };
 
     const handleMouseOver = (
-        event: React.MouseEvent,
-        value: DataPoint | undefined
+        event: any,
+        value: any
     ) => {
-        if (!value || !tooltipRef.current) return;
+        const dataValue = value as DataPoint | undefined;
+        if (!dataValue || dataValue.count === undefined || !tooltipRef.current) return;
 
         const tooltip = tooltipRef.current;
-        const formattedDate = new Date(value.date).toLocaleDateString('en-US', {
+        const formattedDate = new Date(dataValue.date).toLocaleDateString('en-US', {
             month: 'short',
             day: 'numeric',
             year: 'numeric'
         });
 
-        tooltip.innerText = `${formattedDate} — ${value.count} requests`;
+        tooltip.innerText = `${formattedDate} — ${dataValue.count} requests`;
         tooltip.style.opacity = "1";
         tooltip.style.left = event.pageX + "px";
         tooltip.style.top = event.pageY - 40 + "px";

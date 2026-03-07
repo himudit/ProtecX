@@ -9,7 +9,8 @@ import {
   ChevronRight,
   PanelLeftOpen,
   PanelRightOpen,
-  GripVertical
+  GripVertical,
+  Box
 } from 'lucide-react';
 import styles from './Sidebar.module.css';
 
@@ -22,7 +23,7 @@ export interface NavItem {
 
 const defaultNavItems: NavItem[] = [
   { icon: LayoutDashboard, label: 'Overview', path: '/dashboard/overview' },
-  { icon: FolderKanban, label: 'Projects', path: '/dashboard/projects' },
+  { icon: Box, label: 'Projects', path: '/dashboard/projects' },
   { icon: Settings, label: 'Settings', path: '/dashboard/settings' },
 ];
 

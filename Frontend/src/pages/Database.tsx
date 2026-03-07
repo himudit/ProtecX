@@ -78,7 +78,8 @@ export default function Database() {
             <XTable
               data={users}
               columns={columns}
-              maxHeight="330px"
+              pagination={true}
+              pageSize={5}
               onRowClick={(row) => console.log('Clicked row:', row)}
             />
           )}

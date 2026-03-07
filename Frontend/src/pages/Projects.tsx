@@ -214,6 +214,8 @@ export default function Projects() {
         <XTable
           data={rowData}
           onRowClick={handleRowClick}
+          pagination={true}
+          pageSize={5}
           columns={[
             { key: 'name', label: 'Name' },
             {

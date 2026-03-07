@@ -1,6 +1,7 @@
 .database-page {
   max-width: 1400px;
   margin-left: 1.6rem;
+  /* Removed to align with dashboard grid */
 }
 
 .header-actions {

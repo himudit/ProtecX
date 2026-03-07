@@ -1,14 +1,18 @@
 .projects-page {
   max-width: 1400px;
   padding: 20px 32px;
+  overflow-y: hidden;
+  /* border: 2px solid red; */
+  height: 88vh;
+  /* Removed vertical scrolling as requested */
 }
 
 .page-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  /* margin-bottom: 32px; */
-  /* Standardize with Overview */
+  margin-bottom: 10px;
+  /* Reduced gap to match XTable search bar spacing */
 }
 
 .primary-btn:hover {

@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import styles from './XTable.module.css';
 import type { Column } from './types';
-import { Search, Copy, Check } from 'lucide-react';
+import { Search, Copy, Check, ArrowLeft, ArrowRight } from 'lucide-react';
 
 
 type Props<T> = {
@@ -9,6 +9,8 @@ type Props<T> = {
     columns: Column<T>[];
     onRowClick?: (row: T) => void;
     maxHeight?: string;
+    pagination?: boolean;
+    pageSize?: number;
 };
 
 export function XTable<T extends Record<string, any>>({
@@ -16,11 +18,14 @@ export function XTable<T extends Record<string, any>>({
     columns,
     onRowClick,
     maxHeight,
+    pagination = false,
+    pageSize = 10,
 }: Props<T>) {
     const [search, setSearch] = useState('');
     const [sortBy, setSortBy] = useState<keyof T | null>(null);
     const [reverse, setReverse] = useState(false);
     const [copiedId, setCopiedId] = useState<string | null>(null);
+    const [currentPage, setCurrentPage] = useState(1);
 
     const handleCopy = (e: React.MouseEvent, text: string, id: string) => {
         e.stopPropagation();
@@ -35,16 +40,31 @@ export function XTable<T extends Record<string, any>>({
         )
     );
 
-    const sortedData = [...filteredData].sort((a, b) => {
-        if (!sortBy) return 0;
+    const sortedData = useMemo(() => {
+        return [...filteredData].sort((a, b) => {
+            if (!sortBy) return 0;
 
-        const valA = String(a[sortBy]);
-        const valB = String(b[sortBy]);
+            const valA = String(a[sortBy]);
+            const valB = String(b[sortBy]);
 
-        return reverse
-            ? valB.localeCompare(valA)
-            : valA.localeCompare(valB);
-    });
+            return reverse
+                ? valB.localeCompare(valA)
+                : valA.localeCompare(valB);
+        });
+    }, [filteredData, sortBy, reverse]);
+
+    // Pagination Logic
+    const totalPages = Math.ceil(sortedData.length / pageSize);
+    const paginatedData = useMemo(() => {
+        if (!pagination) return sortedData;
+        const start = (currentPage - 1) * pageSize;
+        return sortedData.slice(start, start + pageSize);
+    }, [sortedData, pagination, currentPage, pageSize]);
+
+    // Reset to page 1 when search or sorting changes
+    useMemo(() => {
+        setCurrentPage(1);
+    }, [search, sortBy, reverse]);
 
     const handleSort = (key: keyof T) => {
         if (sortBy === key) {
@@ -84,14 +104,14 @@ export function XTable<T extends Record<string, any>>({
                     </thead>
 
                     <tbody>
-                        {sortedData.length === 0 ? (
+                        {paginatedData.length === 0 ? (
                             <tr>
                                 <td colSpan={columns.length} className={styles.empty}>
                                     Nothing found
                                 </td>
                             </tr>
                         ) : (
-                            sortedData.map((row, idx) => (
+                            paginatedData.map((row, idx) => (
                                 <tr
                                     key={idx}
                                     onClick={() => onRowClick?.(row)}
@@ -128,6 +148,32 @@ export function XTable<T extends Record<string, any>>({
                     </tbody>
                 </table>
             </div>
+
+            {pagination && totalPages > 0 && (
+                <div className={styles.pagination}>
+                    <button
+                        className={styles['pagination-btn']}
+                        onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                        disabled={currentPage === 1}
+                    >
+                        <ArrowLeft size={16} />
+                        Previous
+                    </button>
+
+                    <div className={styles['page-info']}>
+                        Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong>
+                    </div>
+
+                    <button
+                        className={styles['pagination-btn']}
+                        onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                        disabled={currentPage === totalPages}
+                    >
+                        Next
+                        <ArrowRight size={16} />
+                    </button>
+                </div>
+            )}
         </div>
     );
 }

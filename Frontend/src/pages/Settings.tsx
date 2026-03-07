@@ -1,7 +1,11 @@
 import { User, Bell, CreditCard, Globe } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import type { RootState } from '@/store';
+import { Avatar } from '../components/ui/Avatar/Avatar';
 import styles from './Settings.module.css';
 
 export default function Settings() {
+  const { user } = useSelector((state: RootState) => state.auth);
   const settingsSections = [
     {
       icon: User,
@@ -51,7 +55,11 @@ export default function Settings() {
             <div key={section.title} className={styles['settings-card']}>
               <div className={styles['settings-card-header']}>
                 <div className={styles['settings-icon']}>
-                  <Icon size={20} />
+                  {section.title === 'Profile' ? (
+                    <Avatar name={user?.name || 'User'} src={user?.image} size={40} />
+                  ) : (
+                    <Icon size={20} />
+                  )}
                 </div>
                 <div>
                   <h3 className={styles['settings-title']}>{section.title}</h3>

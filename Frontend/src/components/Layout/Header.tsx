@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { ChevronDown, LogOut } from 'lucide-react';
+import { ChevronDown, LogOut, Settings } from 'lucide-react';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '@/store';
 import { logout } from '../../store/slices/authSlice';
@@ -11,7 +11,7 @@ import { BreadCrumb } from '../ui/BreadCrumb/BreadCrumb';
 export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { user } = useSelector((state: RootState) => state.auth);
+  const { user, isAuthenticated } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -49,31 +49,38 @@ export default function Header() {
         <BreadCrumb />
       </div>
       <div className={styles['header-right']}>
-        <div className={styles['user-menu-container']} ref={dropdownRef}>
-          <div
-            className={styles['user-menu']}
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          >
-            <div className={styles['user-avatar']}>
-              <Avatar name={user?.name || 'User'} src={user?.image} size={24} />
-            </div>
-            <ChevronDown size={16} />
-          </div>
-
-          {isDropdownOpen && (
-            <div className={styles['dropdown-menu']}>
-              <div className={styles['dropdown-header']}>
-                <p className={styles['user-name']}>{user?.name}</p>
-                <p className={styles['user-email']}>{user?.email}</p>
+        {isAuthenticated && (
+          <div className={styles['user-menu-container']} ref={dropdownRef}>
+            <div
+              className={styles['user-menu']}
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <div className={styles['user-avatar']}>
+                <Avatar name={user?.name || 'User'} src={user?.image} size={24} />
               </div>
-              <div className={styles['dropdown-divider']} />
-              <button className={styles['logout-btn']} onClick={handleLogout}>
-                <LogOut size={16} />
-                <span>Logout</span>
-              </button>
+              <ChevronDown size={16} />
             </div>
-          )}
-        </div>
+
+            {isDropdownOpen && (
+              <div className={styles['dropdown-menu']}>
+                <div className={styles['dropdown-header']}>
+                  <div className={styles['header-avatar-row']}>
+                    <Avatar name={user?.name || 'User'} src={user?.image} size={50} />
+                    <div className={styles['header-info']}>
+                      <p className={styles['user-name']}>{user?.name}</p>
+                      <p className={styles['user-email']}>{user?.email}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className={styles['dropdown-divider']} />
+                <button className={styles['logout-btn']} onClick={handleLogout}>
+                  <LogOut size={16} />
+                  <span>Logout</span>
+                </button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </header>
   );

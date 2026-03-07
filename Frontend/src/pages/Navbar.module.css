@@ -229,7 +229,7 @@
     position: absolute;
     top: calc(100% + 12px);
     right: 0;
-    width: 240px;
+    width: 280px;
     background: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -257,6 +257,19 @@
     padding: 12px 16px;
 }
 
+.header-avatar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+}
+
 .user-name {
     color: #fff;
     font-size: 14px;
@@ -268,6 +281,9 @@
     color: rgba(255, 255, 255, 0.5);
     font-size: 12px;
     margin: 4px 0 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .dropdown-divider {
@@ -276,6 +292,7 @@
     margin: 8px 0;
 }
 
+.dropdown-item,
 .logout-btn {
     display: flex;
     align-items: center;
@@ -285,11 +302,23 @@
     background: none;
     border: none;
     border-radius: 8px;
-    color: #ef4444;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.2s;
+}
+
+.dropdown-item {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+.logout-btn {
+    color: #ef4444;
 }
 
 .logout-btn:hover {

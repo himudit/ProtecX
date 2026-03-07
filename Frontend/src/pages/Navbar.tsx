@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowRight, ChevronDown, LogOut, FileText, ListChecks, ListCheck } from "lucide-react";
+import { ArrowRight, ChevronDown, LogOut, FileText, ListChecks, ListCheck, Settings } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from '@/store';
 import { logout } from "../store/slices/authSlice";
@@ -110,8 +110,13 @@ const Navbar = () => {
                             {isDropdownOpen && (
                                 <div className={styles['dropdown-menu']}>
                                     <div className={styles['dropdown-header']}>
-                                        <p className={styles['user-name']}>{user?.name}</p>
-                                        <p className={styles['user-email']}>{user?.email}</p>
+                                        <div className={styles['header-avatar-row']}>
+                                            <Avatar name={user?.name || 'User'} src={user?.image} size={50} />
+                                            <div className={styles['header-info']}>
+                                                <p className={styles['user-name']}>{user?.name}</p>
+                                                <p className={styles['user-email']}>{user?.email}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div className={styles['dropdown-divider']} />
                                     <button className={styles['logout-btn']} onClick={handleLogout}>

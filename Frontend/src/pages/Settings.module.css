@@ -40,6 +40,12 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.settings-icon:has(img) {
+  background-color: transparent;
+  padding: 0;
 }
 
 .settings-title {

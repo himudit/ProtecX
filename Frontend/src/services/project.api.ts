@@ -2,7 +2,7 @@ import type { ProjectResponseDto } from '../modules/project/dto/project-response
 import type { CreateProjectResponseDto } from '../modules/project/dto/create-project-response.dto';
 import type { ProjectMetaResponseDto } from '../modules/projectById/dto/projectMeta-response.dto';
 import type { ProjectUserRowResponseDto } from '../modules/projectUser/dto/projectUserRow-response.dto';
-import type { DailyRequestStat } from '../modules/project/dto/daily-request-stat.dto';
+import type { DashboardStatsResponseDto } from '../modules/project/dto/dashboard-stats.dto';
 import { apiClient } from './base.service';
 import type { ApiResponse } from '../interfaces/api.interface';
 
@@ -37,6 +37,6 @@ export function getProjectLogs(projectId: string) {
     return apiClient<ApiResponse<any[]>>(`/api/projects/${projectId}/logs`);
 }
 
-export function getDailyRequestStats() {
-    return apiClient<ApiResponse<DailyRequestStat[]>>('/api/daily_request_stats');
+export function getDashboardStats() {
+    return apiClient<ApiResponse<DashboardStatsResponseDto>>('/api/dashboard_stats');
 }

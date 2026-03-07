@@ -1,45 +1,52 @@
-import { Activity, Database, Users, Zap, TrendingUp, Server } from 'lucide-react';
+import { Activity, Users, Box } from 'lucide-react';
 import styles from './Overview.module.css';
-import { useDispatch } from 'react-redux';
-import { showToast } from '../store/slices/toastSlice';
 import RequestContributionGraph from '../components/ui/RequestContributionGraph/RequestContributionGraph';
 import { useEffect, useState } from 'react';
-import { getDailyRequestStats } from '../services/project.api';
-import type { DailyRequestStat } from '../modules/project/dto/daily-request-stat.dto';
+import { getDashboardStats } from '../services/project.api';
+import type { DashboardStatsResponseDto } from '../modules/project/dto/dashboard-stats.dto';
+import SkeletonDiv from '../components/ui/Skeleton/SkeletonDiv/SkeletonDiv';
 
 export default function Overview() {
-  const dispatch = useDispatch();
-  const [dailyStats, setDailyStats] = useState<DailyRequestStat[]>([]);
-  const [isLoadingStats, setIsLoadingStats] = useState(true);
+  const [dashboardStats, setDashboardStats] = useState<DashboardStatsResponseDto | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const stats = [
-    { label: 'Total Projects', value: '12', icon: Server, change: '+2 this month', color: '#f97316' },
-    { label: 'API Requests', value: '1.2M', icon: Activity, change: '+12% from last month', color: '#ff8c42' },
-    { label: 'Database Size', value: '45.2 GB', icon: Database, change: '+5.1 GB', color: '#ea580c' },
-    { label: 'Active Users', value: '8,432', icon: Users, change: '+234 this week', color: '#f97316' },
+  const statsList = [
+    {
+      label: 'Total Projects',
+      value: dashboardStats?.totalProjects ?? 0,
+      icon: Box,
+      color: '#141414'
+    },
+    {
+      label: 'API Requests',
+      value: dashboardStats?.totalRequests ?? 0,
+      icon: Activity,
+      color: '#141414'
+    },
+    {
+      label: 'Active Users',
+      value: dashboardStats?.totalUsers ?? 0,
+      icon: Users,
+      color: '#141414'
+    },
   ];
 
   useEffect(() => {
-    const fetchStats = async () => {
+    const fetchDashboardStats = async () => {
       try {
-        setIsLoadingStats(true);
-        const response = await getDailyRequestStats();
+        setIsLoading(true);
+        const response = await getDashboardStats();
         if (response && response.data) {
-          // Convert potentially string/bigint counts to number 
-          const formattedStats = response.data.map(stat => ({
-            ...stat,
-            count: Number(stat.count)
-          }));
-          setDailyStats(formattedStats);
+          setDashboardStats(response.data);
         }
       } catch (error) {
-        console.error('Error fetching daily request stats:', error);
+        console.error('Error fetching dashboard stats:', error);
       } finally {
-        setIsLoadingStats(false);
+        setIsLoading(false);
       }
     };
 
-    fetchStats();
+    fetchDashboardStats();
   }, []);
 
   return (
@@ -52,34 +59,56 @@ export default function Overview() {
       </div>
 
       <div className={styles['stats-grid']}>
-        {stats.map((stat) => {
-          const Icon = stat.icon;
-          return (
-            <div key={stat.label} className={styles['stat-card']}>
-              <div className={styles['stat-header']}>
-                <div className={styles['stat-icon']} style={{ backgroundColor: `${stat.color}20`, color: stat.color }}>
-                  <Icon size={20} />
+        {isLoading ? (
+          Array.from({ length: 3 }).map((_, idx) => (
+            <div key={idx} className={styles['stat-card']}>
+              <div className={styles['stat-header']} style={{ alignItems: 'center', justifyContent: 'flex-start', gap: '20px' }}>
+                <SkeletonDiv width="64px" height="64px" borderRadius="12px" />
+                <div className={styles['stat-content']}>
+                  <SkeletonDiv width="80px" height="28px" style={{ marginBottom: '8px' }} />
+                  <SkeletonDiv width="60px" height="16px" />
                 </div>
-                <span className={styles['stat-change']}>{stat.change}</span>
-              </div>
-              <div className={styles['stat-content']}>
-                <h3 className={styles['stat-value']}>{stat.value}</h3>
-                <p className={styles['stat-label']}>{stat.label}</p>
               </div>
             </div>
-          );
-        })}
+          ))
+        ) : (
+          statsList.map((stat) => {
+            const Icon = stat.icon;
+            return (
+              <div key={stat.label} className={styles['stat-card']}>
+                <div className={styles['stat-header']} style={{ alignItems: 'center', justifyContent: 'flex-start', gap: '20px' }}>
+                  <div className={styles['stat-icon']} style={{
+                    backgroundColor: `${stat.color}`,
+                    color: 'white',
+                    width: '64px',
+                    height: '64px',
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0
+                  }}>
+                    <Icon size={32} />
+                  </div>
+                  <div className={styles['stat-content']}>
+                    <h3 className={styles['stat-value']} style={{ fontSize: '24px', margin: 0 }}>{stat.value.toLocaleString()}</h3>
+                    <p className={styles['stat-label']} style={{ margin: 0, opacity: 0.7 }}>{stat.label}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        )}
       </div>
 
 
-      {!isLoadingStats && (
-        <div style={{ marginTop: '32px' }}>
-          <RequestContributionGraph
-            title="Total API Request Activity"
-            data={dailyStats}
-          />
-        </div>
-      )}
+      <div style={{ marginTop: '32px' }}>
+        <RequestContributionGraph
+          title="Total API Request Activity"
+          data={dashboardStats?.dailyRequestStats || []}
+          isLoading={isLoading}
+        />
+      </div>
     </div>
   );
 }

@@ -104,6 +104,7 @@ model ProjectUser {
   lastLoginAt DateTime?
 
   @@unique([projectId, email])
+  @@index([providerId])
 }
 
 model Logs {
@@ -121,6 +122,7 @@ model Logs {
 
   createdAt DateTime @default(now())
 
+  @@index([projectId])
   @@index([projectId, createdAt])
 }
 

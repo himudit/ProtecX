@@ -166,7 +166,8 @@ export default function ProjectOverview() {
                             ) : (
                                 <>
                                     <div className={styles['user-avatar']}>
-                                        <Avatar name={user?.name || 'Owner'} src={user?.image} size={24} />
+                                        <Avatar name={user?.name || 'Owner'} src={user?.image} size={30} />
+
                                     </div>
                                     <div className={styles['user-name']}>
                                         {user?.name || 'Owner'}

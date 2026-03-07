@@ -134,16 +134,16 @@
     flex-direction: column;
     align-items: center;
     gap: 16px;
-    color: #f97316;
+    color: rgba(255, 255, 255, 0.6);
     height: 57vh;
 }
 
 .loader {
     width: 32px;
     height: 32px;
-    border: 3px solid rgba(249, 115, 22, 0.1);
+    border: 3px solid rgba(255, 255, 255, 0.1);
     border-radius: 50%;
-    border-top-color: #f97316;
+    border-top-color: #ffffff;
     animation: spin 1s linear infinite;
 }
 

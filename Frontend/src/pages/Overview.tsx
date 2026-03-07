@@ -3,9 +3,14 @@ import styles from './Overview.module.css';
 import { useDispatch } from 'react-redux';
 import { showToast } from '../store/slices/toastSlice';
 import RequestContributionGraph from '../components/ui/RequestContributionGraph/RequestContributionGraph';
+import { useEffect, useState } from 'react';
+import { getDailyRequestStats } from '../services/project.api';
+import type { DailyRequestStat } from '../modules/project/dto/daily-request-stat.dto';
 
 export default function Overview() {
   const dispatch = useDispatch();
+  const [dailyStats, setDailyStats] = useState<DailyRequestStat[]>([]);
+  const [isLoadingStats, setIsLoadingStats] = useState(true);
 
   const stats = [
     { label: 'Total Projects', value: '12', icon: Server, change: '+2 this month', color: '#f97316' },
@@ -14,12 +19,28 @@ export default function Overview() {
     { label: 'Active Users', value: '8,432', icon: Users, change: '+234 this week', color: '#f97316' },
   ];
 
-  const handleAction = (message: string) => {
-    dispatch(showToast({ message: `${message} feature coming soon!`, type: 'loading' }));
-    setTimeout(() => {
-      dispatch(showToast({ message: `${message} initiated!`, type: 'success' }));
-    }, 1500);
-  };
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        setIsLoadingStats(true);
+        const response = await getDailyRequestStats();
+        if (response && response.data) {
+          // Convert potentially string/bigint counts to number 
+          const formattedStats = response.data.map(stat => ({
+            ...stat,
+            count: Number(stat.count)
+          }));
+          setDailyStats(formattedStats);
+        }
+      } catch (error) {
+        console.error('Error fetching daily request stats:', error);
+      } finally {
+        setIsLoadingStats(false);
+      }
+    };
+
+    fetchStats();
+  }, []);
 
   return (
     <div className={styles['overview-page']}>
@@ -51,9 +72,14 @@ export default function Overview() {
       </div>
 
 
-      <div style={{ marginTop: '32px' }}>
-        <RequestContributionGraph title="Total API Request Activity" />
-      </div>
+      {!isLoadingStats && (
+        <div style={{ marginTop: '32px' }}>
+          <RequestContributionGraph
+            title="Total API Request Activity"
+            data={dailyStats}
+          />
+        </div>
+      )}
     </div>
   );
 }

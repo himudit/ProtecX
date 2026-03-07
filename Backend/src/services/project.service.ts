@@ -1,10 +1,11 @@
 import { prisma } from '../config/prisma';
-import { CreateProjectDto, ProjectResponseDto, ApiKeyCreateResponseDto, JwtKeyResponseDto, CreateProjectResponseDto, ProjectMetaResponseDto, ApiKeyResponseDto, ProjectUserRowResponseDto } from '../interfaces/project.interface';
+import { CreateProjectDto, ProjectResponseDto, ApiKeyCreateResponseDto, JwtKeyResponseDto, CreateProjectResponseDto, ProjectMetaResponseDto, ApiKeyResponseDto, ProjectUserRowResponseDto, DailyRequestStat } from '../interfaces/project.interface';
 import * as projectApiKeyService from './projectApiKey.service';
 import * as projectJwtKeyService from './projectJwtKey.service';
 import { ApiEnvironment } from '../enums/api-environment.enum';
 import { env } from '../config/env';
 import { ProjectStatus } from '@prisma/client';
+import { Prisma } from "@prisma/client";
 
 export const createProject = async (
   userId: string,
@@ -230,4 +231,34 @@ export const getProjectLogs = async (userId: string, projectId: string): Promise
   });
 
   return logs;
+};
+
+export const getDailyRequestStats = async (userId: string): Promise<DailyRequestStat[]> => {
+  const projects = await prisma.project.findMany({
+    where: {
+      ownerId: userId,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  const projectIds = projects.map((p) => p.id);
+
+  if (projectIds.length === 0) {
+    return [];
+  }
+
+  const dailyRequestStats = await prisma.$queryRaw<DailyRequestStat[]>`
+    SELECT to_char("createdAt", 'YYYY-MM-DD') as date, COUNT(*) as count
+    FROM "Logs"
+    WHERE "projectId" IN (${Prisma.join(projectIds)})
+    GROUP BY to_char("createdAt", 'YYYY-MM-DD')
+    ORDER BY date ASC
+  `;
+
+  return dailyRequestStats.map((stat) => ({
+    ...stat,
+    count: Number(stat.count),
+  }));
 };

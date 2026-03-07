@@ -27,6 +27,8 @@ router.get('/projects', authMiddleware, projectController.getProjects);
 router.get('/projects/users/:projectId', authMiddleware, projectController.getProjectUsers);
 router.get('/projects/:projectId', authMiddleware, projectController.getProjectById);
 router.get('/projects/:projectId/logs', authMiddleware, projectController.getProjectLogs);
+router.get('/daily_request_stats', authMiddleware, projectController.getDailyRequestStats);
+
 
 
 export default router;

@@ -63,3 +63,8 @@ export interface ProjectUserRowResponseDto {
     createdAt: string;
     lastLoginAt: string;
 }
+
+export interface DailyRequestStat {
+    date: string;
+    count: number;
+}

@@ -1,7 +1,7 @@
 import { Response, NextFunction } from 'express';
 import * as projectService from '../services/project.service';
 import { AuthRequest } from '../interfaces/auth-request.interface';
-import { CreateProjectDto, CreateProjectResponseDto, ProjectMetaResponseDto, ProjectResponseDto } from '../interfaces/project.interface';
+import { CreateProjectDto, CreateProjectResponseDto, ProjectMetaResponseDto, ProjectResponseDto, DailyRequestStat } from '../interfaces/project.interface';
 import { ApiResponse } from '../interfaces/api-request.interface';
 
 export const createProject = async (
@@ -164,6 +164,32 @@ export const getProjectLogs = async (
       success: true,
       message: 'Project logs retrieved successfully',
       data: logs,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getDailyRequestStats = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const userId = req.userId;
+
+    if (!userId) {
+      const error = new Error('User ID is missing');
+      (error as any).statusCode = 401;
+      throw error;
+    }
+
+    const dailyRequestStats: DailyRequestStat[] = await projectService.getDailyRequestStats(userId as string);
+
+    res.status(200).json({
+      success: true,
+      message: 'Daily request stats retrieved successfully',
+      data: dailyRequestStats,
     });
   } catch (error) {
     next(error);

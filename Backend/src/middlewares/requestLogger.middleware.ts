@@ -12,7 +12,6 @@ export const requestLogger = (
 
     const originalJson = res.json;
 
-    // Capture response body
     res.json = function (body: any) {
         res.locals.responseBody = body;
         return originalJson.call(this, body);
@@ -36,10 +35,8 @@ export const requestLogger = (
         };
 
         try {
-            // Fire-and-forget
             await publish(QUEUES.API_LOGS, logEvent);
         } catch (err) {
-            // Logging failure should NEVER crash main app
             console.error('Failed to publish log event:', err);
         }
     });

@@ -1,7 +1,7 @@
 import { Response, NextFunction } from 'express';
 import * as projectService from '../services/project.service';
 import { AuthRequest } from '../interfaces/auth-request.interface';
-import { CreateProjectDto, CreateProjectResponseDto, ProjectMetaResponseDto, ProjectResponseDto, DailyRequestStat } from '../interfaces/project.interface';
+import { CreateProjectDto, CreateProjectResponseDto, ProjectMetaResponseDto, ProjectResponseDto, DailyRequestStat, DashboardStatsResponseDto } from '../interfaces/project.interface';
 import { ApiResponse } from '../interfaces/api-request.interface';
 
 export const createProject = async (
@@ -170,7 +170,7 @@ export const getProjectLogs = async (
   }
 };
 
-export const getDailyRequestStats = async (
+export const getDashboardStats = async (
   req: AuthRequest,
   res: Response,
   next: NextFunction
@@ -184,12 +184,12 @@ export const getDailyRequestStats = async (
       throw error;
     }
 
-    const dailyRequestStats: DailyRequestStat[] = await projectService.getDailyRequestStats(userId as string);
+    const dashboardStats: DashboardStatsResponseDto = await projectService.getDashboardStats(userId as string);
 
     res.status(200).json({
       success: true,
-      message: 'Daily request stats retrieved successfully',
-      data: dailyRequestStats,
+      message: 'Dashboard stats retrieved successfully',
+      data: dashboardStats,
     });
   } catch (error) {
     next(error);

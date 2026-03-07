@@ -1,5 +1,5 @@
 import { prisma } from '../config/prisma';
-import { CreateProjectDto, ProjectResponseDto, ApiKeyCreateResponseDto, JwtKeyResponseDto, CreateProjectResponseDto, ProjectMetaResponseDto, ApiKeyResponseDto, ProjectUserRowResponseDto, DailyRequestStat } from '../interfaces/project.interface';
+import { CreateProjectDto, ProjectResponseDto, ApiKeyCreateResponseDto, JwtKeyResponseDto, CreateProjectResponseDto, ProjectMetaResponseDto, ApiKeyResponseDto, ProjectUserRowResponseDto, DailyRequestStat, DashboardStatsResponseDto } from '../interfaces/project.interface';
 import * as projectApiKeyService from './projectApiKey.service';
 import * as projectJwtKeyService from './projectJwtKey.service';
 import { ApiEnvironment } from '../enums/api-environment.enum';
@@ -202,7 +202,6 @@ export const getProjectUsers = async (userId: string, projectId: string): Promis
   const projectUsers = await prisma.projectUser.findMany({
     where: {
       providerId: userId,
-      projectId: projectId,
     },
     orderBy: {
       createdAt: 'desc',
@@ -233,7 +232,7 @@ export const getProjectLogs = async (userId: string, projectId: string): Promise
   return logs;
 };
 
-export const getDailyRequestStats = async (userId: string): Promise<DailyRequestStat[]> => {
+export const getDashboardStats = async (userId: string): Promise<DashboardStatsResponseDto> => {
   const projects = await prisma.project.findMany({
     where: {
       ownerId: userId,
@@ -243,13 +242,27 @@ export const getDailyRequestStats = async (userId: string): Promise<DailyRequest
     },
   });
 
+  const totalProjects = projects.length;
   const projectIds = projects.map((p) => p.id);
 
   if (projectIds.length === 0) {
-    return [];
+    return {
+      totalProjects: 0,
+      totalUsers: 0,
+      totalRequests: 0,
+      dailyRequestStats: [],
+    };
   }
 
-  const dailyRequestStats = await prisma.$queryRaw<DailyRequestStat[]>`
+  const totalUsers = await prisma.projectUser.count({
+    where: { providerId: userId },
+  });
+
+  const totalRequests = await prisma.logs.count({
+    where: { projectId: { in: projectIds } }
+  });
+
+  const dailyRequestStatsRaw = await prisma.$queryRaw<DailyRequestStat[]>`
     SELECT to_char("createdAt", 'YYYY-MM-DD') as date, COUNT(*) as count
     FROM "Logs"
     WHERE "projectId" IN (${Prisma.join(projectIds)})
@@ -257,8 +270,15 @@ export const getDailyRequestStats = async (userId: string): Promise<DailyRequest
     ORDER BY date ASC
   `;
 
-  return dailyRequestStats.map((stat) => ({
+  const dailyRequestStats = dailyRequestStatsRaw.map((stat) => ({
     ...stat,
     count: Number(stat.count),
   }));
+
+  return {
+    totalProjects,
+    totalUsers,
+    totalRequests,
+    dailyRequestStats,
+  };
 };

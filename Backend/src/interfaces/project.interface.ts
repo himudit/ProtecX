@@ -64,6 +64,14 @@ export interface ProjectUserRowResponseDto {
     lastLoginAt: string;
 }
 
+
+export interface DashboardStatsResponseDto {
+    totalProjects: number;
+    totalUsers: number;
+    totalRequests: number;
+    dailyRequestStats: DailyRequestStat[];
+}
+
 export interface DailyRequestStat {
     date: string;
     count: number;

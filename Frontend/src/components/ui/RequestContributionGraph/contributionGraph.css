@@ -16,17 +16,17 @@
 
 
 :root {
-    /* true black based scale */
-    --heatmap-empty: #0b0b0b;
-    --heatmap-level-1: #1a1a1a;
-    --heatmap-level-2: #2e2e2e;
-    --heatmap-level-3: #4a4a4a;
-    --heatmap-level-4: #7a7a7a;
+    /* More visible and vibrant orange-based scale */
+    --heatmap-empty: #1c1c1c;
+    --heatmap-level-1: #452100;
+    --heatmap-level-2: #854100;
+    --heatmap-level-3: #c25e00;
+    --heatmap-level-4: #f97316;
 
     --heatmap-text: #e5e5e5;
-    --heatmap-border: rgba(255, 255, 255, 0.06);
-    --heatmap-tooltip-bg: #000000;
-    --heatmap-tooltip-border: #2a2a2a;
+    --heatmap-border: rgba(255, 255, 255, 0.08);
+    --heatmap-tooltip-bg: #0a0a0a;
+    --heatmap-tooltip-border: #333;
 }
 
 .heatmap-container {
@@ -58,6 +58,16 @@
     font-size: 16px;
     font-weight: 600;
     color: white;
+}
+
+.heatmap-years {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Base styles for heatmap svg */

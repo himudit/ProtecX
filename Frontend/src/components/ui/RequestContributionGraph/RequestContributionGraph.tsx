@@ -166,6 +166,9 @@ const RequestContributionGraph: React.FC<Props> = ({
     const lastYear = new Date();
     lastYear.setFullYear(today.getFullYear() - 1);
 
+    const startYear = lastYear.getFullYear();
+    const endYear = today.getFullYear();
+
     // dummy data if none provided
     const values: DataPoint[] =
         data.length > 0
@@ -194,11 +197,16 @@ const RequestContributionGraph: React.FC<Props> = ({
         if (!value || !tooltipRef.current) return;
 
         const tooltip = tooltipRef.current;
+        const formattedDate = new Date(value.date).toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+        });
 
-        tooltip.innerText = `${value.date} — ${value.count} requests`;
+        tooltip.innerText = `${formattedDate} — ${value.count} requests`;
         tooltip.style.opacity = "1";
         tooltip.style.left = event.pageX + "px";
-        tooltip.style.top = event.pageY - 35 + "px";
+        tooltip.style.top = event.pageY - 40 + "px";
     };
 
     const handleMouseLeave = () => {
@@ -212,6 +220,9 @@ const RequestContributionGraph: React.FC<Props> = ({
             <div className="heatmap-card">
                 <div className="heatmap-header">
                     <span className="heatmap-title">{title}</span>
+                    <span className="heatmap-years">
+                        {startYear === endYear ? startYear : `${startYear} - ${endYear}`}
+                    </span>
                 </div>
 
                 <CalendarHeatmap

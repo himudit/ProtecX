@@ -145,6 +145,11 @@ export default function Projects() {
                   setName(e.target.value);
                   if (nameError) setNameError('');
                 }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !isCreating) {
+                    handleCreateProject();
+                  }
+                }}
               />
               {nameError && <span className={styles['error-message']}>{nameError}</span>}
             </div>
@@ -156,6 +161,12 @@ export default function Projects() {
                 placeholder="Briefly describe your project..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !isCreating) {
+                    e.preventDefault(); // Prevent new line in textarea since we are submitting
+                    handleCreateProject();
+                  }
+                }}
               />
             </div>
 
@@ -212,7 +223,15 @@ export default function Projects() {
             },
             { key: 'storage', label: 'Storage' },
             { key: 'lastActive', label: 'Last Active' },
-            { key: 'status', label: 'Status' },
+            {
+              key: 'status',
+              label: 'Status',
+              render: (value) => (
+                <span className={`${styles['status-badge']} ${value === 'ACTIVE' ? styles['status-active'] : styles['status-inactive']}`}>
+                  {value}
+                </span>
+              )
+            },
           ]}
         />
       )}

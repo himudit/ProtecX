@@ -69,7 +69,7 @@ export function XTable<T extends Record<string, any>>({
 
             <div
                 className={styles['table-container']}
-                style={{ maxHeight: maxHeight || '400px' }}
+                style={{ maxHeight: maxHeight }}
             >
                 <table className={styles.table}>
                     <thead>

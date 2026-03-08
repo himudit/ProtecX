@@ -1,6 +1,6 @@
 # Shield - Auth as a Service Dashboard
 
-A modern, Supabase-inspired dashboard UI for managing backend services. Shield provides a beautiful and intuitive interface for outsourcing backend functionality.
+A modern, dashboard UI for managing backend services. Shield provides a beautiful and intuitive interface for outsourcing backend functionality.
 
 ## Features
 

@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 import { AuthRequest } from '../interfaces/auth-request.interface';
 import { validateApiKey } from '../helpers/gatewayHelper';
 import { env } from '../config/env';
+import { iamClient } from '../grpc';
+import { createMetadata } from '../grpc/utils/createMetadata';
 
 export const gateWayRegister = async (
     req: AuthRequest,
@@ -9,8 +11,15 @@ export const gateWayRegister = async (
     next: NextFunction
 ) => {
     try {
-        const projectId = req.headers['x-project-id'];
-        const apiKey = req.headers['x-api-key'];
+        // const projectId = req.headers['x-project-id'];
+        // const apiKey = req.headers['x-api-key'];
+        const projectId = Array.isArray(req.headers['x-project-id'])
+            ? req.headers['x-project-id'][0]
+            : req.headers['x-project-id'];
+
+        const apiKey = Array.isArray(req.headers['x-api-key'])
+            ? req.headers['x-api-key'][0]
+            : req.headers['x-api-key'];
         const { email, password, name } = req.body;
 
         if (!apiKey || !projectId) {
@@ -37,32 +46,27 @@ export const gateWayRegister = async (
                 },
             });
         }
-
-        const response = await fetch(`${env.AUTH_MICROSERVICE}/iam/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-project-id': projectId as string,
-                'x-provider-id': userId as string,
-            },
-            body: JSON.stringify({ email, password, name }),
+        const metadata = createMetadata({
+            projectId,
+            providerId: userId
         });
 
-        let data: any = null;
-        try {
-            data = await response.json();
-        } catch {
-            data = null;
-        }
-
-        // 🔑 Normalize EVERYTHING
-        if (!response.ok) {
-            return res.status(response.status).json({
-                success: false,
-                message: data?.message || 'Signup failed',
-                data: data,
-            });
-        }
+        const data: any = await new Promise((resolve, reject) => {
+            iamClient.RegisterUser(
+                {
+                    name,
+                    email,
+                    password,
+                },
+                metadata,
+                (err: any, response: any) => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    resolve(response);
+                }
+            );
+        });
 
         return res.status(201).json({
             success: true,
@@ -70,10 +74,22 @@ export const gateWayRegister = async (
             data: data,
         });
     } catch (error: any) {
-        return res.status(500).json({
+
+        const grpcToHttp: any = {
+            3: 400,
+            5: 404,
+            6: 409,
+            7: 403,
+            16: 401,
+            13: 500,
+        };
+
+        const status = grpcToHttp[error.code] || 500;
+
+        return res.status(status).json({
             success: false,
-            message: 'Gateway error',
-            data: error?.message || null,
+            message: error.message || "Gateway error",
+            data: null,
         });
     }
 };

@@ -1,0 +1,3 @@
+[submodule "Backend/proto"]
+	path = Backend/proto
+	url = https://github.com/himudit/ProtecX-auth-Proto

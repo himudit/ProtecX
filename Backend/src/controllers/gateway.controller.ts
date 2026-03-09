@@ -3,7 +3,7 @@ import { AuthRequest } from '../interfaces/auth-request.interface';
 import { validateApiKey } from '../helpers/gatewayHelper';
 import { env } from '../config/env';
 import { iamClient } from '../grpc';
-import { createMetadata } from '../grpc/utils/createMetadata';
+import { createMetadata, getClientIp } from '../grpc/utils/createMetadata';
 
 export const gateWayRegister = async (
     req: AuthRequest,
@@ -48,7 +48,8 @@ export const gateWayRegister = async (
         }
         const metadata = createMetadata({
             projectId,
-            providerId: userId
+            providerId: userId,
+            ip: getClientIp(req)
         });
 
         const data: any = await new Promise((resolve, reject) => {
@@ -135,6 +136,8 @@ export const gateWayLogin = async (
                 'Content-Type': 'application/json',
                 'x-project-id': projectId as string,
                 'x-provider-id': userId as string,
+                'x-forwarded-for': getClientIp(req),
+                'x-real-ip': getClientIp(req),
             },
             body: JSON.stringify({ email, password }),
         });
@@ -219,6 +222,8 @@ export const gateWayRefresh = async (
                 'Content-Type': 'application/json',
                 'x-project-id': projectId as string,
                 'x-provider-id': userId as string,
+                'x-forwarded-for': getClientIp(req),
+                'x-real-ip': getClientIp(req),
             },
             body: JSON.stringify({ refreshToken }),
         });
@@ -304,6 +309,8 @@ export const gateWayLogout = async (
                 'Authorization': authHeader as string,
                 'x-project-id': projectId as string,
                 'x-provider-id': userId as string,
+                'x-forwarded-for': getClientIp(req),
+                'x-real-ip': getClientIp(req),
             },
         });
 
@@ -387,6 +394,8 @@ export const gateWayProfile = async (
                 'Authorization': authHeader,
                 'x-project-id': projectId as string,
                 'x-provider-id': userId as string,
+                'x-forwarded-for': getClientIp(req),
+                'x-real-ip': getClientIp(req),
             },
         });
 

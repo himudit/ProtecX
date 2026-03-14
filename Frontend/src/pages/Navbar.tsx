@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowRight, ChevronDown, LogOut, FileText, ListChecks, ListCheck, Settings } from "lucide-react";
+import { ArrowRight, ChevronDown, LogOut, FileText, ListChecks, ListCheck, Settings, Menu, X } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from '@/store';
 import { logout } from "../store/slices/authSlice";
@@ -12,6 +12,7 @@ import { initLenis, getLenis } from "../utils/lenis";
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -128,7 +129,57 @@ const Navbar = () => {
                         </div>
                     )}
                 </div>
+                {/* Mobile Menu Toggle */}
+                <button 
+                    className={styles['mobile-menu-btn']} 
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                >
+                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
             </div>
+
+            {/* Mobile Menu Overlay */}
+            {isMobileMenuOpen && (
+                <div className={styles['mobile-menu']}>
+                    <div className={styles['mobile-nav-links']}>
+                        <Link to="/docs/features" className={styles['mobile-nav-link']} onClick={() => setIsMobileMenuOpen(false)}>
+                            <ListChecks size={20} />
+                            Features
+                        </Link>
+                        <Link to="/docs/overview" className={styles['mobile-nav-link']} onClick={() => setIsMobileMenuOpen(false)}>
+                            <FileText size={20} />
+                            Docs
+                        </Link>
+                    </div>
+                    
+                    <div className={styles['mobile-nav-actions']}>
+                        {!isAuthenticated ? (
+                            <>
+                                <Link to="/login" className={styles['mobile-link-btn']} onClick={() => setIsMobileMenuOpen(false)}>
+                                    Sign In
+                                </Link>
+                                <Link to="/signup" className={styles['mobile-primary-btn']} onClick={() => setIsMobileMenuOpen(false)}>
+                                    Quick Start
+                                </Link>
+                            </>
+                        ) : (
+                            <div className={styles['mobile-user-section']}>
+                                <div className={styles['mobile-user-info']}>
+                                    <Avatar name={user?.name || 'User'} src={user?.image} size={44} />
+                                    <div className={styles['header-info']}>
+                                        <p className={styles['user-name']}>{user?.name}</p>
+                                        <p className={styles['user-email']}>{user?.email}</p>
+                                    </div>
+                                </div>
+                                <button className={styles['mobile-logout-btn']} onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }}>
+                                    <LogOut size={20} />
+                                    <span>Logout</span>
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
         </nav>
     );
 };

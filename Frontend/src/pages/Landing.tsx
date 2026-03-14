@@ -1,5 +1,6 @@
 import Navbar from './Navbar';
 import styles from './Landing.module.css';
+import FAQ from '../components/FAQ/FAQ';
 
 import { ArrowRight, Database, Lock, HardDrive, Code, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -146,6 +147,9 @@ export default function Landing() {
           </div>
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <FAQ />
 
       {/* CTA Section */}
       <section className={styles['cta-section']}>

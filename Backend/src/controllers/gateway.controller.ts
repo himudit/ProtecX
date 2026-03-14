@@ -11,8 +11,6 @@ export const gateWayRegister = async (
     next: NextFunction
 ) => {
     try {
-        // const projectId = req.headers['x-project-id'];
-        // const apiKey = req.headers['x-api-key'];
         const projectId = Array.isArray(req.headers['x-project-id'])
             ? req.headers['x-project-id'][0]
             : req.headers['x-project-id'];
@@ -101,8 +99,13 @@ export const gateWayLogin = async (
     next: NextFunction
 ) => {
     try {
-        const projectId = req.headers['x-project-id'];
-        const apiKey = req.headers['x-api-key'];
+        const projectId = Array.isArray(req.headers['x-project-id'])
+            ? req.headers['x-project-id'][0]
+            : req.headers['x-project-id'];
+
+        const apiKey = Array.isArray(req.headers['x-api-key'])
+            ? req.headers['x-api-key'][0]
+            : req.headers['x-api-key'];
         const { email, password } = req.body;
 
         if (!apiKey || !projectId) {
@@ -130,37 +133,29 @@ export const gateWayLogin = async (
             });
         }
 
-        const response = await fetch(`${env.AUTH_MICROSERVICE}/iam/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-project-id': projectId as string,
-                'x-provider-id': userId as string,
-                'x-forwarded-for': getClientIp(req),
-                'x-real-ip': getClientIp(req),
-            },
-            body: JSON.stringify({ email, password }),
+        // ---------- Login ----------
+        const loginMetadata = createMetadata({
+            projectId,
+            providerId: userId,
+            ip: getClientIp(req),
         });
+        
 
-        let data: any = null;
-        try {
-            data = await response.json();
-        } catch {
-            data = null;
-        }
-
-        if (!response.ok) {
-            return res.status(response.status).json({
-                success: false,
-                message: data?.message || 'Login failed',
-                data: data,
-            });
-        }
+        const loginData: any = await new Promise((resolve, reject) => {
+            iamClient.LoginUser(
+                { email, password },
+                loginMetadata,
+                (err: any, response: any) => {
+                    if (err) return reject(err);
+                    resolve(response);
+                }
+            );
+        });
 
         return res.status(200).json({
             success: true,
             message: 'Login successful',
-            data: data,
+            data: loginData,
         });
     } catch (error: any) {
         return res.status(500).json({
@@ -216,37 +211,28 @@ export const gateWayRefresh = async (
             });
         }
 
-        const response = await fetch(`${env.AUTH_MICROSERVICE}/iam/refresh`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-project-id': projectId as string,
-                'x-provider-id': userId as string,
-                'x-forwarded-for': getClientIp(req),
-                'x-real-ip': getClientIp(req),
-            },
-            body: JSON.stringify({ refreshToken }),
+        // ---------- Refresh Session ----------
+        const refreshMetadata = createMetadata({
+            projectId,
+            providerId: userId,
+            ip: getClientIp(req),
         });
 
-        let data: any = null;
-        try {
-            data = await response.json();
-        } catch {
-            data = null;
-        }
-
-        if (!response.ok) {
-            return res.status(response.status).json({
-                success: false,
-                message: data?.message || 'Session expired',
-                data: data,
-            });
-        }
+        const refreshData: any = await new Promise((resolve, reject) => {
+            iamClient.RefreshSession(
+                { refreshToken },
+                refreshMetadata,
+                (err: any, response: any) => {
+                    if (err) return reject(err);
+                    resolve(response);
+                }
+            );
+        });
 
         return res.status(200).json({
             success: true,
             message: 'Session refreshed',
-            data: data,
+            data: refreshData,
         });
     } catch (error: any) {
         return res.status(500).json({
@@ -302,37 +288,30 @@ export const gateWayLogout = async (
             });
         }
 
-        const response = await fetch(`${env.AUTH_MICROSERVICE}/iam/logout`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': authHeader as string,
-                'x-project-id': projectId as string,
-                'x-provider-id': userId as string,
-                'x-forwarded-for': getClientIp(req),
-                'x-real-ip': getClientIp(req),
-            },
+        // ---------- Logout ----------
+        const logoutMetadata = createMetadata({
+            projectId,
+            providerId: userId,
+            ip: getClientIp(req),
         });
+        // Add Authorization token to metadata
+        if (authHeader) logoutMetadata.add('authorization', authHeader as string);
 
-        let data: any = null;
-        try {
-            data = await response.json();
-        } catch {
-            data = null;
-        }
-
-        if (!response.ok) {
-            return res.status(response.status).json({
-                success: false,
-                message: data?.message || 'Logout failed',
-                data: data,
-            });
-        }
+        const logoutData: any = await new Promise((resolve, reject) => {
+            iamClient.LogoutUser(
+                {},
+                logoutMetadata,
+                (err: any, response: any) => {
+                    if (err) return reject(err);
+                    resolve(response);
+                }
+            );
+        });
 
         return res.status(200).json({
             success: true,
             message: 'Logout successful',
-            data: data,
+            data: logoutData,
         });
     } catch (error: any) {
         return res.status(500).json({
@@ -388,36 +367,29 @@ export const gateWayProfile = async (
             });
         }
 
-        const response = await fetch(`${env.AUTH_MICROSERVICE}/iam/profile`, {
-            method: 'GET',
-            headers: {
-                'Authorization': authHeader,
-                'x-project-id': projectId as string,
-                'x-provider-id': userId as string,
-                'x-forwarded-for': getClientIp(req),
-                'x-real-ip': getClientIp(req),
-            },
+        // ---------- Get Profile ----------
+        const profileMetadata = createMetadata({
+            projectId,
+            providerId: userId,
+            ip: getClientIp(req),
         });
+        if (authHeader) profileMetadata.add('authorization', authHeader as string);
 
-        let data: any = null;
-        try {
-            data = await response.json();
-        } catch {
-            data = null;
-        }
-
-        if (!response.ok) {
-            return res.status(response.status).json({
-                success: false,
-                message: data?.message || 'Profile retrieval failed',
-                data: data,
-            });
-        }
+        const profileData: any = await new Promise((resolve, reject) => {
+            iamClient.GetProfile(
+                {},
+                profileMetadata,
+                (err: any, response: any) => {
+                    if (err) return reject(err);
+                    resolve(response);
+                }
+            );
+        });
 
         return res.status(200).json({
             success: true,
             message: 'Profile retrieved successfully',
-            data: data,
+            data: profileData,
         });
     } catch (error: any) {
         return res.status(500).json({

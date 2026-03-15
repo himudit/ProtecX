@@ -1,0 +1,166 @@
+.miniQuickstartSection {
+    position: relative;
+    z-index: 10;
+    padding: 100px 48px;
+    background-color: transparent;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    max-width: 1100px;
+    width: 100%;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.title {
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    color: #ffffff;
+}
+
+.subtitle {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.6;
+}
+
+.stepsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 120px;
+    position: relative;
+}
+
+.stepsContainer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom,
+            transparent 0%,
+            rgba(249, 115, 22, 0.4) 10%,
+            rgba(249, 115, 22, 0.4) 90%,
+            transparent 100%);
+    z-index: 1;
+}
+
+.stepRow {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    position: relative;
+}
+
+.rowReversed {
+    flex-direction: row-reverse;
+}
+
+.textContent {
+    flex: 1;
+    text-align: right;
+}
+
+.rowReversed .textContent {
+    text-align: left;
+}
+
+.stepBadge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #09090b;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    border: 2px solid rgba(249, 115, 22, 0.6);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.15);
+}
+
+.textContent h3 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+}
+
+.textDimmed {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 0px;
+}
+
+.mediaContent {
+    flex: 1;
+    width: 100%;
+}
+
+.imageContainer {
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.stepImage {
+    width: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.codeWrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .stepsContainer::before {
+        display: none;
+    }
+
+    .stepRow,
+    .rowReversed {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .miniQuickstartSection {
+        padding: 60px 24px;
+    }
+
+    .header {
+        margin-bottom: 60px;
+    }
+
+    .stepsContainer {
+        gap: 80px;
+    }
+
+    .textContent h3 {
+        font-size: 28px;
+    }
+
+    .textDimmed {
+        font-size: 16px;
+    }
+}

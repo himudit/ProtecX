@@ -1,6 +1,7 @@
 import Navbar from './Navbar';
 import styles from './Landing.module.css';
 import FAQ from '../components/FAQ/FAQ';
+import MiniQuickStart from '../components/MiniQuickStart/MiniQuickStart';
 
 import { ArrowRight, Database, Lock, HardDrive, Code, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -86,25 +87,23 @@ export default function Landing() {
       <section className={styles['hero-section']}>
         <div className={styles['hero-container']}>
           <h1 className={styles['hero-title']}>
-            Build <span className={styles.strikethrough}>faster</span> <span className={styles['fastest-text']}>fastest</span> backend with <span className={styles['gradient-text']}>ProtecX</span>
+            Build <span className={styles.strikethrough}>faster</span> <span className={styles['fastest-text']}>fastest</span> authentication with <span className={styles['gradient-text']}>ProtecX</span>
           </h1>
           <p className={styles['hero-description']}>
-            ProtecX is a backend platform that provides everything need to build modern apps.
+            ProtecX is a production-ready authentication platform for modern applications.
             <br />
-            Database, authentication, storage, and edge functions, all in one place.
+            Handle users, sessions, tokens, and security with a simple API.
           </p>
           <div className={styles['hero-cta']}>
-            <Link to="/dashboard" className={styles['cta-primary']}>
+            <Link to="/dashboard/projects" className={styles['cta-primary']}>
               Start Building
               <ArrowRight size={20} />
             </Link>
-            <a href="#dashboard" className={styles['cta-secondary']}>
+            <Link to="/dashboard/overview" className={styles['cta-secondary']}>
               View Dashboard
-            </a>
+            </Link>
           </div>
-          <div className={styles['hero-note']}>
-            Free tier available • No credit card required
-          </div>
+
         </div>
       </section>
 
@@ -121,6 +120,9 @@ export default function Landing() {
           </div>
         </div>
       </section>
+
+      {/* Mini Quickstart */}
+      <MiniQuickStart />
 
       {/* Features Grid */}
       <section id="features" className={styles['features-section']}>

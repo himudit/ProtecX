@@ -42,7 +42,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
                 setIsLoading(true);
                 const html = await codeToHtml(text, {
                     lang: language.toLowerCase() === 'js' ? 'javascript' : language.toLowerCase(),
-                    theme: 'dark-plus', // Official VS Code Dark+ theme
+                    theme: 'dark-plus', // We will use dark-plus, but adjust CSS to match Cursor's font and style.
                 });
 
                 if (isMounted) {

@@ -88,7 +88,7 @@ const Login: React.FC = () => {
         <>
 
 
-            <div style={{ display: 'flex', minHeight: '100vh', width: '100%' }}>
+            <div className={styles.authWrapper}>
                 {/* 35% Section - Visible on all screens */}
                 <div
                     style={{
@@ -102,7 +102,7 @@ const Login: React.FC = () => {
                         color: 'white',
                         transition: 'width 0.3s ease',
                     }}
-                    className="auth-sidebar"
+                    className={styles['auth-sidebar']}
                 >
                     <div style={{ maxWidth: '330px', width: '100%' }}>
                         <div style={{ marginBottom: '1.5rem' }}>
@@ -113,7 +113,9 @@ const Login: React.FC = () => {
                         <button
                             type="button"
                             className={styles.googleButton}
-                            onClick={() => googleLogin()}
+                            onClick={() => !isLoading && googleLogin()}
+                            disabled={isLoading}
+                            style={{ opacity: isLoading ? 0.7 : 1, cursor: isLoading ? 'not-allowed' : 'pointer' }}
                         >
                             <svg className={styles.googleIcon} viewBox="0 0 24 24">
                                 <path
@@ -192,11 +194,12 @@ const Login: React.FC = () => {
                                             background: 'none',
                                             border: 'none',
                                             color: 'var(--text-secondary)',
-                                            cursor: 'pointer',
+                                            cursor: isLoading ? 'not-allowed' : 'pointer',
                                             display: 'flex',
                                             alignItems: 'center',
                                             padding: '4px'
                                         }}
+                                        disabled={isLoading}
                                     >
                                         {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                                     </button>
@@ -228,7 +231,15 @@ const Login: React.FC = () => {
 
                         <p style={{ marginTop: '1.5rem', fontSize: '0.875rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
                             Don't have an account?{' '}
-                            <Link to="/signup" style={{ color: 'white', textDecoration: 'none' }}>
+                            <Link 
+                                to={isLoading ? "#" : "/signup"} 
+                                style={{ 
+                                    color: 'white', 
+                                    textDecoration: 'none',
+                                    opacity: isLoading ? 0.5 : 1,
+                                    pointerEvents: isLoading ? 'none' : 'auto'
+                                }}
+                            >
                                 Sign Up
                             </Link>
                         </p>
@@ -247,19 +258,21 @@ const Login: React.FC = () => {
                         alignItems: 'center',
                         padding: '2rem',
                     }}
-                    className="auth-main"
+                    className={styles['auth-main']}
                 >
                     <div style={{ textAlign: 'center', color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
                         <button
-                            onClick={() => navigate('/')}
+                            onClick={() => !isLoading && navigate('/')}
+                            disabled={isLoading}
                             style={{
                                 all: 'unset',
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '0.5rem',
-                                cursor: 'pointer',
+                                cursor: isLoading ? 'not-allowed' : 'pointer',
                                 color: 'var(--accent)',
-                                marginBottom: '1rem'
+                                marginBottom: '1rem',
+                                opacity: isLoading ? 0.6 : 1
                             }}
                         >
                             <span className={styles['logo-text']}>

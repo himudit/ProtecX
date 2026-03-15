@@ -37,12 +37,13 @@ const Signup: React.FC = () => {
             dispatch(showToast({ message: 'Creating account with Google...', type: 'loading' }));
 
             try {
+                setIsLoading(true);
                 const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/google`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ code: codeResponse.code }),
                 });
-
+                
                 const data = await response.json();
 
                 if (data.success) {
@@ -55,6 +56,8 @@ const Signup: React.FC = () => {
             } catch (error: any) {
                 console.error("Google Signup Error:", error);
                 dispatch(showToast({ message: 'Google Signup Failed', type: 'error' }));
+            } finally {
+                setIsLoading(false);
             }
         },
         onError: () => {
@@ -88,7 +91,7 @@ const Signup: React.FC = () => {
             {/* Toast Notification */}
 
 
-            <div style={{ display: 'flex', minHeight: '100vh', width: '100%' }}>
+            <div className={styles.authWrapper}>
                 {/* 35% Section - Visible on all screens */}
                 <div
                     style={{
@@ -102,7 +105,7 @@ const Signup: React.FC = () => {
                         color: 'white',
                         transition: 'width 0.3s ease',
                     }}
-                    className="auth-sidebar"
+                    className={styles['auth-sidebar']}
                 >
                     <div style={{ maxWidth: '330px', width: '100%' }}>
                         <div style={{ marginBottom: '1.5rem' }}>
@@ -113,7 +116,9 @@ const Signup: React.FC = () => {
                         <button
                             type="button"
                             className={styles.googleButton}
-                            onClick={() => googleLogin()}
+                            onClick={() => !isLoading && googleLogin()}
+                            disabled={isLoading}
+                            style={{ opacity: isLoading ? 0.7 : 1, cursor: isLoading ? 'not-allowed' : 'pointer' }}
                         >
                             <svg className={styles.googleIcon} viewBox="0 0 24 24">
                                 <path
@@ -226,11 +231,12 @@ const Signup: React.FC = () => {
                                             background: 'none',
                                             border: 'none',
                                             color: 'var(--text-secondary)',
-                                            cursor: 'pointer',
+                                            cursor: isLoading ? 'not-allowed' : 'pointer',
                                             display: 'flex',
                                             alignItems: 'center',
                                             padding: '4px'
                                         }}
+                                        disabled={isLoading}
                                     >
                                         {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                                     </button>
@@ -262,7 +268,15 @@ const Signup: React.FC = () => {
 
                         <p style={{ marginTop: '1.5rem', fontSize: '0.875rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
                             Already have an account?{' '}
-                            <Link to="/login" style={{ color: 'white', textDecoration: 'none' }}>
+                            <Link 
+                                to={isLoading ? "#" : "/login"} 
+                                style={{ 
+                                    color: 'white', 
+                                    textDecoration: 'none',
+                                    opacity: isLoading ? 0.5 : 1,
+                                    pointerEvents: isLoading ? 'none' : 'auto'
+                                }}
+                            >
                                 Log In
                             </Link>
                         </p>
@@ -281,19 +295,21 @@ const Signup: React.FC = () => {
                         alignItems: 'center',
                         padding: '2rem',
                     }}
-                    className="auth-main"
+                    className={styles['auth-main']}
                 >
                     <div style={{ textAlign: 'center', color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
                         <button
-                            onClick={() => navigate('/')}
+                            onClick={() => !isLoading && navigate('/')}
+                            disabled={isLoading}
                             style={{
                                 all: 'unset',
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '0.5rem',
-                                cursor: 'pointer',
+                                cursor: isLoading ? 'not-allowed' : 'pointer',
                                 color: 'var(--accent)',
-                                marginBottom: '1rem'
+                                marginBottom: '1rem',
+                                opacity: isLoading ? 0.6 : 1
                             }}
                         >
                             <span className={styles['logo-text']}>

@@ -23,7 +23,6 @@ export async function apiClient<T>(
       },
     });
 
-    console.log("baseService", response.data);
     return response.data;
   } catch (error: any) {
     if (error.response) {

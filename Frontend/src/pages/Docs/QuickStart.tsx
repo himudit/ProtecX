@@ -193,9 +193,9 @@ const handleLogin = async (e) => {
                             </div>
                             <div className={styles['section-content']}>
                                 <p className={styles['text-dimmed']}>
-                                    Congratulations! You've successfully integrated ShieldX into your application. Explore our advanced features like MFA, Session Management, and Audit Logs.
+                                    Congratulations! You've successfully integrated ProtecX into your application.
                                 </p>
-                                <div className={styles['image-container']}>
+                                {/* <div className={styles['image-container']}>
                                     <h3 className={styles['next-steps-title']}>Next Steps</h3>
                                     <ul className={styles['next-steps-list']}>
                                         <li className={styles['next-steps-item']}>
@@ -211,7 +211,7 @@ const handleLogin = async (e) => {
                                             Set up RBAC (Role Based Access Control)
                                         </li>
                                     </ul>
-                                </div>
+                                </div> */}
                             </div>
                         </section>
                     </div>

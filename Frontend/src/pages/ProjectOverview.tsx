@@ -69,9 +69,7 @@ export default function ProjectOverview() {
         }
         try {
             setIsLoading(true);
-            console.log("ProjectOverview: Fetching project for ID:", projectId);
             const res = await getProjectById(projectId);
-            console.log("ProjectOverview: Received response:", res);
             if (res && res.data) {
                 setProjectData(res.data);
             }

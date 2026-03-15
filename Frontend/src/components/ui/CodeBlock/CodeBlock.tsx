@@ -80,13 +80,20 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
             style={{ width, height }}
         >
             <div className={styles.header}>
-                <div className={styles.labelWrapper}>
-                    {filename ? (
-                        <div className={styles.filename}>{filename}</div>
-                    ) : (
-                        <div className={styles.pill}>{label}</div>
-                    )}
-                    {isLoading && <Loader2 size={12} className="animate-spin text-gray-500" />}
+                <div className={styles.headerLeft}>
+                    <div className={styles.trafficLights}>
+                        <span className={styles.red}></span>
+                        <span className={styles.yellow}></span>
+                        <span className={styles.green}></span>
+                    </div>
+                    <div className={styles.labelWrapper}>
+                        {filename ? (
+                            <div className={styles.filename}>{filename}</div>
+                        ) : (
+                            <div className={styles.pill}>{label}</div>
+                        )}
+                        {isLoading && <Loader2 size={12} className="animate-spin text-gray-500" />}
+                    </div>
                 </div>
                 <button
                     onClick={copyToClipboard}

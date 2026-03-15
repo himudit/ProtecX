@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Eye, EyeOff, Loader2, ChevronLeft } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../store/slices/authSlice';
 import { signupSchema } from '../schemas/auth.schema';
@@ -108,6 +108,17 @@ const Signup: React.FC = () => {
                     }}
                     className={styles['auth-sidebar']}
                 >
+                    <Link 
+                        to={isLoading ? "#" : "/"} 
+                        className={styles['mobile-home-btn']}
+                        style={{ 
+                            opacity: isLoading ? 0.5 : 1,
+                            pointerEvents: isLoading ? 'none' : 'auto'
+                        }}
+                    >
+                        <ChevronLeft size={20} />
+                        Back to Home
+                    </Link>
                     <div style={{ maxWidth: '330px', width: '100%' }}>
                         <div style={{ marginBottom: '1.5rem' }}>
                             <p style={{ fontSize: '1.75rem', color: 'var(--text-primary)', marginTop: '0.5rem' }}>Create an account</p>

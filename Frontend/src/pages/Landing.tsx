@@ -94,18 +94,18 @@ export default function Landing() {
             <br />
             Handle users, sessions, tokens, and security with a simple API.
           </p>
-          <div className={styles['hero-cta']}>
-            <Link to="/dashboard/projects" className={styles['cta-primary']}>
-              Start Building
-              <ArrowRight size={20} />
-            </Link>
-            <Link to="/dashboard/overview" className={styles['cta-secondary']}>
-              View Dashboard
-            </Link>
-          </div>
-
         </div>
       </section>
+
+      <div className={styles['hero-cta']}>
+        <Link to="/dashboard/projects" className={styles['cta-primary']}>
+          Start Building
+          <ArrowRight size={20} />
+        </Link>
+        <Link to="/dashboard/overview" className={styles['cta-secondary']}>
+          View Dashboard
+        </Link>
+      </div>
 
       {/* Dashboard Preview Section */}
       <section id="dashboard" className={styles['dashboard-section']}>

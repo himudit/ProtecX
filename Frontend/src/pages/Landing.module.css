@@ -13,6 +13,7 @@
   inset: 0;
   z-index: 0;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .gradient-orb {
@@ -68,7 +69,7 @@
 .hero-section {
   position: relative;
   z-index: 10;
-  padding: 118px 48px 40px;
+  padding: 118px 48px 0;
   text-align: center;
   margin-top: 50px;
 }
@@ -122,7 +123,7 @@
   font-size: 18px;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.75);
-  margin-bottom: 40px;
+  margin-bottom: 24px;
   font-weight: 400;
 }
 
@@ -132,6 +133,8 @@
   justify-content: center;
   gap: 16px;
   margin-bottom: 48px;
+  position: relative;
+  z-index: 20;
 }
 
 .cta-primary {
@@ -145,6 +148,7 @@
   text-decoration: none;
   font-size: 16px;
   font-weight: 600;
+  cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
 }
@@ -492,6 +496,7 @@
   .cta-secondary {
     width: 100%;
     justify-content: center;
+    cursor: pointer;
   }
 
   .nav-container {

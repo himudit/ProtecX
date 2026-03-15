@@ -9,24 +9,20 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
     {
-        question: "Do I need any coding experience?",
-        answer: "No. ProtecX is completely no-code and designed for founders of all technical backgrounds."
+        question: "How secure is ProtecX?",
+        answer: "ProtecX is built with security as a priority. It uses secure authentication practices, encrypted communication, and signed tokens to protect user data and ensure safe authentication across applications."
     },
     {
-        question: "Can I use my own domain?",
-        answer: "Yes, you can easily connect your own custom domain to your project."
+        question: "Does ProtecX support multi-factor authentication (MFA)?",
+        answer: "Currently, ProtecX does not support multi-factor authentication (MFA). However, MFA support is planned for future updates to provide an additional layer of account security."
     },
     {
-        question: "Is ProtecX suitable for solo founders?",
-        answer: "Absolutely. Our platform is designed to help solo founders build and scale quickly without needing a large team."
+        question: "How do other microservices verify authentication tokens?",
+        answer: "ProtecX issues JWT tokens for authenticated users. These tokens are signed using a SHA-256–based signing process, and other microservices can verify them using the public key provided by ProtecX to ensure the token is valid and untampered."
     },
     {
-        question: "Can I upgrade or downgrade my plan later?",
-        answer: "Yes, you can change your plan at any time from your billing dashboard."
-    },
-    {
-        question: "What happens after my free trial ends?",
-        answer: "You will be automatically downgraded to the free tier, unless you choose to upgrade to a paid plan."
+        question: "Are errors handled properly?",
+        answer: "Yes. ProtecX provides built-in error handling through the SDK. Developers can use the handleError function to manage errors, and the SDK automatically surfaces clear messages that can be displayed in the UI."
     }
 ];
 

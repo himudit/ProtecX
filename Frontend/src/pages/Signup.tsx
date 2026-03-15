@@ -94,18 +94,6 @@ const Signup: React.FC = () => {
             <div className={styles.authWrapper}>
                 {/* 35% Section - Visible on all screens */}
                 <div
-                    style={{
-                        width: '45%',
-                        backgroundColor: 'var(--auth-grey)',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        padding: '2rem',
-                        color: 'white',
-                        transition: 'width 0.3s ease',
-                        height: '100vh'
-                    }}
                     className={styles['auth-sidebar']}
                 >
                     <Link 
@@ -297,16 +285,6 @@ const Signup: React.FC = () => {
 
                 {/* 65% Section - Hidden on mobile */}
                 <div
-                    style={{
-                        width: '65%',
-                        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${orangeBackground})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        padding: '2rem',
-                    }}
                     className={styles['auth-main']}
                 >
                     <div style={{ textAlign: 'center', color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>

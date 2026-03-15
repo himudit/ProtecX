@@ -7,10 +7,33 @@
 .logo-text {
     display: inline-flex;
     align-items: center;
-    /* Perfect vertical centering */
     font-weight: 600;
     font-size: 45px;
     color: var(--text-primary);
+}
+
+.auth-sidebar {
+    width: 45%;
+    background-color: var(--auth-grey);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    color: white;
+    transition: width 0.3s ease;
+    min-height: 100vh;
+}
+
+.auth-main {
+    width: 65%;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../assets/orange_background.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
 }
 
 .mobile-home-btn {
@@ -83,8 +106,12 @@
 
     .auth-sidebar {
         width: 100% !important;
-        padding: 1.5rem !important;
+        padding: 2rem 1.5rem !important;
         position: relative;
+        min-height: 100dvh !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
 
     .auth-main {
@@ -96,8 +123,8 @@
         align-items: center;
         gap: 8px;
         position: absolute;
-        top: 24px;
-        left: 24px;
+        top: 20px;
+        left: 20px;
         color: var(--text-secondary);
         text-decoration: none;
         font-size: 14px;

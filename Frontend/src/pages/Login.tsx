@@ -101,6 +101,7 @@ const Login: React.FC = () => {
                         padding: '2rem',
                         color: 'white',
                         transition: 'width 0.3s ease',
+                        height: '100vh'
                     }}
                     className={styles['auth-sidebar']}
                 >
@@ -231,10 +232,10 @@ const Login: React.FC = () => {
 
                         <p style={{ marginTop: '1.5rem', fontSize: '0.875rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
                             Don't have an account?{' '}
-                            <Link 
-                                to={isLoading ? "#" : "/signup"} 
-                                style={{ 
-                                    color: 'white', 
+                            <Link
+                                to={isLoading ? "#" : "/signup"}
+                                style={{
+                                    color: 'white',
                                     textDecoration: 'none',
                                     opacity: isLoading ? 0.5 : 1,
                                     pointerEvents: isLoading ? 'none' : 'auto'

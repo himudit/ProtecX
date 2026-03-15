@@ -104,6 +104,7 @@ const Signup: React.FC = () => {
                         padding: '2rem',
                         color: 'white',
                         transition: 'width 0.3s ease',
+                        height: '100vh'
                     }}
                     className={styles['auth-sidebar']}
                 >

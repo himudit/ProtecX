@@ -3,7 +3,7 @@ import styles from './Landing.module.css';
 import FAQ from '../components/FAQ/FAQ';
 import MiniQuickStart from '../components/MiniQuickStart/MiniQuickStart';
 
-import { ArrowRight, Database, Lock, HardDrive, Code, Globe } from 'lucide-react';
+import { ArrowRight, Database, Lock, HardDrive, Code, Globe, Github, Linkedin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -169,31 +169,59 @@ export default function Landing() {
 
       {/* Footer */}
       <footer className={styles['landing-footer']}>
-        <div className={styles['footer-container']}>
-          <div className={styles['footer-brand']}>
-            <div className={styles['footer-logo']}>
-              <span className={styles['logo-text']}>
-                Protec
-                <img src="/X.png" alt="X" className={styles.logoX} />
-              </span>
+        <div className={styles['footer-main']}>
+          <div className={styles['footer-left']}>
+            <div className={styles['social-icons']}>
+              <a href="https://github.com/himudit/ProtecX" target="_blank" rel="noopener noreferrer" className={styles['social-icon']} aria-label="GitHub"><Github size={20} /></a>
+              <a href="https://linkedin.com/in/mudit-garg-03m" target="_blank" rel="noopener noreferrer" className={styles['social-icon']} aria-label="LinkedIn"><Linkedin size={20} /></a>
             </div>
-            <p className={styles['footer-tagline']}>Auth as a Service</p>
+            <div className={styles['footer-logo-container']}>
+            </div>
           </div>
-          <div className={styles['footer-links']}>
-            <div className={styles['footer-column']}>
-              <h4>Product</h4>
-              <a href="#features">Features</a>
-              <a href="#docs">Documentation</a>
+
+          <div className={styles['footer-right']}>
+            <div className={styles['footer-col']}>
+              <h4>MENU</h4>
+              <a href="/#features" className={styles['disabled-link']}>Product</a>
+              <a href="/docs/overview" className={styles['disabled-link']}>Docs</a>
+              <a href="/#faq" className={styles['disabled-link']}>FAQ</a>
             </div>
-            <div className={styles['footer-column']}>
-              <h4>Company</h4>
-              <a href="#">About</a>
-              <a href="#">Blog</a>
+            <div className={styles['footer-col']}>
+              <h4>COMPANY</h4>
+              <a href="#" className={styles['disabled-link']}>About</a>
+              <a href="#" className={styles['disabled-link']}>Blog</a>
+              <a href="#" className={styles['disabled-link']}>Careers</a>
+            </div>
+            <div className={styles['footer-col']}>
+              <h4>LEGAL</h4>
+              <a href="#" className={styles['disabled-link']}>Terms</a>
+              <a href="#" className={styles['disabled-link']}>Privacy</a>
+              <a href="#" className={styles['disabled-link']}>Security</a>
             </div>
           </div>
         </div>
+
+        <div className={styles['footer-divider-container']}>
+          <div className={styles['footer-divider']} />
+          <Link to="/signup" className={styles['footer-cta-btn']}>Get Started</Link>
+        </div>
+
         <div className={styles['footer-bottom']}>
-          <p>© 2024 ProtecX</p>
+          <div className={styles['footer-tagline-container']}>
+            <p className={styles['footer-tagline-text']}>
+              From security to seamless integration. Our expert<br />
+              team is here to elevate your app and connect you<br />
+              with your users securely.
+            </p>
+          </div>
+          <div className={styles['footer-legal-links']}>
+            <a href="#" className={styles['disabled-link']}>TERMS & CONDITIONS</a>
+            <a href="#" className={styles['disabled-link']}>PRIVACY POLICY</a>
+          </div>
+        </div>
+
+        <div className={styles['footer-bg-text']}>
+          PROTECX
         </div>
       </footer>
     </div>

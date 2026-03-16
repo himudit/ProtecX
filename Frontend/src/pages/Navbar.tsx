@@ -23,6 +23,32 @@ const Navbar = () => {
         setIsDropdownOpen(false);
     };
 
+    const handleScrollTo = (e: React.MouseEvent, id: string) => {
+        e.preventDefault();
+        const element = document.getElementById(id);
+        
+        if (window.location.pathname === '/' && element) {
+            const lenis = getLenis();
+            if (lenis) {
+                lenis.scrollTo(`#${id}`, { offset: -80 });
+            } else {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else {
+            navigate(`/#${id}`);
+            // Small timeout to allow navigation to finish before scrolling
+            setTimeout(() => {
+                const el = document.getElementById(id);
+                if (el) {
+                    const lenis = getLenis();
+                    if (lenis) lenis.scrollTo(`#${id}`, { offset: -80 });
+                    else el.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 100);
+        }
+        setIsMobileMenuOpen(false);
+    };
+
     useEffect(() => {
         const lenis = initLenis();
 
@@ -77,10 +103,14 @@ const Navbar = () => {
 
                 {/* Links */}
                 <div className={styles['navbar-links-container']}>
-                    <Link to="/docs/features" className={styles['nav-link']}>
+                    <a 
+                        href="/#features" 
+                        className={styles['nav-link']}
+                        onClick={(e) => handleScrollTo(e, 'features')}
+                    >
                         <ListChecks size={16} />
                         Features
-                    </Link>
+                    </a>
                     <Link to="/docs/overview" className={styles['nav-link']}>
                         <FileText size={16} />
                         Docs
@@ -142,10 +172,14 @@ const Navbar = () => {
             {isMobileMenuOpen && (
                 <div className={styles['mobile-menu']}>
                     <div className={styles['mobile-nav-links']}>
-                        <Link to="/docs/features" className={styles['mobile-nav-link']} onClick={() => setIsMobileMenuOpen(false)}>
+                        <a 
+                            href="/#features" 
+                            className={styles['mobile-nav-link']} 
+                            onClick={(e) => handleScrollTo(e, 'features')}
+                        >
                             <ListChecks size={20} />
                             Features
-                        </Link>
+                        </a>
                         <Link to="/docs/overview" className={styles['mobile-nav-link']} onClick={() => setIsMobileMenuOpen(false)}>
                             <FileText size={20} />
                             Docs

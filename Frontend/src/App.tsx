@@ -24,18 +24,17 @@ import DocsAPI from './pages/Docs/API';
 import Features from './pages/Docs/Features';
 
 import {
-  FileText,
   TvMinimalPlay,
   Code,
   Codesandbox,
-  ListChecks
+  LayoutDashboard
 } from 'lucide-react';
 import Toast from './components/ui/Toast/Toast';
 
 const docsNavItems = [
-  { icon: FileText, label: 'Overview', path: '/docs/overview' },
+  { icon: LayoutDashboard, label: 'Overview', path: '/docs/overview' },
   { icon: TvMinimalPlay, label: 'Quick Start', path: '/docs/quickstart' },
-  { icon: Codesandbox, label: 'SDKs', path: '/docs/sdks' },
+  // { icon: Codesandbox, label: 'SDKs', path: '/docs/sdks' },
   { icon: Code, label: 'API', path: '/docs/api' },
 ];
 

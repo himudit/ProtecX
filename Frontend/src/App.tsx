@@ -4,7 +4,6 @@ import Layout from './components/Layout/Layout';
 import Landing from './pages/Landing';
 import Overview from './pages/Overview';
 import Projects from './pages/Projects';
-import Settings from './pages/Settings';
 import ProjectLayout from './components/ProjectLayout/ProjectLayout';
 import ProjectOverview from './pages/ProjectOverview';
 import Signup from './pages/Signup';
@@ -17,26 +16,10 @@ import Database from './pages/Database';
 import Logs from './pages/Logs';
 
 // Docs Pages
-import DocsOverview from './pages/Docs/Overview';
 import QuickStart from './pages/Docs/QuickStart';
-import SDKs from './pages/Docs/SDKs';
 import DocsAPI from './pages/Docs/API';
-import Features from './pages/Docs/Features';
 
-import {
-  TvMinimalPlay,
-  Code,
-  Codesandbox,
-  LayoutDashboard
-} from 'lucide-react';
 import Toast from './components/ui/Toast/Toast';
-
-const docsNavItems = [
-  { icon: LayoutDashboard, label: 'Overview', path: '/docs/overview' },
-  { icon: TvMinimalPlay, label: 'Quick Start', path: '/docs/quickstart' },
-  // { icon: Codesandbox, label: 'SDKs', path: '/docs/sdks' },
-  { icon: Code, label: 'API', path: '/docs/api' },
-];
 
 function App() {
 
@@ -54,28 +37,21 @@ function App() {
         </Route>
 
         {/* Protected Routes - Only accessible when logged in */}
-        <Route element={<ProtectedRoute />}>
+        <Route >
           <Route path="/dashboard" element={<Layout />}>
-            <Route index element={<Navigate to="overview" replace />} />
-            <Route path="overview" element={<Overview />} />
-            <Route path="projects" element={<Projects />} />
-            <Route path="projects/:projectId" element={<ProjectLayout />}>
-              <Route index element={<ProjectOverview />} />
-              <Route path="data-browser" element={<Database />} />
-              <Route path="logs" element={<Logs />} />
-              <Route path="settings" element={<div>Project Settings Page</div>} />
+            <Route index element={<Navigate to="quickstart" replace />} />
+            <Route path="quickstart" element={<QuickStart />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="analytics" element={<Overview />} />
+              <Route path="projects" element={<Projects />} />
+              <Route path="projects/:projectId" element={<ProjectLayout />}>
+                <Route index element={<ProjectOverview />} />
+                <Route path="data-browser" element={<Database />} />
+                <Route path="logs" element={<Logs />} />
+              </Route>
             </Route>
-            <Route path="settings" element={<Settings />} />
+            <Route path="api" element={<DocsAPI />} />
           </Route>
-        </Route>
-
-        {/* Docs Routes - Publicly accessible */}
-        <Route path="/docs" element={<Layout sidebarItems={docsNavItems} />}>
-          <Route index element={<Navigate to="overview" replace />} />
-          <Route path="overview" element={<DocsOverview />} />
-          <Route path="quickstart" element={<QuickStart />} />
-          <Route path="sdks" element={<SDKs />} />
-          <Route path="api" element={<DocsAPI />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

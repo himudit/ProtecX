@@ -1,0 +1,232 @@
+.apiContainer {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 4rem 3rem;
+    color: #fff;
+    /* font-family: 'Inter', -apple-system, sans-serif; */
+    background-color: transparent;
+}
+
+.heroGrid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 5rem;
+    align-items: flex-start;
+}
+
+.leftContent {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.03em;
+    color: #fff;
+}
+
+.description {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.5;
+    max-width: 500px;
+    margin: 0;
+}
+
+.exploreBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: #111;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    width: fit-content;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+}
+
+.exploreBtn:hover {
+    background: #1a1a1a;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.featuresGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.featureItem {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.featureIcon {
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.03);
+    width: fit-content;
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+.featureTitle {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0;
+    color: #fff;
+}
+
+.featureDesc {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Right Side - Code Area */
+.codeArea {
+    /* background: #0f0f10; */
+    /* border-radius: 16px; */
+    /* border: 1px solid rgba(255, 255, 255, 0.05); */
+    overflow: hidden;
+    margin-top: -4rem;
+    margin-left: -7rem;
+    /* Shifting to the left */
+}
+
+.tabsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    background: transparent;
+}
+
+.tabsWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    overflow: hidden;
+    position: relative;
+    flex: 1;
+}
+
+.tabs {
+    display: flex;
+    gap: 0.3rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    /* Hide scrollbar for cleaner look */
+    scroll-behavior: smooth;
+}
+
+.scrollIndicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.3);
+    padding-right: 0.5rem;
+    pointer-events: none;
+    flex-shrink: 0;
+}
+
+.tab {
+    background: transparent;
+    border: 1px solid rgba(62, 60, 60, 0.5);
+    color: rgba(255, 255, 255, 0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.copyBtn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copyBtn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.activeTab {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.codeContent {
+    padding: 0 1.25rem 1.25rem;
+    margin-top: -2rem;
+}
+
+@media (max-width: 1200px) {
+    .heroGrid {
+        gap: 3rem;
+    }
+
+    .title {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .heroGrid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .apiContainer {
+        padding: 2rem;
+    }
+
+    .description {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .featuresGrid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .tabsHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .tabs {
+        overflow-x: auto;
+        width: 100%;
+        padding-bottom: 0.5rem;
+    }
+
+    .copyBtn {
+        align-self: flex-end;
+    }
+}

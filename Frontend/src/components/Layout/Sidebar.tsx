@@ -1,16 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import {
-  LayoutDashboard,
-  FolderKanban,
-  Code,
-  Codesandbox,
-  Webhook,
-  Settings,
   ChevronRight,
   PanelLeftOpen,
   PanelRightOpen,
   GripVertical,
-  Box
+  Box,
+  TvMinimalPlay,
+  ChartSpline,
+  CodeXml
 } from 'lucide-react';
 import styles from './Sidebar.module.css';
 
@@ -22,9 +19,10 @@ export interface NavItem {
 }
 
 const defaultNavItems: NavItem[] = [
-  { icon: LayoutDashboard, label: 'Overview', path: '/dashboard/overview' },
+  { icon: TvMinimalPlay, label: 'Quick Start', path: '/dashboard/quickstart' },
   { icon: Box, label: 'Projects', path: '/dashboard/projects' },
-  { icon: Settings, label: 'Settings', path: '/dashboard/settings' },
+  { icon: ChartSpline, label: 'Analytics', path: '/dashboard/analytics' },
+  { icon: CodeXml, label: 'API', path: '/dashboard/api' },
 ];
 
 interface SidebarProps {

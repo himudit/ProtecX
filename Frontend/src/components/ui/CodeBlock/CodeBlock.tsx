@@ -12,6 +12,8 @@ interface CodeBlockProps {
     showLineNumbers?: boolean;
     language?: string;
     highlightLines?: number[];
+    hideHeader?: boolean;
+    background?: string;
 }
 
 const CodeBlock: React.FC<CodeBlockProps> = ({
@@ -23,6 +25,8 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     showLineNumbers = true,
     language,
     highlightLines = [],
+    hideHeader = false,
+    background,
 }) => {
     const [copied, setCopied] = useState(false);
     const [highlightedHtml, setHighlightedHtml] = useState<string>("");
@@ -77,33 +81,35 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     return (
         <div
             className={styles.codeBlockContainer}
-            style={{ width, height }}
+            style={{ width, height, background: background || 'var(--code-bg)' }}
         >
-            <div className={styles.header}>
-                <div className={styles.headerLeft}>
-                    <div className={styles.trafficLights}>
-                        <span className={styles.red}></span>
-                        <span className={styles.yellow}></span>
-                        <span className={styles.green}></span>
+            {!hideHeader && (
+                <div className={styles.header}>
+                    <div className={styles.headerLeft}>
+                        <div className={styles.trafficLights}>
+                            <span className={styles.red}></span>
+                            <span className={styles.yellow}></span>
+                            <span className={styles.green}></span>
+                        </div>
+                        <div className={styles.labelWrapper}>
+                            {filename ? (
+                                <div className={styles.filename}>{filename}</div>
+                            ) : (
+                                <div className={styles.pill}>{label}</div>
+                            )}
+                            {isLoading && <Loader2 size={12} className="animate-spin text-gray-500" />}
+                        </div>
                     </div>
-                    <div className={styles.labelWrapper}>
-                        {filename ? (
-                            <div className={styles.filename}>{filename}</div>
-                        ) : (
-                            <div className={styles.pill}>{label}</div>
-                        )}
-                        {isLoading && <Loader2 size={12} className="animate-spin text-gray-500" />}
-                    </div>
+                    <button
+                        onClick={copyToClipboard}
+                        className={styles.copyButton}
+                        aria-label="Copy to Clipboard"
+                        title="Copy to Clipboard"
+                    >
+                        {copied ? <Check size={16} color="#10b981" /> : <Copy size={16} />}
+                    </button>
                 </div>
-                <button
-                    onClick={copyToClipboard}
-                    className={styles.copyButton}
-                    aria-label="Copy to Clipboard"
-                    title="Copy to Clipboard"
-                >
-                    {copied ? <Check size={16} color="#10b981" /> : <Copy size={16} />}
-                </button>
-            </div>
+            )}
 
             <div className={styles.contentWrapper}>
                 {showLineNumbers && (

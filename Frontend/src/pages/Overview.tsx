@@ -53,7 +53,7 @@ export default function Overview() {
     <div className={styles['overview-page']}>
       <div className={styles['page-header']}>
         <div>
-          <h1 className={styles['page-title']}>Overview</h1>
+          <h1 className={styles['page-title']}>Analytics</h1>
           <p className={styles['page-subtitle']}>Monitor your projects and resources</p>
         </div>
       </div>

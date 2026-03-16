@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowRight, ChevronDown, LogOut, FileText, ListChecks, ListCheck, Settings, Menu, X } from "lucide-react";
+import { ChevronDown, LogOut, FileText, ListChecks, Menu, X } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from '@/store';
 import { logout } from "../store/slices/authSlice";
@@ -26,7 +26,7 @@ const Navbar = () => {
     const handleScrollTo = (e: React.MouseEvent, id: string) => {
         e.preventDefault();
         const element = document.getElementById(id);
-        
+
         if (window.location.pathname === '/' && element) {
             const lenis = getLenis();
             if (lenis) {
@@ -103,18 +103,14 @@ const Navbar = () => {
 
                 {/* Links */}
                 <div className={styles['navbar-links-container']}>
-                    <a 
-                        href="/#features" 
+                    <a
+                        href="/#features"
                         className={styles['nav-link']}
                         onClick={(e) => handleScrollTo(e, 'features')}
                     >
                         <ListChecks size={16} />
                         Features
                     </a>
-                    <Link to="/docs/overview" className={styles['nav-link']}>
-                        <FileText size={16} />
-                        Docs
-                    </Link>
                 </div>
 
                 {/* Actions */}
@@ -160,8 +156,8 @@ const Navbar = () => {
                     )}
                 </div>
                 {/* Mobile Menu Toggle */}
-                <button 
-                    className={styles['mobile-menu-btn']} 
+                <button
+                    className={styles['mobile-menu-btn']}
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
                     {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -172,9 +168,9 @@ const Navbar = () => {
             {isMobileMenuOpen && (
                 <div className={styles['mobile-menu']}>
                     <div className={styles['mobile-nav-links']}>
-                        <a 
-                            href="/#features" 
-                            className={styles['mobile-nav-link']} 
+                        <a
+                            href="/#features"
+                            className={styles['mobile-nav-link']}
                             onClick={(e) => handleScrollTo(e, 'features')}
                         >
                             <ListChecks size={20} />
@@ -185,7 +181,7 @@ const Navbar = () => {
                             Docs
                         </Link>
                     </div>
-                    
+
                     <div className={styles['mobile-nav-actions']}>
                         {!isAuthenticated ? (
                             <>

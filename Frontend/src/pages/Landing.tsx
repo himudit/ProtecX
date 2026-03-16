@@ -98,12 +98,12 @@ export default function Landing() {
       </section>
 
       <div className={styles['hero-cta']}>
-        <Link to="/dashboard/projects" className={styles['cta-primary']}>
-          Start Building
+        <Link to="/dashboard/quickstart" className={styles['cta-primary']}>
+          Get Started
           <ArrowRight size={20} />
         </Link>
-        <Link to="/dashboard/overview" className={styles['cta-secondary']}>
-          View Dashboard
+        <Link to="/dashboard/projects" className={styles['cta-secondary']}>
+          Create Project
         </Link>
       </div>
 
@@ -160,7 +160,7 @@ export default function Landing() {
           <p className={styles['cta-description']}>
             Create your project and start building in minutes.
           </p>
-          <Link to="/dashboard" className={styles['cta-button']}>
+          <Link to="/dashboard/projects" className={styles['cta-button']}>
             Create Project
             <ArrowRight size={20} />
           </Link>

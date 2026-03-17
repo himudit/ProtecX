@@ -5,13 +5,16 @@
     color: #fff;
     /* font-family: 'Inter', -apple-system, sans-serif; */
     background-color: transparent;
+    height: 88vh;
+    overflow-y: hidden;
 }
 
 .heroGrid {
     display: grid;
     grid-template-columns: 1fr 1.1fr;
     gap: 5rem;
-    align-items: flex-start;
+    align-items: center;
+    height: 100%;
 }
 
 .leftContent {
@@ -99,7 +102,7 @@
     /* border-radius: 16px; */
     /* border: 1px solid rgba(255, 255, 255, 0.05); */
     overflow: hidden;
-    margin-top: -4rem;
+    margin-top: -1rem;
     margin-left: -7rem;
     /* Shifting to the left */
 }

@@ -57,15 +57,66 @@ const handleSubmit = async (e: React.FormEvent) => {
   }
 };
 `,
-    LogIn: `// Log in with email and password
-const session = await protecx.login({
-  email: 'example@email.com',
-  password: 'example-password',
-})`,
-    LogOut: `// Log out the current user
-await protecx.logout();`,
-    Profile: `// Get current user profile
-const profile = await protecx.getProfile();`,
+    LogIn: `import { useState } from "react";
+import { protecx } from "./lib/protecx";
+import { ProtecXError } from "@protecx/js";
+
+const [formData, setFormData] = useState({
+  email: "",
+  password: ""
+});
+
+const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+const [error, setError] = useState<string | null>(null);
+const [loading, setLoading] = useState(false);
+
+const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setLoading(true);
+  setError(null);
+  setFieldErrors({});
+
+  try {
+    const session = await protecx.login({
+      email: formData.email,
+      password: formData.password
+    });
+
+    console.log("Logged in successfully:", session.user);
+
+  } catch (err) {
+    if (err instanceof ProtecXError) {
+
+      if (err.isValidationError()) {
+        setFieldErrors(err.getAllFieldErrors());
+      }
+
+      if (err.isGlobalError()) {
+        const globalErr = err.getErrors();
+        setError(typeof globalErr === "string" ? globalErr : null);
+      }
+
+    } else {
+      setError("An unexpected error occurred. Please try again.");
+      console.error(err);
+    }
+
+  } finally {
+    setLoading(false);
+  }
+};`,
+    LogOut: `async function logout() {
+    try {
+      await protecx.logout();
+    } catch {
+      // Still clear local state even if the API call fails.
+    }
+    setUser(null);
+  };`,
+    Profile: `async function refreshProfile() {
+    const session = await protecx.profile();
+    setUser(session?.user || session || null);
+  }`,
     Refresh: `// Refresh session token
 const session = await protecx.refreshToken();`
   };

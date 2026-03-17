@@ -21,6 +21,7 @@ const Navbar = () => {
     const handleLogout = () => {
         dispatch(logout());
         setIsDropdownOpen(false);
+        navigate("/login");
     };
 
     const handleScrollTo = (e: React.MouseEvent, id: string) => {

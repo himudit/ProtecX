@@ -96,7 +96,8 @@
 }
 
 .contentWrapper {
-    overflow-x: auto;
+    flex: 1;
+    overflow: auto;
     position: relative;
     padding: 20px 0;
     display: flex;

@@ -37,18 +37,16 @@ function App() {
         </Route>
 
         {/* Protected Routes - Only accessible when logged in */}
-        <Route >
+        <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Layout />}>
             <Route index element={<Navigate to="quickstart" replace />} />
             <Route path="quickstart" element={<QuickStart />} />
-            <Route element={<ProtectedRoute />}>
-              <Route path="analytics" element={<Overview />} />
-              <Route path="projects" element={<Projects />} />
-              <Route path="projects/:projectId" element={<ProjectLayout />}>
-                <Route index element={<ProjectOverview />} />
-                <Route path="data-browser" element={<Database />} />
-                <Route path="logs" element={<Logs />} />
-              </Route>
+            <Route path="analytics" element={<Overview />} />
+            <Route path="projects" element={<Projects />} />
+            <Route path="projects/:projectId" element={<ProjectLayout />}>
+              <Route index element={<ProjectOverview />} />
+              <Route path="data-browser" element={<Database />} />
+              <Route path="logs" element={<Logs />} />
             </Route>
             <Route path="api" element={<DocsAPI />} />
           </Route>

@@ -163,6 +163,7 @@ export const protecx = new ProtecX({
                                 <div className={styles['code-block-wrapper']}>
                                     <CodeBlock
                                         text={`import { protecx } from '../lib/protecx';
+import { ProtecXError } from "@protecx/js";
 
 const handleLogin = async (e) => {
   e.preventDefault();
@@ -173,9 +174,23 @@ const handleLogin = async (e) => {
     const { user, session } = await protecx.login({ email, password });
     console.log('Logged in successfully:', user);
     // Redirect to dashboard
-  } catch (error) {
-    console.error('Login failed:', error.message);
-  }
+  } catch (err) {
+      if (err instanceof ProtecXError) {
+        if (err.isValidationError()) {
+          const fieldErrors = err.getAllFieldErrors();
+          const message = fieldErrors?.email || fieldErrors?.password || "Invalid input";
+          setError(message);
+        } else if (err.isGlobalError()) {
+          const globalErr = err.getErrors();
+          const message = typeof globalErr === "string" ? globalErr : "Something went wrong";
+          setError(message);
+        } else {
+          setError("Something went wrong");
+        }
+      } else {
+        console.error("Unexpected error", err);
+        setError("Unexpected error");
+      }
 };`}
                                         label="Login.jsx"
                                         language="javascript"

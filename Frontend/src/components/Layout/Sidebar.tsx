@@ -5,9 +5,9 @@ import {
   PanelRightOpen,
   GripVertical,
   Box,
-  TvMinimalPlay,
   ChartSpline,
-  CodeXml
+  CodeXml,
+  CirclePlay
 } from 'lucide-react';
 import styles from './Sidebar.module.css';
 
@@ -19,7 +19,7 @@ export interface NavItem {
 }
 
 const defaultNavItems: NavItem[] = [
-  { icon: TvMinimalPlay, label: 'Quick Start', path: '/dashboard/quickstart' },
+  { icon: CirclePlay, label: 'Quick Start', path: '/dashboard/quickstart' },
   { icon: Box, label: 'Projects', path: '/dashboard/projects' },
   { icon: ChartSpline, label: 'Analytics', path: '/dashboard/analytics' },
   { icon: CodeXml, label: 'API', path: '/dashboard/api' },

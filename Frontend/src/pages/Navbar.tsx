@@ -141,8 +141,8 @@ const Navbar = () => {
                                         <div className={styles['header-avatar-row']}>
                                             <Avatar name={user?.name || 'User'} src={user?.image} size={50} />
                                             <div className={styles['header-info']}>
-                                                <p className={styles['user-name']}>{user?.name}</p>
-                                                <p className={styles['user-email']}>{user?.email}</p>
+                                                <p className={styles['user-name']}>{user?.name || 'User'}</p>
+                                                <p className={styles['user-email']}>{user?.email || ''}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -198,8 +198,8 @@ const Navbar = () => {
                                 <div className={styles['mobile-user-info']}>
                                     <Avatar name={user?.name || 'User'} src={user?.image} size={44} />
                                     <div className={styles['header-info']}>
-                                        <p className={styles['user-name']}>{user?.name}</p>
-                                        <p className={styles['user-email']}>{user?.email}</p>
+                                        <p className={styles['user-name']}>{user?.name || 'User'}</p>
+                                        <p className={styles['user-email']}>{user?.email || ''}</p>
                                     </div>
                                 </div>
                                 <button className={styles['mobile-logout-btn']} onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }}>

@@ -2,8 +2,7 @@ import Navbar from './Navbar';
 import styles from './Landing.module.css';
 import FAQ from '../components/FAQ/FAQ';
 import MiniQuickStart from '../components/MiniQuickStart/MiniQuickStart';
-
-import { ArrowRight, Database, Lock, HardDrive, Code, Globe, Github, Linkedin } from 'lucide-react';
+import { ArrowRight, Lock, Github, Linkedin, RefreshCw, Shield, Activity, Timer, Key } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -30,34 +29,40 @@ export default function Landing() {
 
   const features = [
     {
-      icon: Database,
-      title: 'Database',
-      description: 'PostgreSQL database with real-time subscriptions. Migrations, backups, and point-in-time recovery.',
-    },
-    {
       icon: Lock,
-      title: 'Auth',
-      description: 'User authentication with email, OAuth providers, and magic links. Row-level security policies.',
+      title: 'JWT Authentication',
+      description:
+        'Secure access using RS256-signed JWTs with short-lived access tokens and long-lived refresh tokens. Public key verification across services.',
     },
     {
-      icon: HardDrive,
-      title: 'Storage',
-      description: 'File storage with CDN delivery. Image transformations and automatic optimization.',
+      icon: RefreshCw,
+      title: 'Token Rotation',
+      description:
+        'Automatic refresh token rotation with token versioning. Instantly revokes compromised sessions without blacklisting.',
     },
     {
-      icon: Code,
-      title: 'Edge Functions',
-      description: 'Deploy TypeScript functions at the edge. Auto-scaling and global distribution.',
+      icon: Shield,
+      title: 'Layered Security',
+      description:
+        'Multi-layer protection with IP-based limiting, user-based throttling, and progressive penalties against abuse.',
     },
     {
-      icon: Globe,
-      title: 'Realtime',
-      description: 'Subscribe to database changes. Broadcast messages to connected clients.',
+      icon: Activity,
+      title: 'Rate Limiting',
+      description:
+        'Token bucket algorithm with precise refill strategy to prevent brute-force and API abuse in real time.',
     },
     {
-      icon: () => <img src="/X.png" alt="Security" style={{ width: '24px', height: '24px' }} />,
-      title: 'Security',
-      description: 'SSL everywhere, encryption at rest. SOC 2 compliant infrastructure.',
+      icon: Timer,
+      title: 'Exponential Backoff',
+      description:
+        'Smart login protection that increases delay after failed attempts, slowing down attackers without affecting real users.',
+    },
+    {
+      icon: Key,
+      title: 'Secure Credentials',
+      description:
+        'Passwords hashed with Argon2 and never stored in plain text. Designed for maximum resistance against breaches.',
     },
   ];
 

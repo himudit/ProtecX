@@ -21,6 +21,7 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    /* margin-top: -5rem; */
 }
 
 .title {
@@ -184,6 +185,111 @@
 .codeContent {
     padding: 0 1.25rem 1.25rem;
     margin-top: -2rem;
+}
+
+/* Getting Started Card */
+.gettingStartedContainer {
+    margin-top: -0.5rem;
+    padding: 1rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    max-width: 360px;
+    position: relative;
+    z-index: 10;
+}
+
+.gsHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.4rem;
+}
+
+.playContainer {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+}
+
+.gsTitle {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.gsDescription {
+    color: var(--text-secondary);
+    opacity: 0.7;
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.logoGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+}
+
+.logoItem {
+    aspect-ratio: 1;
+    background: var(--bg-tertiary);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    transition: all 0.2s;
+    border: 1px solid var(--border-color);
+}
+
+.logoItem:hover {
+    background: var(--bg-hover);
+    border-color: var(--accent);
+}
+
+.logoItem img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: grayscale(1) brightness(0.9);
+}
+
+.logoItem:hover img {
+    filter: none;
+}
+
+.promptsBtn {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.promptsBtn:hover {
+    background: var(--bg-secondary);
+    border-color: var(--text-tertiary);
+    color: var(--text-primary);
+}
+
+.sparkleIcon {
+    color: var(--text-tertiary);
 }
 
 @media (max-width: 1200px) {

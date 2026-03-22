@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, ChevronRight, Play, Sparkles } from 'lucide-react';
 import CodeBlock from '../../components/ui/CodeBlock/CodeBlock';
 import styles from './API.module.css';
 
@@ -139,10 +139,31 @@ app.use(protecx.middleware());`
           <p className={styles.description}>
             APIs that you can understand. With powerful libraries that work on client and server-side applications.
           </p>
-          <a href="/docs/overview" className={styles.exploreBtn}>
-            <ArrowUpRight size={18} />
-            Explore documentation
-          </a>
+
+          <div className={styles.gettingStartedContainer}>
+            <div className={styles.gsHeader}>
+              <div className={styles.playContainer}><Play size={14} fill="white" /></div>
+              <h2 className={styles.gsTitle}>Getting Started</h2>
+            </div>
+            <p className={styles.gsDescription}>Set up and connect in just a few minutes.</p>
+
+            <div className={styles.logoGrid}>
+              <div className={styles.logoItem}>
+                <img src="https://cdn.worldvectorlogo.com/logos/javascript-1.svg" alt="JS" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="https://cdn.worldvectorlogo.com/logos/nodejs-icon.svg" alt="NodeJS" />
+              </div>
+              <div className={styles.logoItem}>
+                <img src="https://cdn.worldvectorlogo.com/logos/typescript.svg" alt="TS" />
+              </div>
+            </div>
+
+
+          </div>
 
         </div>
 

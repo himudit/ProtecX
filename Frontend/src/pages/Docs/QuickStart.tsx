@@ -134,9 +134,10 @@ const QuickStart = () => {
 
                                 <div className={styles['code-block-wrapper']}>
                                     <CodeBlock
-                                        text={`import { ProtecX, ProtecXError } from '@protecx/js';
+                                        text={`import { ProtecXClient } from "@protecx/js/client";
+import { ProtecXError } from '@protecx/js';
 
-export const protecx = new ProtecX({
+export const protecx = new ProtecXClient({
   baseUrl: "https://protecx.onrender.com/api/v1/",
   projectId: "<PROJECT_ID>", // Replace with actual project ID
   apiKey: "<API_KEY>",   // Replace with actual API key

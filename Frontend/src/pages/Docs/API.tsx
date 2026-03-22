@@ -119,8 +119,27 @@ const handleLogin = async (e: React.FormEvent) => {
   }`,
     Refresh: `// Refresh session token
 const session = await protecx.refreshToken();`,
-    Middleware: `// Middleware
-app.use(protecx.middleware());`
+    Middleware: `const { ProtecXServer } = require("@protecx/js/server");
+
+const protecxServer = new ProtecXServer({
+  publicKeyPEM: (process.env.PROTECX_PUBLIC_KEY || "").replace(/\\n/g, "\n")
+});
+
+const sdkMiddleware = protecxServer.middleware();
+
+function requireAuth(req, res, next) {
+  sdkMiddleware(req, res, () => {
+    if (!req.user) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+    console.log(req.user);
+    req.user.id = req.user.userId || req.user.id || req.user.sub;
+    next();
+  });
+}
+
+module.exports = { requireAuth };
+`
   };
 
   const fileNames: Record<string, string> = {
@@ -128,7 +147,8 @@ app.use(protecx.middleware());`
     LogIn: 'Login.tsx',
     LogOut: 'Auth.tsx',
     Profile: 'User.tsx',
-    Refresh: 'Session.tsx'
+    Refresh: 'Session.tsx',
+    Middleware: 'backend/src/middleware/auth.js'
   };
 
   return (

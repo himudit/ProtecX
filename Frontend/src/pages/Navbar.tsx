@@ -130,7 +130,7 @@ const Navbar = () => {
                                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                             >
                                 <div className={styles['user-avatar']}>
-                                    <Avatar name={user?.name || 'User'} src={user?.image} size={24} />
+                                    <Avatar name={user?.name || 'meu'} src={user?.image} size={24} />
                                 </div>
                                 <ChevronDown size={16} className={styles['chevron-icon']} />
                             </div>
@@ -177,10 +177,6 @@ const Navbar = () => {
                             <ListChecks size={20} />
                             Features
                         </a>
-                        <Link to="/docs/overview" className={styles['mobile-nav-link']} onClick={() => setIsMobileMenuOpen(false)}>
-                            <FileText size={20} />
-                            Docs
-                        </Link>
                     </div>
 
                     <div className={styles['mobile-nav-actions']}>

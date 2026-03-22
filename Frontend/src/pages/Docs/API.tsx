@@ -118,7 +118,9 @@ const handleLogin = async (e: React.FormEvent) => {
     setUser(session?.user || session || null);
   }`,
     Refresh: `// Refresh session token
-const session = await protecx.refreshToken();`
+const session = await protecx.refreshToken();`,
+    Middleware: `// Middleware
+app.use(protecx.middleware());`
   };
 
   const fileNames: Record<string, string> = {
@@ -177,6 +179,12 @@ const session = await protecx.refreshToken();`
                   onClick={() => setActiveTab('Refresh')}
                 >
                   Refresh
+                </button>
+                <button
+                  className={`${styles.tab} ${activeTab === 'Middleware' ? styles.activeTab : ''}`}
+                  onClick={() => setActiveTab('Middleware')}
+                >
+                  Middleware
                 </button>
               </div>
               <div className={styles.scrollIndicator}>

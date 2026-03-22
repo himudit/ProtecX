@@ -10,7 +10,11 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import PublicRoute from './components/Auth/PublicRoute';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
+import { useDispatch } from 'react-redux';
+import { getProfile } from './store/slices/authSlice';
+import type { AppDispatch } from './store';
 import { GlobalDialog } from './components/ui/Dialog/GlobalDialog';
+
 import './App.css';
 import Database from './pages/Database';
 import Logs from './pages/Logs';
@@ -22,6 +26,14 @@ import DocsAPI from './pages/Docs/API';
 import Toast from './components/ui/Toast/Toast';
 
 function App() {
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      dispatch(getProfile());
+    }
+  }, [dispatch]);
 
   return (
     <BrowserRouter>

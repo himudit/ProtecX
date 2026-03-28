@@ -44,7 +44,7 @@ const MiniQuickStart = () => {
                         <div className={styles.stepBadge}>2</div>
                         <div className={styles.mediaContent}>
                             <div className={styles.codeWrapper}>
-                                <CodeBlock text="npm i @protecx/js" label="Shell" language="bash" filename="Terminal" />
+                                <CodeBlock text="npm i protecx-js" label="Shell" language="bash" filename="Terminal" />
                             </div>
                         </div>
                     </div>
@@ -62,8 +62,7 @@ const MiniQuickStart = () => {
                         <div className={styles.mediaContent}>
                             <div className={styles.codeWrapper}>
                                 <CodeBlock
-                                    text={`import { ProtecXClient } from "@protecx/js/client";
-import { ProtecXError } from '@protecx/js';\n\nexport const protecx = new ProtecXClient({\n  baseUrl: "https://api.protecx.com/v1/",\n  projectId: "<YOUR_PROJECT_ID>",\n  apiKey: "<YOUR_API_KEY>"\n});`}
+                                    text={`import { ProtecXClient, ProtecXError } from "protecx-js/client";\nexport const protecx = new ProtecXClient({\n  baseUrl: "https://api.protecx.com/v1/",\n  projectId: "<YOUR_PROJECT_ID>",\n  apiKey: "<YOUR_API_KEY>"\n});`}
                                     label="JS"
                                     language="javascript"
                                     filename="src/lib/protecx.js"

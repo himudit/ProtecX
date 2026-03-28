@@ -8,7 +8,7 @@ const API = () => {
   const codeSnippets: Record<string, string> = {
     SignUp: `import { useState } from "react";
 import { protecx } from "./lib/protecx";
-import { ProtecXError } from "@protecx/js";
+import { ProtecXError } from "protecx-js/client";
 
 const [formData, setFormData] = useState({
   fullName: "",
@@ -59,7 +59,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 `,
     LogIn: `import { useState } from "react";
 import { protecx } from "./lib/protecx";
-import { ProtecXError } from "@protecx/js";
+import { ProtecXError } from "protecx-js/client";
 
 const [formData, setFormData] = useState({
   email: "",
@@ -119,7 +119,7 @@ const handleLogin = async (e: React.FormEvent) => {
   }`,
     Refresh: `// Refresh session token
 const session = await protecx.refreshToken();`,
-    Middleware: `const { ProtecXServer } = require("@protecx/js/server");
+    Middleware: `const { ProtecXServer } = require("protecx-js/server");
 
 const protecxServer = new ProtecXServer({
   publicKeyPEM: (process.env.PROTECX_PUBLIC_KEY || "").replace(/\\n/g, "\n")

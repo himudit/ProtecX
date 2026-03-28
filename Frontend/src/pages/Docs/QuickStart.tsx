@@ -89,7 +89,7 @@ const QuickStart = () => {
                             <div className={styles['section-content']}>
                                 <div className={styles['code-block-wrapper']}>
                                     <CodeBlock
-                                        text="npm i protecX-js"
+                                        text="npm i protecx-js"
                                         label="Shell"
                                         language="bash"
                                         filename="Terminal"

@@ -135,7 +135,6 @@ const QuickStart = () => {
                                 <div className={styles['code-block-wrapper']}>
                                     <CodeBlock
                                         text={`import { ProtecXClient } from "protecx/js/client";
-import { ProtecXError } from 'protecx/js/client';
 
 export const protecx = new ProtecXClient({
   baseUrl: "https://protecx.onrender.com/api/v1/",

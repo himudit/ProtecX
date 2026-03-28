@@ -202,6 +202,7 @@ export const getProjectUsers = async (userId: string, projectId: string): Promis
   const projectUsers = await prisma.projectUser.findMany({
     where: {
       providerId: userId,
+      projectId: projectId,
     },
     orderBy: {
       createdAt: 'desc',

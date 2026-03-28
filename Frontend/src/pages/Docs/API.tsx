@@ -20,7 +20,7 @@ const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 const [error, setError] = useState<string | null>(null);
 const [loading, setLoading] = useState(false);
 
-const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
   setLoading(true);
   setError(null);
@@ -70,7 +70,7 @@ const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 const [error, setError] = useState<string | null>(null);
 const [loading, setLoading] = useState(false);
 
-const handleLogin = async (e: React.FormEvent) => {
+const handleLogin = async (e) => {
   e.preventDefault();
   setLoading(true);
   setError(null);

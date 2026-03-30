@@ -76,9 +76,26 @@ ProtecX/
    ```bash
    cd Backend
    npm install
-   # Create .env file and fill in your DATABASE_URL, REDIS_URL, RABBITMQ_URL, etc.
-   npx prisma generate
-   npx prisma db push
+   
+    # Backend Environment Variables (.env)
+    PORT=3000
+    NODE_ENV=development
+    DATABASE_URL=
+    JWT_SECRET=
+    JWT_TTL=28800
+    ENCRYPTION_KEY=
+    RABBITMQ_URL=
+    RABBITMQ_USER=
+    RABBITMQ_PASS=
+    RABBITMQ_VHOST=kvxirref
+    RABBITMQ_QUEUE=api_logs_queue
+    RABBITMQ_PREFETCH=10
+    GOOGLE_CLIENT_ID=
+    GOOGLE_CLIENT_SECRET=
+    AUTH_MICROSERVICE=http://localhost:8080
+    FRONTEND_URL=http://localhost:5173  
+    REDIS_URL=
+
    npm run dev
    ```
 
@@ -86,7 +103,12 @@ ProtecX/
    ```bash
    cd ../Frontend
    npm install
-   # Create .env file and set VITE_API_BASE_URL
+
+   # Frontend Environment Variables (.env)
+   VITE_BACKEND_URL=http://localhost:3000
+   NODE_ENV=development
+   VITE_GOOGLE_CLIENT_ID=
+
    npm run dev
    ```
 

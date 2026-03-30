@@ -1,5 +1,4 @@
-# <img src="Frontend/public/protecX.png" alt="ProtecX" width="200" height="200"> ProtecX: Auth as a Service
-
+# <img src="Frontend/public/protecX.png" alt="ProtecX" width="150" height="150" align="center">: Auth as a Service
 ProtecX is a powerful, distributed API security and authentication layer designed for modern developers. It provides a robust, scalable infrastructure for managing projects, user authentication, and secure API access using state-of-the-art technologies.
 
 [![Tech Stack](https://img.shields.io/badge/Stack-Node.js%20%7C%20React%20%7C%20TypeScript%20%7C%20PostgreSQL-blue)](https://protecx.io)

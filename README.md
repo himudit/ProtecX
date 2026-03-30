@@ -1,25 +1,27 @@
 # <img src="Frontend/public/protecX.png" alt="ProtecX" width="150" height="150" align="center">: Auth as a Service
 ProtecX is a powerful, distributed API security and authentication layer designed for modern developers. It provides a robust, scalable infrastructure for managing projects, user authentication, and secure API access using state-of-the-art technologies.
 
-[![Tech Stack](https://img.shields.io/badge/Stack-Node.js%20%7C%20React%20%7C%20TypeScript%20%7C%20PostgreSQL-blue)](https://protecx.io)
+<img src="Frontend/public/Landing-Page.jpg" alt="ProtecX" width="100%" height="100%" align="center">
+
+<br>
+
+[![Tech Stack](https://img.shields.io/badge/Stack-Node.js%20%7C%20Go%20%7C%20React%20%7C%20TypeScript%20%7C%20PostgreSQL-blue)](https://protecx.io)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
-- **🔐 Multi-Tenant Security**: Manage multiple projects, each with its own isolated set of users, API keys, and JWT configurations.
-- **🛠️ Flexible Authentication**: Supports both traditional Email/Password and Google OAuth 2.0.
-- **🔑 Advanced Key Management**: 
+- Multi-Tenant Security: Manage multiple projects, each with its own isolated set of users, API keys, and JWT configurations.
+- Advanced Key Management: 
   - Securely generate and manage **API Keys** for backend-to-backend communication.
   - **RS256 JWT** key generation and management for secure client-side authentication.
-- **📊 Real-time Monitoring**: Integrated logging system to track API usage, status codes, and errors across all your projects.
-- **⚡ High Performance**: Built with a distributed architecture using **gRPC**, **RabbitMQ**, and **Redis** for low-latency communication and event-driven workflows.
-- **🎨 Modern Dashboard**: Sleek, responsive dashboard built with **React**, **Tailwind CSS**, and **Shadcn UI**.
+- Real-time Monitoring: Integrated logging system to track API usage, status codes, and errors across all your projects.
+- High Performance: Built with a distributed architecture using **gRPC**, **RabbitMQ**, and **Redis** for low-latency communication and event-driven workflows.
 
 ---
 
-## 🏗️ Architecture & Tech Stack
+## Architecture & Tech Stack
 
 ### Backend
 - **Core**: Node.js & Express (TypeScript)
@@ -38,7 +40,7 @@ ProtecX is a powerful, distributed API security and authentication layer designe
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```bash
 ProtecX/
@@ -54,7 +56,7 @@ ProtecX/
 
 ---
 
-## ⚙️ Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -67,8 +69,7 @@ ProtecX/
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/ProtecX.git
-   cd ProtecX
+   git clone https://github.com/himudit/ProtecX
    ```
 
 2. **Backend Setup**:

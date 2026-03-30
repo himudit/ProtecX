@@ -1,4 +1,4 @@
-# ShieldX Backend API Documentation
+# ProtecX Backend API Documentation
 
 ## Base URL
 ```

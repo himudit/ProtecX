@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './XTable.module.css';
 import type { Column } from './types';
 
@@ -7,7 +8,7 @@ type Props<T> = {
 };
 
 // SkeletonXTable does not need real data
-export function SkeletonXTable<T>({ columns, rowCount = 5 }: Props<T>) {
+export const SkeletonXTable = React.memo(function SkeletonXTable<T>({ columns, rowCount = 5 }: Props<T>) {
     return (
         <div className={styles.wrapper}>
             {/* Search input skeleton */}
@@ -41,4 +42,4 @@ export function SkeletonXTable<T>({ columns, rowCount = 5 }: Props<T>) {
             </table>
         </div>
     );
-}
+}) as <T>(props: Props<T>) => JSX.Element;

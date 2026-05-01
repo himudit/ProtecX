@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ChevronDown, LogOut, FileText, ListChecks, Menu, X } from "lucide-react";
+import { ChevronDown, LogOut, ListChecks, Menu, X } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from '@/store';
 import { logout } from "../store/slices/authSlice";

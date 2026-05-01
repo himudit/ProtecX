@@ -6,7 +6,7 @@ import { SkeletonXTable } from '@/components/ui/x-table/SkeletonXTable';
 import type { ProjectUserRowResponseDto } from '@/modules/projectUser/dto/projectUserRow-response.dto';
 import { ProjectRole } from '@/enums/enum';
 import type { Column } from '@/components/ui/x-table/types';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProjectUsers } from '@/services/project.api';
 // import { toast } from 'react-hot-toast';
@@ -35,12 +35,11 @@ export default function Database() {
     fetchUsers();
   }, [projectId]);
 
-  const columns: Column<ProjectUserRowResponseDto>[] = [
+  const columns = useMemo<Column<ProjectUserRowResponseDto>>(() => [
     { key: 'id', label: 'User Id', copyable: true },
     { key: 'name', label: 'Name' },
     { key: 'email', label: 'Email' },
     { key: 'role', label: 'Role' },
-    // { key: 'isVerified', label: 'Verified' },
     {
       key: 'createdAt',
       label: 'Created At',
@@ -51,7 +50,11 @@ export default function Database() {
       label: 'Last Login',
       render: (value) => useRelativeTime(value)
     },
-  ];
+  ], []);
+
+  const handleRowClick = useCallback((row: ProjectUserRowResponseDto) => {
+    console.log('Clicked row:', row);
+  }, []);
 
   return (
     <div className={styles['database-page']}>
@@ -80,7 +83,7 @@ export default function Database() {
               columns={columns}
               pagination={true}
               pageSize={5}
-              onRowClick={(row) => console.log('Clicked row:', row)}
+              onRowClick={handleRowClick}
             />
           )}
         </div>

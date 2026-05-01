@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import styles from './XTable.module.css';
 import type { Column } from './types';
 import { Search, Copy, Check, ArrowLeft, ArrowRight } from 'lucide-react';
@@ -13,7 +13,7 @@ type Props<T> = {
     pageSize?: number;
 };
 
-export function XTable<T extends Record<string, any>>({
+function XTableComponent<T extends Record<string, any>>({
     data,
     columns,
     onRowClick,
@@ -34,11 +34,13 @@ export function XTable<T extends Record<string, any>>({
         setTimeout(() => setCopiedId(null), 2000);
     };
 
-    const filteredData = data.filter((row) =>
-        columns.some((col) =>
-            String(row[col.key]).toLowerCase().includes(search.toLowerCase())
-        )
-    );
+    const filteredData = useMemo(() => {
+        return data.filter((row) => {
+            return columns.some((col) =>
+                String(row[col.key]).toLowerCase().includes(search.toLowerCase())
+            );
+        });
+    }, [data, columns, search]);
 
     const sortedData = useMemo(() => {
         return [...filteredData].sort((a, b) => {
@@ -62,7 +64,7 @@ export function XTable<T extends Record<string, any>>({
     }, [sortedData, pagination, currentPage, pageSize]);
 
     // Reset to page 1 when search or sorting changes
-    useMemo(() => {
+    useEffect(() => {
         setCurrentPage(1);
     }, [search, sortBy, reverse]);
 
@@ -178,3 +180,4 @@ export function XTable<T extends Record<string, any>>({
     );
 }
 
+export const XTable = React.memo(XTableComponent) as typeof XTableComponent;

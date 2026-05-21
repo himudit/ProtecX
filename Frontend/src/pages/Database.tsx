@@ -35,7 +35,7 @@ export default function Database() {
     fetchUsers();
   }, [projectId]);
 
-  const columns = useMemo<Column<ProjectUserRowResponseDto>>(() => [
+  const columns = useMemo<Column<ProjectUserRowResponseDto>[]>(() => [
     { key: 'id', label: 'User Id', copyable: true },
     { key: 'name', label: 'Name' },
     { key: 'email', label: 'Email' },

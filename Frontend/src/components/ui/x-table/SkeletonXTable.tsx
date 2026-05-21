@@ -42,4 +42,4 @@ export const SkeletonXTable = React.memo(function SkeletonXTable<T>({ columns, r
             </table>
         </div>
     );
-}) as <T>(props: Props<T>) => JSX.Element;
+}) as <T>(props: Props<T>) => React.JSX.Element;
